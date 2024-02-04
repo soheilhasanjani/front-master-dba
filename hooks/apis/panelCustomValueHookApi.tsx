@@ -7,3 +7,10 @@ export const usePostPanelCustomValueGetLogImage = () => {
     queryFn: () => panelCustomValueApi.postPanelCustomValueGetLogImage(),
   });
 };
+
+export const usePostPanelCustomValueGetFooterContent = () => {
+  return useQuery({
+    queryKey: ["postPanelCustomValueGetFooterContent"],
+    queryFn: () => panelCustomValueApi.postPanelCustomValueGetFooterContent(),
+  });
+};

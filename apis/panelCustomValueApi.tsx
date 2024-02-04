@@ -9,3 +9,11 @@ export const postPanelCustomValueGetLogImage = async () => {
   });
   return data;
 };
+
+export const postPanelCustomValueGetFooterContent = async () => {
+  const { data }: any = await axiosInstance({
+    method: "post",
+    url: BASE_URL + "/GetFooterContent",
+  });
+  return data;
+};
