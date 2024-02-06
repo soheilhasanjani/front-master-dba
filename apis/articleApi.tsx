@@ -9,3 +9,12 @@ export const postArticleGetAllArticlesForMainPage = async () => {
   });
   return data;
 };
+
+export const postArticleGetArticleUsingSearch = async (params: any) => {
+  const { data }: any = await axiosInstance({
+    method: "post",
+    url: BASE_URL + "/GetArticleUsingSearch",
+    params,
+  });
+  return data;
+};

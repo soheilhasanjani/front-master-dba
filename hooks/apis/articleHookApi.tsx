@@ -7,3 +7,11 @@ export const usePostArticleGetAllArticlesForMainPage = () => {
     queryFn: () => articleApi.postArticleGetAllArticlesForMainPage(),
   });
 };
+
+export const usePostArticleGetArticleUsingSearch = (params: any) => {
+  return useQuery({
+    queryKey: ["postArticleGetArticleUsingSearch", params],
+    queryFn: () => articleApi.postArticleGetArticleUsingSearch(params),
+    enabled: !!params,
+  });
+};
