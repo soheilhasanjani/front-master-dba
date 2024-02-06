@@ -1,38 +1,24 @@
 "use client";
 
-import { usePostSliderGetAllSliders } from "@/hooks/apis/sliderHookApi";
+import LatestArticles from "@/components/pages/landing/LatestArticles";
+import MostVisited from "@/components/pages/landing/MostVisited";
+import OurServices from "@/components/pages/landing/OurServices";
+import PromotionalSlider from "@/components/pages/landing/PromotionalSlider";
 
 export default function Home() {
-  usePostSliderGetAllSliders();
   return (
-    <div className="container">
-      <div className="new-article container-xxl pt-3">
-        <h4>جدیدترین مقالات</h4>
-        <div className="p-relative pb-4">
-          <div className="rx-border-rectangle"></div>
-          <div className="rx-border-rectangle-after"></div>
-        </div>
-
-        {/* <Articles
-          articles={articles.LatestArticles}
-          handleClickArticle={handleClickArticle}
-        /> */}
+    <div className="container flex flex-col gap-y-4 py-4">
+      <div>
+        <PromotionalSlider />
       </div>
-      <div className=" pb-4 container-xxl">
-        {/* {mainPageData ? <About mainPageData={mainPageData} /> : null} */}
-        {/* {mainPageData ? <Products /> : null} */}
+      <div>
+        <LatestArticles />
       </div>
-      <div className="new-article container-xxl">
-        <h4>پر بازدیدترین ها</h4>
-        <div className="p-relative pb-4">
-          <div className="rx-border-rectangle"></div>
-          <div className="rx-border-rectangle-after"></div>
-        </div>
-
-        {/* <Articles
-          articles={articles.MostVisitedArticles}
-          handleClickArticle={handleClickArticle}
-        /> */}
+      <div>
+        <OurServices />
+      </div>
+      <div>
+        <MostVisited />
       </div>
     </div>
   );

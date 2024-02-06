@@ -8,9 +8,6 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    colors: {
-      primary: "#0f70b7",
-    },
     container: {
       center: true,
       padding: {
@@ -19,6 +16,11 @@ const config: Config = {
         lg: "4rem",
         xl: "5rem",
         "2xl": "6rem",
+      },
+    },
+    extend: {
+      colors: {
+        primary: "#0f70b7",
       },
     },
   },
