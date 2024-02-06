@@ -6,8 +6,12 @@ import Link from "next/link";
 import { FileText, Home, Users } from "react-feather";
 import { usePostPanelCustomValueGetLogImage } from "@/hooks/apis/panelCustomValueHookApi";
 import staticFileUrl from "@/utils/staticFileUrl";
+import { usePathname } from "next/navigation";
+import { cn } from "@/utils/cn";
 
 const MainNav = () => {
+  //
+  const pathname = usePathname();
   //
   const { data: logoSrc } = usePostPanelCustomValueGetLogImage();
   //
@@ -36,7 +40,12 @@ const MainNav = () => {
             },
           ].map((item) => {
             return (
-              <li key={item.id} className="hover:text-primary">
+              <li
+                key={item.id}
+                className={cn("hover:text-primary", {
+                  "text-primary": item.href === pathname,
+                })}
+              >
                 <Link href={item.href} className="flex items-center gap-1">
                   <item.icon />
                   <span>{item.label}</span>

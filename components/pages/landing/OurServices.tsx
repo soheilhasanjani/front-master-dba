@@ -28,11 +28,11 @@ const OurServices = () => {
                   className="rounded-full"
                   width={130}
                   height={130}
-                  alt={slide.Name}
+                  alt={slide.Title}
                 />
                 <h5 className="text-xl">{slide.Title}</h5>
-                <p className="leading-6 text-center h-24">
-                  <div className="line-clamp-4">{slide.Description}</div>
+                <p className="leading-6 text-center h-24 line-clamp-4">
+                  {slide.Description}
                 </p>
                 <Link
                   href="/productdemoform"
