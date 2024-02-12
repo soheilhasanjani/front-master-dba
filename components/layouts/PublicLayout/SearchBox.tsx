@@ -54,7 +54,10 @@ const ListContent = ({ isLoading, data }: any) => {
       return (
         <li key={suggestion.Id}>
           <Link
-            href={""}
+            href={`/article/${suggestion?.Id}/${suggestion.Name.replace(
+              " ",
+              "_"
+            ).replace(/ /g, "_")}`}
             className="px-1 py-2 flex gap-2 hover:bg-[#dfdfdf] rounded hover:border-[rgb(85,85,85)] border-[1.5px] border-transparent border-dashed"
           >
             <div className="flex-grow overflow-hidden">

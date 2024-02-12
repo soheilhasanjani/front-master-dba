@@ -15,3 +15,11 @@ export const usePostArticleGetArticleUsingSearch = (params: any) => {
     enabled: !!params,
   });
 };
+
+export const usePostArticleGetArticleDetail = (params: any) => {
+  return useQuery({
+    queryKey: ["postArticleGetArticleDetail", params],
+    queryFn: () => articleApi.postArticleGetArticleDetail(params),
+    enabled: !!params,
+  });
+};
