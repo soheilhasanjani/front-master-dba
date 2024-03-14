@@ -27,3 +27,20 @@ export const postArticleGetArticleDetail = async (params: any) => {
   });
   return data;
 };
+
+export const postArticleGetBreadCrumbListOnArticleId = async (params: any) => {
+  const { data }: any = await axiosInstance({
+    method: "post",
+    url: BASE_URL + "/GetBreadCrumbListOnArticleId",
+    params,
+  });
+  return data;
+};
+
+export const postArticleGetAllArticleMenu = async () => {
+  const { data }: any = await axiosInstance({
+    method: "post",
+    url: BASE_URL + "/GetAllArticleMenu",
+  });
+  return data;
+};

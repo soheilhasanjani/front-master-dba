@@ -23,3 +23,18 @@ export const usePostArticleGetArticleDetail = (params: any) => {
     enabled: !!params,
   });
 };
+
+export const usePostArticleGetBreadCrumbListOnArticleId = (params: any) => {
+  return useQuery({
+    queryKey: ["postArticleGetBreadCrumbListOnArticleId", params],
+    queryFn: () => articleApi.postArticleGetBreadCrumbListOnArticleId(params),
+    enabled: !!params,
+  });
+};
+
+export const usePostArticleGetAllArticleMenu = () => {
+  return useQuery({
+    queryKey: ["postArticleGetAllArticleMenu"],
+    queryFn: () => articleApi.postArticleGetAllArticleMenu(),
+  });
+};
