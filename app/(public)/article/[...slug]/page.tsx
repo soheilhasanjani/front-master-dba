@@ -8,10 +8,17 @@ import {
 import { cn } from "@/utils/cn";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import React, { useState } from "react";
+import React from "react";
 import { ChevronLeft, Home, IconProps } from "react-feather";
-import { Collapse } from "react-collapse";
 import { useCollapse } from "react-collapsed";
+import KeyWordsList from "@/components/pages/article/KeyWordsList";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/core/Popover";
+import ArticleInformation from "@/components/pages/article/ArticleInformation";
+import MarkdownRenderer from "@/components/pages/article/MarkdownRenderer";
 
 const CustomBreadCrumb = ({ articleId }: { articleId: number }) => {
   //
@@ -171,16 +178,74 @@ const ArticlePage = () => {
   if (article === undefined) return "";
   return (
     <section className="container">
-      <CustomBreadCrumb articleId={Number(slug[0])} />
-      <div className="grid grid-cols-12 gap-4">
+      <div className="grid grid-cols-12 gap-4 pt-4">
+        <div className="col-span-12">
+          <CustomBreadCrumb articleId={Number(slug[0])} />
+        </div>
         <div className="col-span-3">
           <nav>
             <ul className="nav nav-list" style={{ display: "inherit" }}>
-              <MultiLevelList />
+              {/* <MultiLevelList /> */}
             </ul>
           </nav>
         </div>
-        <div className="col-span-9">{/* {children} */}</div>
+        <div className="col-span-9">
+          <header>
+            <h2 className="text-2xl mb-4">{article.Name}</h2>
+            <ArticleInformation
+              authorId={article.AuthorId}
+              authorName={article.AuthorName}
+              timeToRead={article.TimeToRead}
+              updateDate={article.UpdateDate}
+              uploadDate={article.UploadDate}
+              views={article.Views}
+            />
+            <hr />
+          </header>
+          <section className="mt-4">
+            {article.Body ? <MarkdownRenderer content={article.Body} /> : null}
+          </section>
+
+          <footer>
+            {article.Refrences && (
+              <div className="col-12 pb-3">
+                <Popover placement="left" typeInteract="click">
+                  <PopoverTrigger>
+                    <span className="pointer bold main-color">
+                      مشاهده منابع
+                    </span>
+                  </PopoverTrigger>
+                  <PopoverContent className="bg-white rounded-xl border p-3">
+                    <div className="flex flex-col gap-4">تست نمونه</div>
+                  </PopoverContent>
+                </Popover>
+              </div>
+            )}
+
+            <KeyWordsList keyWordsList={article.KeyWordsList} />
+          </footer>
+
+          {/* {isLogin ? (
+              <Comment articleId={id} />
+            ) : (
+              <div className="mt-3 text-center alert alert-info" role="alert">
+                <span className="font-bold">برای ثبت نظر باید وارد شوید</span>
+              </div>
+            )} */}
+
+          {/* <CommentList
+              articleId={id}
+              articleComment={articleComment}
+              islogin={isLogin}
+            /> */}
+
+          <div id="imgZoomModal" className="image-modal">
+            {/* <span className="close" onClick={handleCloseImageModal}>
+                &times;
+              </span> */}
+            <img className="image-modal-content" id="img02" />
+          </div>
+        </div>
       </div>
     </section>
   );
