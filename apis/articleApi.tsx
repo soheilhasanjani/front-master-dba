@@ -55,3 +55,12 @@ export const postArticleGetAllArticlesForArchiveWithPaginate = async (
   });
   return data;
 };
+
+export const postArticleGetAllArticlesOnAuthrId = async (params: any) => {
+  const { data }: any = await axiosInstance({
+    method: "post",
+    url: BASE_URL + "/GetAllArticlesOnAuthrId",
+    data: params,
+  });
+  return data;
+};

@@ -49,3 +49,11 @@ export const usePostArticleGetAllArticlesForArchiveWithPaginate = (
     enabled: !!params,
   });
 };
+
+export const usePostArticleGetAllArticlesOnAuthrId = (params: any) => {
+  return useQuery({
+    queryKey: ["postArticleGetAllArticlesOnAuthrId", params],
+    queryFn: () => articleApi.postArticleGetAllArticlesOnAuthrId(params),
+    enabled: !!params,
+  });
+};
