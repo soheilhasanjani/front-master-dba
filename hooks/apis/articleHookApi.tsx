@@ -38,3 +38,14 @@ export const usePostArticleGetAllArticleMenu = () => {
     queryFn: () => articleApi.postArticleGetAllArticleMenu(),
   });
 };
+
+export const usePostArticleGetAllArticlesForArchiveWithPaginate = (
+  params: any
+) => {
+  return useQuery({
+    queryKey: ["postArticleGetAllArticlesForArchiveWithPaginate", params],
+    queryFn: () =>
+      articleApi.postArticleGetAllArticlesForArchiveWithPaginate(params),
+    enabled: !!params,
+  });
+};

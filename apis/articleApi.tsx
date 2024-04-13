@@ -44,3 +44,14 @@ export const postArticleGetAllArticleMenu = async () => {
   });
   return data;
 };
+
+export const postArticleGetAllArticlesForArchiveWithPaginate = async (
+  params: any
+) => {
+  const { data }: any = await axiosInstance({
+    method: "post",
+    url: BASE_URL + "/GetAllArticlesForArchiveWithPaginate",
+    data: params,
+  });
+  return data;
+};

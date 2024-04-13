@@ -176,6 +176,7 @@ const ArticlePage = () => {
   const article = articleDetail?.data?.Article;
   //
   if (article === undefined) return "";
+  //
   return (
     <section className="container">
       <div className="grid grid-cols-12 gap-4 pt-4">
