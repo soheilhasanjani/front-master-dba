@@ -288,16 +288,9 @@ const DashboardPage = () => {
             </div>
           </div>
 
-          <button className="text-white bg-[#0f70b7] rounded text-sm font-medium px-3 h-10">
+          <button className="text-white bg-[#0f70b7] hover:bg-[#0f70b7]/90 transition rounded text-sm font-medium px-3 h-10">
             ثبت
           </button>
-
-          <div id="myModal" className="image-modal">
-            {/* <span className="close" onClick={handleCloseImageModal}>
-              &times;
-            </span> */}
-            <img className="image-modal-content" id="img01" />
-          </div>
         </form>
       </div>
     </div>

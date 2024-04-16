@@ -14,27 +14,24 @@ const Sidebar = () => {
   //
   return (
     <div className="bg-[#f8f9fa] w-56 fixed top-0 start-0 h-screen p-2.5">
-      <div className="flex items-center flex-col">
-        {!isEmpty(user?.ImageUrl) ? (
-          <Image
-            className="rounded-full mb-2"
-            width={200}
-            height={200}
-            src={"http://masterdba.ir:8080" + user.ImageUrl}
-            alt="user-profile"
-          />
-        ) : (
-          <Image
-            className="rounded-full mb-2"
-            width={200}
-            height={200}
-            src={"/images/dashboard-user-profile-placeholder.jpg"}
-            alt="user-profile"
-          />
-        )}
-        <div className="text-center">{user?.FullName}</div>
+      <div className="flex items-center gap-2">
+        <Image
+          className="rounded-full border-2"
+          width={50}
+          height={50}
+          src={
+            !isEmpty(user?.ImageUrl)
+              ? "http://masterdba.ir:8080" + user.ImageUrl
+              : "/images/dashboard-user-profile-placeholder.jpg"
+          }
+          alt="user-profile"
+        />
+        <div>
+          <div className="text-sm">{user?.FullName}</div>
+          <div className="text-gray-400 text-sm">{user?.Username}</div>
+        </div>
       </div>
-      <hr className="my-6" />
+      <hr className="my-2.5" />
       <ul>
         {[
           {
