@@ -1,218 +1,210 @@
-import React from "react";
+"use client";
+
+import Input from "@/components/core/Input";
+import Label from "@/components/core/Label";
+import Textarea from "@/components/core/Textarea";
+import { usePostPanelCustomValueGetPanelCustomeValue } from "@/hooks/apis/panelCustomValueHookApi";
+import React, { useEffect } from "react";
 import { Bookmark } from "react-feather";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+
+// Define your form schema
+const schema = z.object({
+  WebSiteTitle: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
+  MainPageKeyWord: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
+  MainPageAboutUsTitle: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
+  MainPageAboutUsText: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
+  FooterAboutUsText: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
+  Tel: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
+  Fax: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
+  EnamadCode: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
+});
+
+// TypeScript types for form values
+type FormData = z.infer<typeof schema>;
 
 const DashboardPage = () => {
+  //
+  const { data } = usePostPanelCustomValueGetPanelCustomeValue();
+  //
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+    setValue,
+  } = useForm<FormData>({
+    resolver: zodResolver(schema),
+    defaultValues: {
+      WebSiteTitle: "",
+      MainPageKeyWord: "",
+      MainPageAboutUsTitle: "",
+      MainPageAboutUsText: "",
+      FooterAboutUsText: "",
+      Tel: "",
+      Fax: "",
+      EnamadCode: "",
+    },
+  });
+  //
+  const onSubmit: SubmitHandler<FormData> = (data) => {};
+  //
+  useEffect(() => {
+    if (data) {
+      setValue("WebSiteTitle", data.WebSiteTitle);
+      setValue("MainPageKeyWord", data.MainPageKeyWord);
+      setValue("MainPageAboutUsTitle", data.MainPageAboutUsTitle);
+      setValue("MainPageAboutUsText", data.MainPageAboutUsText);
+      setValue("FooterAboutUsText", data.FooterAboutUsText);
+      setValue("Tel", data.Tel);
+      setValue("Fax", data.Fax);
+      setValue("EnamadCode", data.EnamadCode);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
+  //
   return (
-    <div className="container-fluid pt-3">
-      <BreadcrumbsItem to="/dashboard"> تنظیمات</BreadcrumbsItem>
+    <div className="p-5">
+      <div className="font-semibold text-lg">تنظیمات</div>
 
-      <div className="col-12 dashboard-content">
-        <form onSubmit={handleSubmit}>
-          <div className="d-flex">
-            <Bookmark /> <h6 className="dashboard-title">تنظیمات سایت</h6>
-          </div>
+      <div className="bg-[#f8f9fa] p-8 mt-5 rounded-lg">
+        <form
+          className="flex flex-col gap-10"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <div className="">
+            <div className="flex items-center gap-2 pb-3 border-b mb-3">
+              <Bookmark />
+              <h6>تنظیمات سایت</h6>
+            </div>
 
-          <hr className=" mt-1 mb-3" />
-          <div className="mb-3 row">
-            <label htmlFor="inputPassword" className="col-sm-2 col-form-label">
-              عنوان سایت
-            </label>
-            <div className="col-sm-10">
-              <input
-                type="text"
-                className="form-control"
-                value={WebSiteTitle}
-                onChange={(e) => {
-                  setWebSiteTitle(e.target.value);
-                }}
-              />
-            </div>
-          </div>
-          <div className="mb-3 row">
-            <label htmlFor="inputPassword" className="col-sm-2 col-form-label">
-              لوگو سایت
-            </label>
-            <div className="col-sm-9">
-              <input
-                type="file"
-                className="form-control"
-                onChange={(e) => {
-                  setImageFile(e);
-                  setWebsiteLogo(e.target.files[0]);
-                }}
-              />
-            </div>
-            <div className="col-sm-1">
-              <img
+            <div className="grid grid-cols-12 gap-4">
+              <div className="col-span-12">
+                <Label>عنوان سایت</Label>
+                <Input {...register("WebSiteTitle")} />
+              </div>
+              <div className="col-span-12">
+                <Label>لوگو سایت</Label>
+                <div className="col-sm-9">
+                  <Input
+                    type="file"
+                    onChange={(e) => {
+                      // setImageFile(e);
+                      // setWebsiteLogo(e.target.files[0]);
+                    }}
+                  />
+                </div>
+                <div className="col-sm-1">
+                  {/* <img
                 src={WebsiteLogoUrl}
                 style={{ width: "110px", cursor: "pointer" }}
                 onClick={() => handleShowImageModal(WebsiteLogoUrl)}
-              />
+              /> */}
+                </div>
+              </div>
+              <div className="col-span-12">
+                <Label> کلمات کلیدی صفحه اصلی</Label>
+                <div className="col-sm-10">
+                  <Input
+                    {...register("MainPageKeyWord")}
+                    placeholder="کلمات را با , جدا کنید"
+                  />
+                </div>
+              </div>
             </div>
-          </div>
-          <div className="mb-3 row">
-            <label htmlFor="inputPassword" className="col-sm-2 col-form-label">
-              {" "}
-              کلمات کلیدی صفحه اصلی
-            </label>
-            <div className="col-sm-10">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="کلمات را با , جدا کنید"
-                value={MainPageKeyWord}
-                onChange={(e) => {
-                  setMainPageKeyWord(e.target.value);
-                }}
-              />
-            </div>
-          </div>
-          <div className="d-flex">
-            <Bookmark /> <h6 className="dashboard-title">صفحه اصلی</h6>
           </div>
 
-          <hr className=" mt-1 mb-3" />
-          <div className="mb-3 row">
-            <label htmlFor="inputPassword" className="col-sm-2 col-form-label">
-              عنوان درباره ما
-            </label>
-            <div className="col-sm-10">
-              <input
-                type="text"
-                className="form-control"
-                id="inputPassword"
-                value={MainPageAboutUsTitle}
-                onChange={(e) => setMainPageAboutUsTitle(e.target.value)}
-              />
+          <div className="">
+            <div className="flex items-center gap-2 pb-3 border-b mb-3">
+              <Bookmark />
+              <h6>صفحه اصلی</h6>
             </div>
-          </div>
-          <div className="mb-3 row">
-            <label htmlFor="inputPassword" className="col-sm-2 col-form-label">
-              متن درباره ما
-            </label>
-            <div className="col-sm-10">
-              <textarea
-                type="text"
-                className="form-control"
-                id="inputPassword"
-                style={{ resize: "vertical" }}
-                value={MainPageAboutUsText}
-                onChange={(e) => setMainPageAboutUsText(e.target.value)}
-              />
-            </div>
-          </div>
-          <div className="mb-3 row">
-            <label htmlFor="inputPassword" className="col-sm-2 col-form-label">
-              عکس درباره ما
-            </label>
-            <div className="col-sm-9">
-              <input
-                type="file"
-                className="form-control"
-                onChange={(e) => {
-                  setImageFile(e);
-                  setMainPageAboutUsImageUrl(e.target.files[0]);
-                }}
-              />
-            </div>
-            <div className="col-sm-1">
-              <img
+
+            <div className="grid grid-cols-12 gap-4">
+              <div className="col-span-12">
+                <Label>عنوان درباره ما</Label>
+                <Input {...register("MainPageAboutUsTitle")} />
+              </div>
+              <div className="col-span-12">
+                <Label>متن درباره ما</Label>
+                <Textarea
+                  {...register("MainPageAboutUsText")}
+                  rows={5}
+                  className="resize-y"
+                />
+              </div>
+              <div className="col-span-12">
+                <Label>عکس درباره ما</Label>
+                <div className="col-sm-9">
+                  <Input
+                    type="file"
+                    onChange={(e) => {
+                      // setImageFile(e);
+                      // setMainPageAboutUsImageUrl(e.target.files[0]);
+                    }}
+                  />
+                </div>
+                <div className="col-sm-1">
+                  {/* <img
                 src={MainPageAboutUsImageUrl}
                 style={{ width: "110px", cursor: "pointer" }}
                 onClick={() => handleShowImageModal(MainPageAboutUsImageUrl)}
-              />
-            </div>
-          </div>
-          <div className="d-flex">
-            <Bookmark />
-            <h6 className="dashboard-title">فوتر</h6>
-          </div>
-
-          <hr className=" mt-1 mb-3" />
-          <div className="mb-3 row">
-            <label htmlFor="inputPassword" className="col-sm-2 col-form-label">
-              متن درباره ما
-            </label>
-            <div className="col-sm-10">
-              <textarea
-                type="text"
-                className="form-control"
-                id="inputPassword"
-                style={{ resize: "vertical" }}
-                value={FooterAboutUsText}
-                onChange={(e) => setFooterAboutUsText(e.target.value)}
-              />
-            </div>
-          </div>
-          <div className="mb-3 row">
-            <label htmlFor="inputPassword" className="col-sm-2 col-form-label">
-              تلفن
-            </label>
-            <div className="col-sm-10">
-              <input
-                type="text"
-                className="form-control"
-                id="inputPassword"
-                value={Tel}
-                onChange={(e) => setTel(e.target.value)}
-              />
-            </div>
-          </div>
-          <div className="mb-3 row">
-            <label htmlFor="inputPassword" className="col-sm-2 col-form-label">
-              ایمیل
-            </label>
-            <div className="col-sm-10">
-              <input
-                type="text"
-                className="form-control"
-                id="inputPassword"
-                value={Fax}
-                onChange={(e) => setFax(e.target.value)}
-              />
-            </div>
-          </div>
-          <div className="mb-3 row">
-            <label htmlFor="inputPassword" className="col-sm-2 col-form-label">
-              ای نماد
-            </label>
-            <div className="col-sm-10">
-              <input
-                type="text"
-                className="form-control"
-                id="inputPassword"
-                value={EnamadCode}
-                onChange={(e) => setEnamadCode(e.target.value)}
-              />
-            </div>
-          </div>
-          <div className="d-flex">
-            <Bookmark />
-            <h6 className="dashboard-title">درباره ما</h6>
-          </div>
-
-          <hr className=" mt-1 mb-3" />
-          <div className="mb-3 row">
-            <label htmlFor="inputPassword" className="col-sm-2 col-form-label">
-              عنوان درباره ما
-            </label>
-            <div className="col-sm-10">
-              <input
-                type="text"
-                className="form-control"
-                id="inputPassword"
-                value={AboutUsTitle}
-                onChange={(e) => setAboutUsTitle(e.target.value)}
-              />
+              /> */}
+                </div>
+              </div>
             </div>
           </div>
 
-          <div className="mb-3 row">
-            <label htmlFor="inputPassword" className="col-sm-2 col-form-label">
-              متن درباره ما
-            </label>
-            <div className="col-sm-10">
-              <Editor
+          <div className="">
+            <div className="flex items-center gap-2 pb-3 border-b mb-3">
+              <Bookmark />
+              <h6>فوتر</h6>
+            </div>
+
+            <div className="grid grid-cols-12 gap-4">
+              <div className="col-span-12">
+                <Label>متن درباره ما</Label>
+                <Textarea
+                  rows={5}
+                  className="resize-y"
+                  {...register("FooterAboutUsText")}
+                />
+              </div>
+              <div className="col-span-12">
+                <Label>تلفن</Label>
+                <Input {...register("Tel")} />
+              </div>
+              <div className="col-span-12">
+                <Label>ایمیل</Label>
+                <Input {...register("Fax")} />
+              </div>
+              <div className="col-span-12">
+                <Label>ای نماد</Label>
+                <Input {...register("EnamadCode")} />
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div className="flex items-center gap-2 pb-3 border-b mb-3">
+              <Bookmark />
+              <h6>درباره ما</h6>
+            </div>
+
+            <div className="grid grid-cols-12 gap-4">
+              <div className="col-span-12">
+                <Label>عنوان درباره ما</Label>
+                <Input
+                // value={AboutUsTitle}
+                // onChange={(e) => setAboutUsTitle(e.target.value)}
+                />
+              </div>
+
+              <div className="col-span-12">
+                <Label>متن درباره ما</Label>
+                {/* <Editor
                 tinymceScriptSrc={
                   process.env.PUBLIC_URL + "/tinymce/tinymce.min.js"
                 }
@@ -291,19 +283,19 @@ const DashboardPage = () => {
                     "};" +
                     "body { font-family:IranSanse; font-size:14px }",
                 }}
-              />
+              /> */}
+              </div>
             </div>
           </div>
-          <div className="d-grid gap-2">
-            <button className="btn main-background-color-btn text-white">
-              ثبت
-            </button>
-          </div>
+
+          <button className="text-white bg-[#0f70b7] rounded text-sm font-medium px-3 h-10">
+            ثبت
+          </button>
 
           <div id="myModal" className="image-modal">
-            <span className="close" onClick={handleCloseImageModal}>
+            {/* <span className="close" onClick={handleCloseImageModal}>
               &times;
-            </span>
+            </span> */}
             <img className="image-modal-content" id="img01" />
           </div>
         </form>

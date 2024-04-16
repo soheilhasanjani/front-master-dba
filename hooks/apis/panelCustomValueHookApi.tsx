@@ -14,3 +14,11 @@ export const usePostPanelCustomValueGetFooterContent = () => {
     queryFn: () => panelCustomValueApi.postPanelCustomValueGetFooterContent(),
   });
 };
+
+export const usePostPanelCustomValueGetPanelCustomeValue = () => {
+  return useQuery({
+    queryKey: ["postPanelCustomValueGetPanelCustomeValue"],
+    queryFn: () =>
+      panelCustomValueApi.postPanelCustomValueGetPanelCustomeValue(),
+  });
+};
