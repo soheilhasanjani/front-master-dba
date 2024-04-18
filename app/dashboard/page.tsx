@@ -69,7 +69,7 @@ const DashboardPage = () => {
     <div className="p-5">
       <div className="font-semibold text-lg">تنظیمات</div>
 
-      <div className="bg-[#f8f9fa] p-8 mt-5 rounded-lg">
+      <div className="bg-[#f8f9fa] p-5 mt-5 rounded-lg">
         <form
           className="flex flex-col gap-10"
           onSubmit={handleSubmit(onSubmit)}

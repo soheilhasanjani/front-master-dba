@@ -57,3 +57,11 @@ export const usePostArticleGetAllArticlesOnAuthrId = (params: any) => {
     enabled: !!params,
   });
 };
+
+export const usePostArticleGetAllArticlesForDashboard = (params: any) => {
+  return useQuery({
+    queryKey: ["postArticleGetAllArticlesForDashboard", params],
+    queryFn: () => articleApi.postArticleGetAllArticlesForDashboard(params),
+    enabled: !!params,
+  });
+};
