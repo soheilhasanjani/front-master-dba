@@ -1,8 +1,8 @@
 import * as articleApi from "@/apis/articleApi";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 
 export const usePostArticleGetAllArticlesForMainPage = () => {
-  return useQuery({
+  return useSuspenseQuery({
     queryKey: ["postArticleGetAllArticlesForMainPage"],
     queryFn: () => articleApi.postArticleGetAllArticlesForMainPage(),
   });

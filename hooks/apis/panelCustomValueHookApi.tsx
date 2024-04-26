@@ -1,15 +1,15 @@
 import * as panelCustomValueApi from "@/apis/panelCustomValueApi";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 
 export const usePostPanelCustomValueGetLogImage = () => {
-  return useQuery({
+  return useSuspenseQuery({
     queryKey: ["postPanelCustomValueGetLogImage"],
     queryFn: () => panelCustomValueApi.postPanelCustomValueGetLogImage(),
   });
 };
 
 export const usePostPanelCustomValueGetFooterContent = () => {
-  return useQuery({
+  return useSuspenseQuery({
     queryKey: ["postPanelCustomValueGetFooterContent"],
     queryFn: () => panelCustomValueApi.postPanelCustomValueGetFooterContent(),
   });

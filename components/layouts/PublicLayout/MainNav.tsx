@@ -1,19 +1,15 @@
 "use client";
 
-import React from "react";
-import Image from "next/image";
+import React, { Suspense } from "react";
 import Link from "next/link";
 import { FileText, Home, Users } from "react-feather";
-import { usePostPanelCustomValueGetLogImage } from "@/hooks/apis/panelCustomValueHookApi";
-import staticFileUrl from "@/utils/staticFileUrl";
 import { usePathname } from "next/navigation";
 import { cn } from "@/utils/cn";
+import Logo from "@/components/layouts/PublicLayout/Logo";
 
 const MainNav = () => {
   //
   const pathname = usePathname();
-  //
-  const { data: logoSrc } = usePostPanelCustomValueGetLogImage();
   //
   return (
     <nav className="border-b border-[#e6e6e6] py-4">
@@ -55,14 +51,9 @@ const MainNav = () => {
           })}
         </ul>
         <Link href="/" className="block w-[110px] h-[53px]">
-          {logoSrc && (
-            <Image
-              width={110}
-              height={53}
-              src={staticFileUrl(logoSrc)}
-              alt="logo"
-            />
-          )}
+          <Suspense fallback={<div></div>}>
+            <Logo />
+          </Suspense>
         </Link>
       </div>
     </nav>

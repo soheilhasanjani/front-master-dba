@@ -1,8 +1,8 @@
 import * as productApi from "@/apis/productApi";
-import { useQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 
 export const usePostProductGetAllProducts = () => {
-  return useQuery({
+  return useSuspenseQuery({
     queryKey: ["postProductGetAllProducts"],
     queryFn: () => productApi.postProductGetAllProducts(),
   });
