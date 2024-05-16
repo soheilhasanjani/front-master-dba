@@ -1,5 +1,4 @@
 import axiosInstance from "@/configs/axios";
-import token from "@/constant/token";
 
 const BASE_URL = "/Article";
 
@@ -71,9 +70,6 @@ export const postArticleGetAllArticlesForDashboard = async (params: any) => {
     method: "post",
     url: BASE_URL + "/GetAllArticlesForDashboard",
     data: params,
-    headers: {
-      Authorization: `bearer ${token}`,
-    },
   });
   return data;
 };
