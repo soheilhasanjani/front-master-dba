@@ -4,6 +4,7 @@ import Input from "@/components/core/Input";
 import Table from "@/components/core/Table";
 import { usePostArticleGetAllArticlesForDashboard } from "@/hooks/apis/articleHookApi";
 import { createColumnHelper } from "@tanstack/react-table";
+import Link from "next/link";
 import React from "react";
 
 type article = {
@@ -56,9 +57,11 @@ const ArticlesPage = () => {
       <div className="bg-[#f8f9fa] p-5 mt-5 rounded-lg">
         <div className="flex items-center gap-2 mb-2">
           <Input placeholder="جستجو مقاله ..." />
-          <button className="text-white border border-[#0f70b7] bg-[#0f70b7] whitespace-nowrap hover:bg-[#0f70b7]/90 transition rounded text-sm font-medium px-3 h-10">
-            افزودن مقاله
-          </button>
+          <Link href="/dashboard/articles/add">
+            <button className="text-white border border-[#0f70b7] bg-[#0f70b7] whitespace-nowrap hover:bg-[#0f70b7]/90 transition rounded text-sm font-medium px-3 h-10">
+              افزودن مقاله
+            </button>
+          </Link>
         </div>
         <Table data={data?.ItemList ?? []} columns={columns} />
       </div>
