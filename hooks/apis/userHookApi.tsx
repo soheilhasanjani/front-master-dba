@@ -1,8 +1,8 @@
 import * as userApi from "@/apis/userApi";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 
 export const usePostUserGetAllAuthorList = () => {
-  return useQuery({
+  return useSuspenseQuery({
     queryKey: ["postUserGetAllAuthorList"],
     queryFn: () => userApi.postUserGetAllAuthorList(),
   });

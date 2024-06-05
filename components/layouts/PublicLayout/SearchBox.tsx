@@ -40,7 +40,7 @@ const SearchBox = () => {
           { "opacity-0 pointer-events-none": !(isFocus && inputText) }
         )}
       >
-        <ul className="p-2">{ListContent({ isLoading, data })}</ul>
+        {ListContent({ isLoading, data })}
       </div>
     </div>
   );
@@ -50,35 +50,39 @@ const ListContent = ({ isLoading, data }: any) => {
   if (isLoading) {
     return <div className="text-center">در حال جستجو ...</div>;
   } else if (data?.length > 0) {
-    return data.map((suggestion: any) => {
-      return (
-        <li key={suggestion.Id}>
-          <Link
-            href={`/article/${suggestion?.Id}/${suggestion.Name.replace(
-              " ",
-              "_"
-            ).replace(/ /g, "_")}`}
-            className="px-1 py-2 flex gap-2 hover:bg-[#dfdfdf] rounded hover:border-[rgb(85,85,85)] border-[1.5px] border-transparent border-dashed"
-          >
-            <div className="flex-grow overflow-hidden">
-              <div className="flex gap-1">
-                <FileText className="w-5 flex-shrink-0" />
-                <span className="truncate">{suggestion.Name}</span>
-              </div>
-              <div className="ps-6 text-xs text-[gray] truncate">
-                {suggestion.Breadcrumbs}
-              </div>
-            </div>
-            <div className="basis-1/4 flex-shrink-0 hidden sm:block">
-              <UserCheck className="flex-shrink-0 w-5" />
-              {suggestion.AuthorName}
-            </div>
-          </Link>
-        </li>
-      );
-    });
+    return (
+      <ul className="p-2">
+        {data.map((suggestion: any) => {
+          return (
+            <li key={suggestion.Id}>
+              <Link
+                href={`/article/${suggestion?.Id}/${suggestion.Name.replace(
+                  " ",
+                  "_"
+                ).replace(/ /g, "_")}`}
+                className="px-1 py-2 flex gap-2 hover:bg-[#dfdfdf] rounded hover:border-[rgb(85,85,85)] border-[1.5px] border-transparent border-dashed"
+              >
+                <div className="flex-grow overflow-hidden">
+                  <div className="flex gap-1">
+                    <FileText className="w-5 flex-shrink-0" />
+                    <span className="truncate">{suggestion.Name}</span>
+                  </div>
+                  <div className="ps-6 text-xs text-[gray] truncate">
+                    {suggestion.Breadcrumbs}
+                  </div>
+                </div>
+                <div className="basis-1/4 flex-shrink-0 hidden sm:block">
+                  <UserCheck className="flex-shrink-0 w-5" />
+                  {suggestion.AuthorName}
+                </div>
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    );
   } else {
-    return <div className="text-center">نتیجه ای یافت نشد!</div>;
+    return <div className="text-center p-2">نتیجه ای یافت نشد!</div>;
   }
 };
 

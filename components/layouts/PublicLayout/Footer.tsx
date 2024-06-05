@@ -15,20 +15,16 @@ const Footer = () => {
         <div className="grid grid-cols-12 gap-6">
           <div className="col-span-12 sm:col-span-6 md:col-span-6">
             <section className="mb-5">
-              <header className="mb-5">
-                <h4 className="text-primary text-base leading-5">
-                  درباره دی بی ای
-                </h4>
+              <header className="mb-5 text-primary text-base leading-5">
+                درباره دی بی ای
               </header>
               <p>{data?.FooterAboutUsText}</p>
             </section>
           </div>
           <div className="col-span-12 sm:col-span-6 md:col-span-3">
             <section className="mb-5">
-              <header className="mb-5">
-                <h4 className="text-primary text-base leading-5">
-                  بخش های سایت
-                </h4>
+              <header className="mb-5 text-primary text-base leading-5">
+                بخش های سایت
               </header>
               <ul>
                 {[
@@ -51,10 +47,8 @@ const Footer = () => {
           </div>
           <div className="col-span-12 sm:col-span-6 md:col-span-3">
             <section className="mb-5">
-              <header className="mb-5">
-                <h4 className="text-primary text-base leading-5">
-                  ارتباط با ما
-                </h4>
+              <header className="mb-5 text-primary text-base leading-5">
+                ارتباط با ما
               </header>
               <p className="mb-4">
                 شما میتوانید با استفاده از یکی از راه‌های زیر با ما ارتباط

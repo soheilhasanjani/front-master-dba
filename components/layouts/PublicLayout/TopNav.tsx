@@ -34,7 +34,6 @@ const TopNav = () => {
                     >
                       <a
                         className="nav-link dropdown-toggle"
-                        // activeClassName="main-color"
                         id="navbarScrollingDropdown"
                         role="button"
                         data-bs-toggle="dropdown"

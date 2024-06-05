@@ -13,11 +13,13 @@ const CustomBreadCrumb = () => {
     label?: string;
     icon: React.ComponentType<IconProps>;
     ignoreMarginIcon?: boolean;
+    ariaLabel?: string;
   }[] = [
     {
       id: 0,
       icon: Home,
       ignoreMarginIcon: true,
+      ariaLabel: "Website homepage link",
     },
     {
       id: 1,
@@ -30,7 +32,11 @@ const CustomBreadCrumb = () => {
     <ul className="flex items-center py-3">
       {breadCrumbList?.map((item) => (
         <li key={item.id} className="me-2">
-          <Link href={"/"} className="flex items-center">
+          <Link
+            href={"/"}
+            className="flex items-center"
+            aria-label={item.ariaLabel}
+          >
             <item.icon
               className={cn("mb-1", { "me-2": !item.ignoreMarginIcon })}
               size={18}
