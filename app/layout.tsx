@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Providers from "@/components/providers";
-import { BYekan } from "@/theme/fonts";
+import { IRANYekanX } from "@/theme/fonts";
 import "@/styles/globals.css";
 
 export const metadata: Metadata = {
@@ -15,7 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fa" dir="rtl">
-      <body className={BYekan.variable}>
+      <body className={IRANYekanX.variable}>
         <Providers>{children}</Providers>
       </body>
     </html>

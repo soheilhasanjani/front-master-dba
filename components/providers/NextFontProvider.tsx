@@ -1,14 +1,14 @@
 "use client";
 
 import React from "react";
-import { BYekan } from "@/theme/fonts";
+import { IRANYekanX } from "@/theme/fonts";
 
 const NextFontProvider = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className={`${BYekan.variable}`}>
+    <div className={`${IRANYekanX.variable}`}>
       <style jsx global>{`
         html {
-          font-family: ${BYekan.style.fontFamily};
+          font-family: ${IRANYekanX.style.fontFamily};
         }
       `}</style>
       {children}

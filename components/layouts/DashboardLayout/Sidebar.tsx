@@ -26,9 +26,9 @@ const Sidebar = () => {
           }
           alt="user-profile"
         />
-        <div>
-          <div className="text-sm">{user?.FullName}</div>
-          <div className="text-gray-400 text-sm">{user?.Username}</div>
+        <div className="flex flex-col gap-1">
+          <div className="text-xs">{user?.FullName}</div>
+          <div className="text-gray-400 text-xs">{user?.Username}</div>
         </div>
       </div>
       <hr className="my-2.5" />
@@ -48,8 +48,8 @@ const Sidebar = () => {
             : []),
         ].map((item, i) => (
           <li key={i}>
-            <Link href={item.href} className="px-4 py-2 block">
-              <span className="ms-2">{item.label}</span>
+            <Link href={item.href} className="px-2 py-2 block">
+              <span className="ms-0.5 text-xs">{item.label}</span>
             </Link>
           </li>
         ))}
