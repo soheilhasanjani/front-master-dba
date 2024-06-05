@@ -21,7 +21,7 @@ const Breadcrumbs: FC<BreadcrumbsProps> = ({
   isDisabledLastItem = true,
 }) => {
   return (
-    <div className="flex items-center gap-2 py-2 text-xs">
+    <div className="flex items-center gap-2 pb-2 pt-2.5 text-xs">
       <Home
         onClick={onClickHome}
         size={18}

@@ -9,7 +9,7 @@ const RadioButton: React.ForwardRefRenderFunction<
   RadioButtonProps
 > = ({ label, ...props }, ref) => {
   return (
-    <label className="inline-flex gap-1 cursor-pointer">
+    <label className="inline-flex gap-1 cursor-pointer text-xs">
       <input ref={ref} {...props} type="radio" />
       <span className="inline-block">{label}</span>
     </label>

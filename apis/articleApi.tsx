@@ -73,3 +73,15 @@ export const postArticleGetAllArticlesForDashboard = async (params: any) => {
   });
   return data;
 };
+
+export const postArticleSave = async (params: any) => {
+  const { data }: any = await axiosInstance({
+    method: "post",
+    url: BASE_URL + "/Save",
+    data: params,
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+  return data;
+};

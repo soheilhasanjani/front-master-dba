@@ -27,7 +27,7 @@ const ArticleCard = ({
           </div>
           <div className="flex m-2.5 items-center justify-between text-xs text-[brown] bg-[gainsboro] p-1.5 rounded">
             <span className="pe-2">{authorName}</span>
-            <span className="text-[#6c757d]">
+            <span className="text-[#393e43]">
               {new Intl.DateTimeFormat("fa-IR").format(
                 new Date(uploadDateForOrderby)
               )}

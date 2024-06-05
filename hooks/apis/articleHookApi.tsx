@@ -1,5 +1,10 @@
 import * as articleApi from "@/apis/articleApi";
-import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+  useSuspenseQuery,
+} from "@tanstack/react-query";
 
 export const usePostArticleGetAllArticlesForMainPage = () => {
   return useSuspenseQuery({
@@ -63,5 +68,20 @@ export const usePostArticleGetAllArticlesForDashboard = (params: any) => {
     queryKey: ["postArticleGetAllArticlesForDashboard", params],
     queryFn: () => articleApi.postArticleGetAllArticlesForDashboard(params),
     enabled: !!params,
+  });
+};
+
+export const usePostArticleSave = () => {
+  const QC = useQueryClient();
+  return useMutation({
+    mutationFn: articleApi.postArticleSave,
+    onSuccess: () => {
+      QC.invalidateQueries({
+        queryKey: ["postArticleGetBreadCrumbListOnArticleId"],
+      });
+      QC.invalidateQueries({
+        queryKey: ["postArticleGetAllArticlesForDashboard"],
+      });
+    },
   });
 };

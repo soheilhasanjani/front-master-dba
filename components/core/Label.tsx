@@ -7,7 +7,10 @@ const Label = ({
   ...props
 }: LabelHTMLAttributes<HTMLLabelElement>) => {
   return (
-    <label className={cn("block mb-1 whitespace-nowrap", className)} {...props}>
+    <label
+      className={cn("block mb-1 whitespace-nowrap text-xs", className)}
+      {...props}
+    >
       {children}
     </label>
   );

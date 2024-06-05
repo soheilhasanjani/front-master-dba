@@ -11,7 +11,7 @@ import formatPersianDate from "@/utils/formatPersianDate";
 import { createColumnHelper } from "@tanstack/react-table";
 import Link from "next/link";
 import React, { useMemo, useState } from "react";
-import { FileText, Folder } from "react-feather";
+import { Edit, FileText, Folder, Trash2 } from "react-feather";
 
 type Article = {
   Name: string;
@@ -52,7 +52,7 @@ const columns = (onClickTr: (id: number) => void) => [
               className="mb-1 text-[#0f70b7]"
             />
           )}
-          {info.getValue()}
+          <div className="max-w-md truncate">{info.getValue()}</div>
         </button>
       );
     },
@@ -69,7 +69,19 @@ const columns = (onClickTr: (id: number) => void) => [
     header: "عملیات",
     cell: (info) => {
       const data = info.row.original;
-      return <div className="flex items-center gap-4"></div>;
+      return (
+        <div className="flex items-center gap-3">
+          <Link href={"/dashboard/articles/article/" + data.Id}>
+            <Edit size={18} strokeWidth={1.5} className="mb-1" />
+          </Link>
+          <Trash2 size={18} strokeWidth={1.5} className="mb-1" />
+          <Trash2
+            size={18}
+            strokeWidth={1.5}
+            className="mb-1 text-[orangered]"
+          />
+        </div>
+      );
     },
   }),
 ];
@@ -109,22 +121,24 @@ const ArticlesPage = () => {
   //
   return (
     <div className="p-5">
-      <div className="font-semibold text-sm">مقالات</div>
-      <div className="bg-[#f8f9fa] p-5 mt-5 rounded-lg">
-        <div className="flex items-center gap-2 mb-2">
-          <Input placeholder="جستجو مقاله ..." />
-          <Link href="/dashboard/articles/add">
-            <button className="text-white border border-[#0f70b7] bg-[#0f70b7] whitespace-nowrap hover:bg-[#0f70b7]/90 transition rounded text-xs font-normal px-3 h-10">
-              افزودن مقاله
-            </button>
-          </Link>
-        </div>
+      <div className="flex items-center justify-between">
+        <div className="font-semibold text-sm">مقالات</div>
+        <Link href="/dashboard/articles/article">
+          <button className="text-white border border-[#0f70b7] bg-[#0f70b7] whitespace-nowrap hover:bg-[#0f70b7]/90 transition rounded text-xs font-normal px-3 h-10">
+            افزودن مقاله
+          </button>
+        </Link>
+      </div>
+      <div className="bg-[#f8f9fa] p-5 mt-2 rounded-lg pt-1">
         <Breadcrumbs
           onClickHome={() => {
             setSelectedFolder(0);
           }}
           links={formattedBreadCrumbData}
         />
+        <div className="flex items-center gap-2 mb-1">
+          <Input placeholder="جستجو مقاله ..." />
+        </div>
         <Table
           data={sortedList}
           columns={columns((id) => {
