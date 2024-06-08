@@ -22,3 +22,11 @@ export const usePostPanelCustomValueGetPanelCustomeValue = () => {
       panelCustomValueApi.postPanelCustomValueGetPanelCustomeValue(),
   });
 };
+
+export const usePostPanelCustomValueGetAboutPageAboutUs = () => {
+  return useQuery({
+    queryKey: ["postPanelCustomValueGetAboutPageAboutUs"],
+    queryFn: () =>
+      panelCustomValueApi.postPanelCustomValueGetAboutPageAboutUs(),
+  });
+};

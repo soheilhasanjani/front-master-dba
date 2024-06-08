@@ -25,3 +25,11 @@ export const postPanelCustomValueGetPanelCustomeValue = async () => {
   });
   return data;
 };
+
+export const postPanelCustomValueGetAboutPageAboutUs = async () => {
+  const { data }: any = await axiosInstance({
+    method: "post",
+    url: BASE_URL + "/GetAboutPageAboutUs",
+  });
+  return data;
+};

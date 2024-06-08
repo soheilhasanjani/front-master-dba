@@ -5,9 +5,9 @@ import Footer from "@/components/layouts/PublicLayout/Footer";
 
 export default function PublicLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <>
       <TopNav />
