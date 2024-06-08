@@ -9,8 +9,8 @@ const Textarea: React.ForwardRefRenderFunction<
     <textarea
       ref={ref}
       className={cn(
-        "block w-full px-2.5 border rounded text-sm py-2",
-        className
+        "block w-full rounded border px-2.5 py-2 text-sm",
+        className,
       )}
       {...props}
     />

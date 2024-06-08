@@ -9,8 +9,8 @@ const Input: React.ForwardRefRenderFunction<
     <input
       ref={ref}
       className={cn(
-        "block w-full h-10 px-2.5 border rounded text-xs",
-        className
+        "block h-10 w-full rounded border px-2.5 text-xs",
+        className,
       )}
       {...props}
     />

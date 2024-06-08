@@ -14,7 +14,7 @@ const MainNav = () => {
   return (
     <nav className="border-b border-[#e6e6e6] py-4">
       <div className="container flex items-center">
-        <ul className="flex items-center gap-4 flex-grow justify-center">
+        <ul className="flex flex-grow items-center justify-center gap-4">
           {[
             {
               id: 0,
@@ -58,7 +58,7 @@ const MainNav = () => {
             );
           })}
         </ul>
-        <Link href="/" className="block w-[110px] h-[53px]">
+        <Link href="/" className="block h-[53px] w-[110px]">
           <Suspense fallback={<div></div>}>
             <Logo />
           </Suspense>

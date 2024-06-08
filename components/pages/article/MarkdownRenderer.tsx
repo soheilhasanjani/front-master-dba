@@ -34,7 +34,7 @@ const MarkdownRenderer: React.FC<MarkdownProps> = ({ content }) => {
     },
     blockquote: (props: any) => {
       return (
-        <blockquote className="my-4 border-s-8 border-[#ffe564] text-[#333] p-[5px_8px_5px_30px] bg-[rgba(255,229,100,0.3)]">
+        <blockquote className="my-4 border-s-8 border-[#ffe564] bg-[rgba(255,229,100,0.3)] p-[5px_8px_5px_30px] text-[#333]">
           {props.children}
         </blockquote>
       );

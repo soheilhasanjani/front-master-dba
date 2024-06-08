@@ -47,7 +47,7 @@ const Breadcrumbs: FC<BreadcrumbsProps> = ({
               className={cn(
                 !(isLastItem && isDisabledLastItem)
                   ? "cursor-pointer"
-                  : "pointer-events-none"
+                  : "pointer-events-none",
               )}
             >
               {item.label}

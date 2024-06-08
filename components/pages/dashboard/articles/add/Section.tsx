@@ -5,7 +5,7 @@ type SectionProps = React.ComponentProps<"div">;
 
 const Section = ({ children, className, ...props }: SectionProps) => {
   return (
-    <div className={cn("bg-[#f8f9fa] p-4 rounded", className)} {...props}>
+    <div className={cn("rounded bg-[#f8f9fa] p-4", className)} {...props}>
       {children}
     </div>
   );

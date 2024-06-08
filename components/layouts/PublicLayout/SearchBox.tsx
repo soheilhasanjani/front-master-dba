@@ -15,17 +15,17 @@ const SearchBox = () => {
   const { data, isLoading } = usePostArticleGetArticleUsingSearch(
     inputText
       ? { "ArticleSearchViewModel.serachValue": debouncedInputText }
-      : null
+      : null,
   );
   //
   return (
     <div className="search-form relative">
       <div className="">
-        <span className="absolute start-0 top-0 size-11 grid place-items-center">
+        <span className="absolute start-0 top-0 grid size-11 place-items-center">
           <Search className="text-primary" />
         </span>
         <input
-          className="ps-11 border border-[#e9e7e7] w-full rounded h-11"
+          className="h-11 w-full rounded border border-[#e9e7e7] ps-11"
           type="text"
           placeholder="جست و جو ..."
           value={inputText}
@@ -36,8 +36,8 @@ const SearchBox = () => {
       </div>
       <div
         className={cn(
-          "absolute overflow-y-auto z-10 bottom-0 translate-y-[calc(100%+5px)] w-full bg-[#f4f4f4] shadow-[0_5px_10px_0_rgba(0,0,0,0.22)] rounded border border-[gainsboro] max-h-[350px]",
-          { "opacity-0 pointer-events-none": !(isFocus && inputText) }
+          "absolute bottom-0 z-10 max-h-[350px] w-full translate-y-[calc(100%+5px)] overflow-y-auto rounded border border-[gainsboro] bg-[#f4f4f4] shadow-[0_5px_10px_0_rgba(0,0,0,0.22)]",
+          { "pointer-events-none opacity-0": !(isFocus && inputText) },
         )}
       >
         {ListContent({ isLoading, data })}
@@ -58,21 +58,21 @@ const ListContent = ({ isLoading, data }: any) => {
               <Link
                 href={`/article/${suggestion?.Id}/${suggestion.Name.replace(
                   " ",
-                  "_"
+                  "_",
                 ).replace(/ /g, "_")}`}
-                className="px-1 py-2 flex gap-2 hover:bg-[#dfdfdf] rounded hover:border-[rgb(85,85,85)] border-[1.5px] border-transparent border-dashed"
+                className="flex gap-2 rounded border-[1.5px] border-dashed border-transparent px-1 py-2 hover:border-[rgb(85,85,85)] hover:bg-[#dfdfdf]"
               >
                 <div className="flex-grow overflow-hidden">
                   <div className="flex gap-1">
                     <FileText className="w-5 flex-shrink-0" />
                     <span className="truncate">{suggestion.Name}</span>
                   </div>
-                  <div className="ps-6 text-xs text-[gray] truncate">
+                  <div className="truncate ps-6 text-xs text-[gray]">
                     {suggestion.Breadcrumbs}
                   </div>
                 </div>
-                <div className="basis-1/4 flex-shrink-0 hidden sm:block">
-                  <UserCheck className="flex-shrink-0 w-5" />
+                <div className="hidden flex-shrink-0 basis-1/4 sm:block">
+                  <UserCheck className="w-5 flex-shrink-0" />
                   {suggestion.AuthorName}
                 </div>
               </Link>
@@ -82,7 +82,7 @@ const ListContent = ({ isLoading, data }: any) => {
       </ul>
     );
   } else {
-    return <div className="text-center p-2">نتیجه ای یافت نشد!</div>;
+    return <div className="p-2 text-center">نتیجه ای یافت نشد!</div>;
   }
 };
 

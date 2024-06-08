@@ -37,7 +37,7 @@ const columns = (onClickTr: (id: number) => void) => [
       const Id = info.row.original.Id;
       return (
         <button
-          className="flex items-center gap-2 pt-1 cursor-pointer"
+          className="flex cursor-pointer items-center gap-2 pt-1"
           onClick={() => {
             if (onClickTr) onClickTr(Id);
           }}
@@ -101,7 +101,7 @@ const ArticlesPage = () => {
   const sortedList = useMemo(() => {
     if (!Array.isArray(data?.ItemList)) return [];
     return data?.ItemList.sort(
-      (a: any, b: any) => a.ArticleTypeId - b.ArticleTypeId
+      (a: any, b: any) => a.ArticleTypeId - b.ArticleTypeId,
     );
   }, [data?.ItemList]);
   //
@@ -116,27 +116,27 @@ const ArticlesPage = () => {
             },
           }))
         : [],
-    [breadCrumbData]
+    [breadCrumbData],
   );
   //
   return (
     <div className="p-5">
       <div className="flex items-center justify-between">
-        <div className="font-semibold text-sm">مقالات</div>
+        <div className="text-sm font-semibold">مقالات</div>
         <Link href="/dashboard/articles/article">
-          <button className="text-white border border-[#0f70b7] bg-[#0f70b7] whitespace-nowrap hover:bg-[#0f70b7]/90 transition rounded text-xs font-normal px-3 h-10">
+          <button className="h-10 whitespace-nowrap rounded border border-[#0f70b7] bg-[#0f70b7] px-3 text-xs font-normal text-white transition hover:bg-[#0f70b7]/90">
             افزودن مقاله
           </button>
         </Link>
       </div>
-      <div className="bg-[#f8f9fa] p-5 mt-2 rounded-lg pt-1">
+      <div className="mt-2 rounded-lg bg-[#f8f9fa] p-5 pt-1">
         <Breadcrumbs
           onClickHome={() => {
             setSelectedFolder(0);
           }}
           links={formattedBreadCrumbData}
         />
-        <div className="flex items-center gap-2 mb-1">
+        <div className="mb-1 flex items-center gap-2">
           <Input placeholder="جستجو مقاله ..." />
         </div>
         <Table

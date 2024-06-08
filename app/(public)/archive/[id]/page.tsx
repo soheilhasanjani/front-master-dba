@@ -58,7 +58,7 @@ const ArchiveByIdPage = () => {
         perpage: 100,
         skip: 0,
       },
-    }
+    },
   );
   //
   return (

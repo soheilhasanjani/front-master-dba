@@ -66,22 +66,22 @@ const LoginPage = () => {
   //
   return (
     <div className="container">
-      <div className="grid grid-cols-12 my-10 rounded overflow-hidden">
-        <div className="md:col-span-8 col-span-12">
-          <div className="bg-[#f2f2f2] h-full py-10">
-            <header className="text-center pb-4">
-              <h2 className="font-bold text-2xl">ورود به سایت</h2>
+      <div className="my-10 grid grid-cols-12 overflow-hidden rounded">
+        <div className="col-span-12 md:col-span-8">
+          <div className="h-full bg-[#f2f2f2] py-10">
+            <header className="pb-4 text-center">
+              <h2 className="text-2xl font-bold">ورود به سایت</h2>
             </header>
-            <div className="w-3/4 mx-auto">
+            <div className="mx-auto w-3/4">
               <form
                 onSubmit={handleSubmit(onSubmit)}
                 className="flex flex-col gap-6"
               >
                 <div>
-                  <div className="h-10 px-2.5 border rounded text-sm flex items-center gap-2.5">
+                  <div className="flex h-10 items-center gap-2.5 rounded border px-2.5 text-sm">
                     <User color="rgb(39 103 169)" />
                     <input
-                      className="flex-grow h-full bg-transparent outline-none"
+                      className="h-full flex-grow bg-transparent outline-none"
                       autoComplete="false"
                       type="text"
                       placeholder="نام کاربری"
@@ -94,10 +94,10 @@ const LoginPage = () => {
                 </div>
 
                 <div>
-                  <div className="h-10 px-2.5 border rounded text-sm flex items-center gap-2.5">
+                  <div className="flex h-10 items-center gap-2.5 rounded border px-2.5 text-sm">
                     <Lock color="rgb(39 103 169)" />
                     <input
-                      className="flex-grow h-full bg-transparent outline-none"
+                      className="h-full flex-grow bg-transparent outline-none"
                       autoComplete="false"
                       type={isHidePassword ? "password" : "text"}
                       aria-describedby="password"
@@ -120,7 +120,7 @@ const LoginPage = () => {
                   </span>
                 </div>
 
-                <button className="bg-[#0f70b7] border border-[#0f70b7] hover:bg-white transition-colors h-10 rounded text-white hover:text-[#0f70b7]">
+                <button className="h-10 rounded border border-[#0f70b7] bg-[#0f70b7] text-white transition-colors hover:bg-white hover:text-[#0f70b7]">
                   ورود به سایت
                 </button>
               </form>
@@ -131,12 +131,12 @@ const LoginPage = () => {
             </div>
           </div>
         </div>
-        <div className="md:col-span-4 hidden md:flex bg-[#0f70b7] py-10">
-          <div className="text-white flex flex-col items-center text-center px-3">
-            <span className="border border-[#c6c6c6] rounded-full p-3 mb-5">
+        <div className="hidden bg-[#0f70b7] py-10 md:col-span-4 md:flex">
+          <div className="flex flex-col items-center px-3 text-center text-white">
+            <span className="mb-5 rounded-full border border-[#c6c6c6] p-3">
               <User size={50} />
             </span>
-            <h3 className="font-bold pb-2 text-xl">
+            <h3 className="pb-2 text-xl font-bold">
               ورود به حساب کاربری در سایت DBA{" "}
             </h3>
             <p className="pb-2">
@@ -144,7 +144,7 @@ const LoginPage = () => {
             </p>
             <Link
               href="/register"
-              className="border border-white rounded px-3 py-2 block"
+              className="block rounded border border-white px-3 py-2"
             >
               ثبت نام
             </Link>

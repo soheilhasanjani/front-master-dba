@@ -13,7 +13,7 @@ const Sidebar = () => {
   const { data: panelMenu } = usePostPanelMenuGetPanelMenuOnUserRole();
   //
   return (
-    <div className="bg-[#f8f9fa] w-56 fixed top-0 start-0 h-screen p-2.5">
+    <div className="fixed start-0 top-0 h-screen w-56 bg-[#f8f9fa] p-2.5">
       <div className="flex items-center gap-2">
         <Image
           className="rounded-full border-2"
@@ -28,7 +28,7 @@ const Sidebar = () => {
         />
         <div className="flex flex-col gap-1">
           <div className="text-xs">{user?.FullName}</div>
-          <div className="text-gray-400 text-xs">{user?.Username}</div>
+          <div className="text-xs text-gray-400">{user?.Username}</div>
         </div>
       </div>
       <hr className="my-2.5" />
@@ -48,7 +48,7 @@ const Sidebar = () => {
             : []),
         ].map((item, i) => (
           <li key={i}>
-            <Link href={item.href} className="px-2 py-2 block">
+            <Link href={item.href} className="block px-2 py-2">
               <span className="ms-0.5 text-xs">{item.label}</span>
             </Link>
           </li>

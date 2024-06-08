@@ -84,7 +84,7 @@ export function usePopover({
       setLabelId,
       setDescriptionId,
     }),
-    [open, setOpen, interactions, data, modal, labelId, descriptionId]
+    [open, setOpen, interactions, data, modal, labelId, descriptionId],
   );
 }
 
@@ -148,7 +148,7 @@ export const PopoverTrigger = React.forwardRef<
         ...props,
         ...children.props,
         "data-state": context.open ? "open" : "closed",
-      })
+      }),
     );
   }
 

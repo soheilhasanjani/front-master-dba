@@ -12,7 +12,7 @@ const MostVisited = () => {
   return (
     <div>
       <CustomTitleBox title="پر بازدیدترین ها" />
-      <section className="py-3 grid grid-cols-12 gap-4">
+      <section className="grid grid-cols-12 gap-4 py-3">
         {mostVisitedArticles?.map((article: any) => (
           <div
             key={article.Id}

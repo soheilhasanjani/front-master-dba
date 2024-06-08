@@ -24,7 +24,7 @@ const ArticleGroupSection: React.FC<ArticleGroupSectionProps> = ({
   };
   //
   return (
-    <div className="grid grid-cols-12 gap-4 bg-[#f8f9fa] p-4 rounded">
+    <div className="grid grid-cols-12 gap-4 rounded bg-[#f8f9fa] p-4">
       <div className="col-span-12">
         <Label>عنوان</Label>
         <Input value={name} onChange={(e) => setName(e.target.value)} />
@@ -41,7 +41,7 @@ const ArticleGroupSection: React.FC<ArticleGroupSectionProps> = ({
           disabled={!(name && latinName)}
           type="button"
           onClick={handleOnSubmit}
-          className="bg-[#0f70b7] border text-xs border-[#0f70b7] disabled:bg-[#5096c7] disabled:border-[#5096c7] disabled:pointer-events-none hover:bg-white px-4 transition-colors h-10 rounded text-white hover:text-[#0f70b7]"
+          className="h-10 rounded border border-[#0f70b7] bg-[#0f70b7] px-4 text-xs text-white transition-colors hover:bg-white hover:text-[#0f70b7] disabled:pointer-events-none disabled:border-[#5096c7] disabled:bg-[#5096c7]"
         >
           ثبت
         </button>

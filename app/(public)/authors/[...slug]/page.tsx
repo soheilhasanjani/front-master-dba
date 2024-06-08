@@ -25,10 +25,10 @@ const AuthorPage = () => {
   //
   return (
     <div className="container">
-      <div className="grid grid-cols-12 gap-4 my-3">
-        <div className="md:col-span-3 mb-2">
-          <div className="bg-[#ededed] rounded-lg px-3 py-10 flex items-center flex-col">
-            <div className="relative w-[150px] aspect-square overflow-hidden border-4 border-[gray] rounded-full">
+      <div className="my-3 grid grid-cols-12 gap-4">
+        <div className="mb-2 md:col-span-3">
+          <div className="flex flex-col items-center rounded-lg bg-[#ededed] px-3 py-10">
+            <div className="relative aspect-square w-[150px] overflow-hidden rounded-full border-4 border-[gray]">
               {profile?.ImageUrl ? (
                 <Image
                   src={"http://masterdba.ir:8080" + profile.ImageUrl}
@@ -50,8 +50,8 @@ const AuthorPage = () => {
             </p>
           </div>
         </div>
-        <div className="md:col-span-9 author-articles relative">
-          <div className="grid grid-cols-12 gap-4 bg-[#ededed] rounded-lg p-6">
+        <div className="author-articles relative md:col-span-9">
+          <div className="grid grid-cols-12 gap-4 rounded-lg bg-[#ededed] p-6">
             {authorArticles?.length > 0 ? (
               authorArticles?.map((article) => (
                 <div key={article.Id} className="col-span-4">
@@ -66,7 +66,7 @@ const AuthorPage = () => {
               ))
             ) : (
               <span style={{ position: "absolute", top: "190px" }}>
-                <p className="text-center bold">
+                <p className="bold text-center">
                   برای نویسنده مورد نظر مقاله ای یافت نشد
                 </p>
               </span>

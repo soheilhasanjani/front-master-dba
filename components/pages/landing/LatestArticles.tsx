@@ -12,7 +12,7 @@ const LatestArticles = () => {
   return (
     <div>
       <CustomTitleBox title="جدیدترین مقالات" />
-      <section className="py-3 grid grid-cols-12 gap-4">
+      <section className="grid grid-cols-12 gap-4 py-3">
         {latestArticles?.map((article: any) => (
           <div
             key={article.Id}

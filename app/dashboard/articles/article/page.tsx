@@ -19,7 +19,7 @@ const AddArticlePage = () => {
   const [articleType, setArticleType] = useState(0);
   //
   const handleChangeArticleType = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     setArticleType(+event.target.value);
   };
@@ -36,7 +36,7 @@ const AddArticlePage = () => {
           ArticleTypeId: value.articleType,
           Name: value.name,
           LatinName: value.latinName,
-        })
+        }),
       );
       //
       saveArticle.mutate(formData, {
@@ -48,7 +48,7 @@ const AddArticlePage = () => {
   //
   return (
     <div className="p-5">
-      <div className="flex items-center gap-6 bg-[#f8f9fa] p-4 rounded mb-4">
+      <div className="mb-4 flex items-center gap-6 rounded bg-[#f8f9fa] p-4">
         <RadioButton
           name="exampleOption"
           value={0}

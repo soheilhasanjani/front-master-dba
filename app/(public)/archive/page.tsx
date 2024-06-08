@@ -59,7 +59,7 @@ const ArchivePage = () => {
         perpage: 12,
         skip: 0,
       },
-    }
+    },
   );
 
   //
@@ -75,17 +75,17 @@ const ArchivePage = () => {
               articles?.ItemList.map((item, i: number) => (
                 <Link
                   key={item.Id}
-                  className="block col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-3"
+                  className="col-span-12 block sm:col-span-6 lg:col-span-4 xl:col-span-3"
                   href={{
                     pathname: "/archive/" + item.Id,
                   }}
                 >
-                  <div className="shadow-[0_5px_10px_0_rgba(0,0,0,0.22)] rounded bg-[#0f70b7] flex flex-col items-center justify-center gap-4 p-8">
-                    <h2 className="text-white text-lg font-medium">
+                  <div className="flex flex-col items-center justify-center gap-4 rounded bg-[#0f70b7] p-8 shadow-[0_5px_10px_0_rgba(0,0,0,0.22)]">
+                    <h2 className="text-lg font-medium text-white">
                       {item.Name}
                     </h2>
                     <h2>{item.LatinName}</h2>
-                    <span className="bg-[brown] rounded p-2 flex gap-2 items-center text-white">
+                    <span className="flex items-center gap-2 rounded bg-[brown] p-2 text-white">
                       {item.NumberOfChild} <FileText />
                     </span>
                   </div>

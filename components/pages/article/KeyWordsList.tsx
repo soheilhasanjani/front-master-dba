@@ -4,7 +4,7 @@ import { Tag } from "react-feather";
 
 const KeyWordsList = ({ keyWordsList }: { keyWordsList: Array<string> }) => {
   return keyWordsList ? (
-    <div className="flex items-center gap-1 flex-wrap">
+    <div className="flex flex-wrap items-center gap-1">
       {keyWordsList.map((item, i) => (
         <Link key={i} href={`/archive/${item}/${1}`}>
           <span
@@ -12,7 +12,7 @@ const KeyWordsList = ({ keyWordsList }: { keyWordsList: Array<string> }) => {
               //   dispatch(setSearchValue(item));
               window.scrollTo(0, 0);
             }}
-            className="border border-[#0f70b7] py-0.5 px-1 rounded cursor-pointer flex items-center gap-0.5"
+            className="flex cursor-pointer items-center gap-0.5 rounded border border-[#0f70b7] px-1 py-0.5"
           >
             <Tag size="14px" className="me-1" />
             <span className="whitespace-nowrap">{item}</span>

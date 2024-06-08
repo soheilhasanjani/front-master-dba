@@ -20,16 +20,16 @@ const TopNav = () => {
               </Link>
             </li>
           </ul>
-          <div className="max-w-lg w-full">
+          <div className="w-full max-w-lg">
             <SearchBox />
           </div>
           <div className="md:col-span-3">
             <div className="clientarea">
               {false ? (
                 <>
-                  <div className="loggein ">
+                  <div className="loggein">
                     <span
-                      className=" dropdown "
+                      className="dropdown"
                       style={{ display: "inline-block" }}
                     >
                       <a
@@ -69,7 +69,7 @@ const TopNav = () => {
                           <UserCheck className="pe-1" />
                           <Link
                             href="/userProfile"
-                            className="dropdown-item  d-inline"
+                            className="dropdown-item d-inline"
                           >
                             حساب شخصی من
                           </Link>

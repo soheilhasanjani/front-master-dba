@@ -1,6 +1,6 @@
 function formatPersianDate(
   date: Date | null | undefined,
-  locale: string = "fa-IR"
+  locale: string = "fa-IR",
 ): string {
   // Check if 'date' is null, undefined, or not a valid date
   if (!date || !(date instanceof Date) || isNaN(date.getTime())) {

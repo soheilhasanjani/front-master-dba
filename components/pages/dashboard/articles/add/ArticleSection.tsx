@@ -24,7 +24,7 @@ const ArticleSection: React.FC<ArticleSectionProps> = ({ onSubmit }) => {
   //
   return (
     <div className="grid grid-cols-12 gap-4">
-      <div className="col-span-8 grid grid-cols-12 gap-4 h-fit">
+      <div className="col-span-8 grid h-fit grid-cols-12 gap-4">
         <Section className="col-span-12 grid grid-cols-12 gap-4">
           <div className="col-span-12">
             <Label>عنوان</Label>
@@ -61,7 +61,7 @@ const ArticleSection: React.FC<ArticleSectionProps> = ({ onSubmit }) => {
           <Editor value={name} onChange={(e) => setName(e.target.value)} />
         </Section>
       </div>
-      <div className="col-span-4 grid grid-cols-12 gap-4 h-fit">
+      <div className="col-span-4 grid h-fit grid-cols-12 gap-4">
         <Section className="col-span-12 grid grid-cols-12 gap-4">
           <div className="col-span-12">
             <Label>مدت زمان مطالعه</Label>
@@ -101,7 +101,7 @@ const ArticleSection: React.FC<ArticleSectionProps> = ({ onSubmit }) => {
         <div className="col-span-6">
           <button
             type="button"
-            className="bg-[#198754] border border-[#198754] disabled:bg-[#53b889] w-full disabled:border-[#53b889] disabled:pointer-events-none hover:bg-white px-4 transition-colors h-10 rounded text-white hover:text-[#198754]"
+            className="h-10 w-full rounded border border-[#198754] bg-[#198754] px-4 text-white transition-colors hover:bg-white hover:text-[#198754] disabled:pointer-events-none disabled:border-[#53b889] disabled:bg-[#53b889]"
           >
             ثبت نهایی
           </button>
@@ -109,7 +109,7 @@ const ArticleSection: React.FC<ArticleSectionProps> = ({ onSubmit }) => {
         <div className="col-span-6">
           <button
             type="button"
-            className="bg-[#0f70b7] border border-[#0f70b7] disabled:bg-[#5096c7] w-full disabled:border-[#5096c7] disabled:pointer-events-none hover:bg-white px-4 transition-colors h-10 rounded text-white hover:text-[#0f70b7]"
+            className="h-10 w-full rounded border border-[#0f70b7] bg-[#0f70b7] px-4 text-white transition-colors hover:bg-white hover:text-[#0f70b7] disabled:pointer-events-none disabled:border-[#5096c7] disabled:bg-[#5096c7]"
           >
             ثبت موقت
           </button>

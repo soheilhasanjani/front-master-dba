@@ -17,7 +17,7 @@ const PromotionalSlider = () => {
               <Image
                 src={"http://masterdba.ir:8080" + slide.ImageUrl}
                 fill
-                className="object-cover w-full h-full rounded"
+                className="h-full w-full rounded object-cover"
                 alt={slide.Name}
               />
             </SwiperSlide>

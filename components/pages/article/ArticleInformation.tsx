@@ -14,7 +14,7 @@ type ArticleInformationProps = {
 
 const ArticleInformation = (props: ArticleInformationProps) => {
   return (
-    <ul className="flex items-center gap-3 mb-4">
+    <ul className="mb-4 flex items-center gap-3">
       {[
         {
           id: 0,

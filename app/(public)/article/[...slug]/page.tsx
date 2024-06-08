@@ -88,10 +88,10 @@ const CollapsibleMenuItem = ({
       <div
         {...getToggleProps()}
         className={cn(
-          "p-2.5 rounded-md hover:bg-[#e0e0e0] transition-colors flex items-center justify-between",
+          "flex items-center justify-between rounded-md p-2.5 transition-colors hover:bg-[#e0e0e0]",
           {
             "bg-[#e0e0e0]": isExpanded,
-          }
+          },
         )}
       >
         {title}
@@ -99,11 +99,11 @@ const CollapsibleMenuItem = ({
           size={"16px"}
           className={cn(
             "transition-transform",
-            isExpanded ? "rotate-90" : "-rotate-90"
+            isExpanded ? "rotate-90" : "-rotate-90",
           )}
         />
       </div>
-      <ul {...getCollapseProps()} className="bg-[#f6f6f6] rounded-md ps-2">
+      <ul {...getCollapseProps()} className="rounded-md bg-[#f6f6f6] ps-2">
         {childrenItem?.map((item: any) => (
           <CollapsibleMenuItem
             key={item.ID}
@@ -192,7 +192,7 @@ const ArticlePage = () => {
         </div>
         <div className="col-span-9">
           <header>
-            <h2 className="text-2xl mb-4">{article.Name}</h2>
+            <h2 className="mb-4 text-2xl">{article.Name}</h2>
             <ArticleInformation
               authorId={article.AuthorId}
               authorName={article.AuthorName}
@@ -216,7 +216,7 @@ const ArticlePage = () => {
                       مشاهده منابع
                     </span>
                   </PopoverTrigger>
-                  <PopoverContent className="bg-white rounded-xl border p-3">
+                  <PopoverContent className="rounded-xl border bg-white p-3">
                     <div className="flex flex-col gap-4">تست نمونه</div>
                   </PopoverContent>
                 </Popover>

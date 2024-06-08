@@ -13,8 +13,8 @@ const AuthorsList = () => {
   return (
     <div className="grid grid-cols-12 gap-4">
       {authorsList?.map((author: any) => (
-        <div key={author.ID} className="lg:col-span-3 mb-2">
-          <figure className="aspect-square relative rounded border-4 border-[#0f70b7]">
+        <div key={author.ID} className="mb-2 lg:col-span-3">
+          <figure className="relative aspect-square rounded border-4 border-[#0f70b7]">
             {author.ImageUrl ? (
               <Image
                 src={"http://masterdba.ir:8080" + author.ImageUrl}
@@ -29,15 +29,15 @@ const AuthorsList = () => {
               />
             )}
 
-            <div className="bg-[linear-gradient(0deg,rgba(0,0,0,.66)_10%,rgba(255,255,255,0)_100%)] w-full h-full absolute start-0 top-0" />
+            <div className="absolute start-0 top-0 h-full w-full bg-[linear-gradient(0deg,rgba(0,0,0,.66)_10%,rgba(255,255,255,0)_100%)]" />
 
-            <figcaption className="absolute bottom-6 px-5 text-center start-1/2 translate-x-1/2 flex flex-col items-center">
-              <h2 className="drop-shadow-lg text-white text-lg whitespace-nowrap mb-2">
+            <figcaption className="absolute bottom-6 start-1/2 flex translate-x-1/2 flex-col items-center px-5 text-center">
+              <h2 className="mb-2 whitespace-nowrap text-lg text-white drop-shadow-lg">
                 {author.FullName}
               </h2>
               <Link
                 href={`/authors/${author.ID}/${author.FullName}`}
-                className="hover:bg-[#0f70b7] transition border-2 border-[#0f70b7] py-1.5 px-3 w-fit block whitespace-nowrap text-white"
+                className="block w-fit whitespace-nowrap border-2 border-[#0f70b7] px-3 py-1.5 text-white transition hover:bg-[#0f70b7]"
               >
                 مشاهده رزومه
               </Link>

@@ -29,13 +29,13 @@ const Table = ({ data, columns, isAnimationEnabled = false }: TableProps) => {
               {headerGroup.headers.map((header) => (
                 <th
                   key={header.id}
-                  className="py-2 px-2 text-xs text-start font-normal text-gray-400 whitespace-nowrap bg-white rounded"
+                  className="whitespace-nowrap rounded bg-white px-2 py-2 text-start text-xs font-normal text-gray-400"
                 >
                   {header.isPlaceholder
                     ? null
                     : flexRender(
                         header.column.columnDef.header,
-                        header.getContext()
+                        header.getContext(),
                       )}
                 </th>
               ))}
@@ -64,11 +64,11 @@ const Table = ({ data, columns, isAnimationEnabled = false }: TableProps) => {
                   {row.getVisibleCells().map((cell) => (
                     <td
                       key={cell.id}
-                      className="py-2 px-3 text-xs font-medium text-start text-[#0c0b0b]"
+                      className="px-3 py-2 text-start text-xs font-medium text-[#0c0b0b]"
                     >
                       {flexRender(
                         cell.column.columnDef.cell,
-                        cell.getContext()
+                        cell.getContext(),
                       )}
                     </td>
                   ))}

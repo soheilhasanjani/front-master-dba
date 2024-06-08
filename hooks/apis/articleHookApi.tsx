@@ -45,7 +45,7 @@ export const usePostArticleGetAllArticleMenu = () => {
 };
 
 export const usePostArticleGetAllArticlesForArchiveWithPaginate = (
-  params: any
+  params: any,
 ) => {
   return useQuery({
     queryKey: ["postArticleGetAllArticlesForArchiveWithPaginate", params],

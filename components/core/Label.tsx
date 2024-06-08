@@ -8,7 +8,7 @@ const Label = ({
 }: LabelHTMLAttributes<HTMLLabelElement>) => {
   return (
     <label
-      className={cn("block mb-1 whitespace-nowrap text-xs", className)}
+      className={cn("mb-1 block whitespace-nowrap text-xs", className)}
       {...props}
     >
       {children}

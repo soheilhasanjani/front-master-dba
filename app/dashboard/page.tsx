@@ -67,15 +67,15 @@ const DashboardPage = () => {
   //
   return (
     <div className="p-5">
-      <div className="font-semibold text-lg">تنظیمات</div>
+      <div className="text-lg font-semibold">تنظیمات</div>
 
-      <div className="bg-[#f8f9fa] p-5 mt-5 rounded-lg">
+      <div className="mt-5 rounded-lg bg-[#f8f9fa] p-5">
         <form
           className="flex flex-col gap-10"
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className="">
-            <div className="flex items-center gap-2 pb-3 border-b mb-3">
+            <div className="mb-3 flex items-center gap-2 border-b pb-3">
               <Bookmark />
               <h6>تنظیمات سایت</h6>
             </div>
@@ -117,7 +117,7 @@ const DashboardPage = () => {
           </div>
 
           <div className="">
-            <div className="flex items-center gap-2 pb-3 border-b mb-3">
+            <div className="mb-3 flex items-center gap-2 border-b pb-3">
               <Bookmark />
               <h6>صفحه اصلی</h6>
             </div>
@@ -158,7 +158,7 @@ const DashboardPage = () => {
           </div>
 
           <div className="">
-            <div className="flex items-center gap-2 pb-3 border-b mb-3">
+            <div className="mb-3 flex items-center gap-2 border-b pb-3">
               <Bookmark />
               <h6>فوتر</h6>
             </div>
@@ -188,7 +188,7 @@ const DashboardPage = () => {
           </div>
 
           <div>
-            <div className="flex items-center gap-2 pb-3 border-b mb-3">
+            <div className="mb-3 flex items-center gap-2 border-b pb-3">
               <Bookmark />
               <h6>درباره ما</h6>
             </div>
@@ -288,7 +288,7 @@ const DashboardPage = () => {
             </div>
           </div>
 
-          <button className="text-white bg-[#0f70b7] hover:bg-[#0f70b7]/90 transition rounded text-sm font-medium px-3 h-10">
+          <button className="h-10 rounded bg-[#0f70b7] px-3 text-sm font-medium text-white transition hover:bg-[#0f70b7]/90">
             ثبت
           </button>
         </form>

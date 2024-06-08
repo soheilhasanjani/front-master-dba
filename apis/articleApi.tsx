@@ -46,7 +46,7 @@ export const postArticleGetAllArticleMenu = async () => {
 };
 
 export const postArticleGetAllArticlesForArchiveWithPaginate = async (
-  params: any
+  params: any,
 ) => {
   const { data }: any = await axiosInstance({
     method: "post",

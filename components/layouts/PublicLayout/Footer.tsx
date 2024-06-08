@@ -15,7 +15,7 @@ const Footer = () => {
         <div className="grid grid-cols-12 gap-6">
           <div className="col-span-12 sm:col-span-6 md:col-span-6">
             <section className="mb-5">
-              <header className="mb-5 text-primary text-base leading-5">
+              <header className="mb-5 text-base leading-5 text-primary">
                 درباره دی بی ای
               </header>
               <p>{data?.FooterAboutUsText}</p>
@@ -23,7 +23,7 @@ const Footer = () => {
           </div>
           <div className="col-span-12 sm:col-span-6 md:col-span-3">
             <section className="mb-5">
-              <header className="mb-5 text-primary text-base leading-5">
+              <header className="mb-5 text-base leading-5 text-primary">
                 بخش های سایت
               </header>
               <ul>
@@ -36,7 +36,7 @@ const Footer = () => {
                   <li key={item.id}>
                     <Link
                       href={item.href}
-                      className="block leading-6 py-0.5 ps-3.5 text-sm hover:ps-4 transition-[padding]"
+                      className="block py-0.5 ps-3.5 text-sm leading-6 transition-[padding] hover:ps-4"
                     >
                       {item.label}
                     </Link>
@@ -47,7 +47,7 @@ const Footer = () => {
           </div>
           <div className="col-span-12 sm:col-span-6 md:col-span-3">
             <section className="mb-5">
-              <header className="mb-5 text-primary text-base leading-5">
+              <header className="mb-5 text-base leading-5 text-primary">
                 ارتباط با ما
               </header>
               <p className="mb-4">
@@ -67,7 +67,7 @@ const Footer = () => {
             </section>
           </div>
         </div>
-        <p className="text-center py-1 text-xs">
+        <p className="py-1 text-center text-xs">
           کليه حقوق محصولات و محتوای اين سایت متعلق به مستر دی بی ای می باشد و
           هر گونه کپی برداری از محتوا و محصولات سایت غیر مجاز و بدون رضایت ماست
         </p>

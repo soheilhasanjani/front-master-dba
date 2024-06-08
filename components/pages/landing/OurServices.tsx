@@ -12,9 +12,9 @@ const OurServices = () => {
   //
   return (
     <div className="rounded bg-[rgb(237,237,237)] p-4">
-      <div className="flex flex-col justify-center items-center w-full mb-4">
+      <div className="mb-4 flex w-full flex-col items-center justify-center">
         <Users size={60} className="mb-2 inline-block text-[gray]" />
-        <h4 className="border-b border-[#ccc] text-primary text-2xl">
+        <h4 className="border-b border-[#ccc] text-2xl text-primary">
           خدمات ما
         </h4>
       </div>
@@ -22,7 +22,7 @@ const OurServices = () => {
         {data?.map((slide: any) => {
           return (
             <SwiperSlide key={slide.Id}>
-              <div className="border border-[rgb(0,0,0,.27)] rounded hover:border-primary flex flex-col py-4 items-center gap-4 px-4">
+              <div className="flex flex-col items-center gap-4 rounded border border-[rgb(0,0,0,.27)] px-4 py-4 hover:border-primary">
                 <Image
                   src={"http://masterdba.ir:8080" + slide.ImageUrl}
                   className="rounded-full"
@@ -31,12 +31,12 @@ const OurServices = () => {
                   alt={slide.Title}
                 />
                 <h5 className="text-xl">{slide.Title}</h5>
-                <p className="leading-6 text-center h-24 line-clamp-4">
+                <p className="line-clamp-4 h-24 text-center leading-6">
                   {slide.Description}
                 </p>
                 <Link
                   href="/productdemoform"
-                  className="bg-primary rounded text-white py-1.5 px-3 inline-block"
+                  className="inline-block rounded bg-primary px-3 py-1.5 text-white"
                 >
                   درخواست دمو
                 </Link>

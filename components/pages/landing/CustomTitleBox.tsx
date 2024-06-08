@@ -3,10 +3,10 @@ import React from "react";
 const CustomTitleBox = ({ title }: { title: string }) => {
   return (
     <div>
-      <h4 className="text-2xl pb-2">{title}</h4>
+      <h4 className="pb-2 text-2xl">{title}</h4>
       <div className="flex items-center pb-4">
-        <div className="bg-primary h-1 rounded-full w-14" />
-        <div className="w-8 border-b-4 border-dotted border-primary -ms-0.5"></div>
+        <div className="h-1 w-14 rounded-full bg-primary" />
+        <div className="-ms-0.5 w-8 border-b-4 border-dotted border-primary"></div>
       </div>
     </div>
   );
