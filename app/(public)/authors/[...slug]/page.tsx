@@ -53,7 +53,7 @@ const AuthorPage = () => {
         <div className="author-articles relative md:col-span-9">
           <div className="grid grid-cols-12 gap-4 rounded-lg bg-[#ededed] p-6">
             {authorArticles?.length > 0 ? (
-              authorArticles?.map((article) => (
+              authorArticles?.map((article: any) => (
                 <div key={article.Id} className="col-span-4">
                   <ArticleCard
                     id={article.Id}

@@ -72,7 +72,7 @@ const ArchivePage = () => {
         <div className="col-span-12">
           <div className="grid grid-cols-12 gap-4">
             {articles?.ItemList?.length &&
-              articles?.ItemList.map((item, i: number) => (
+              articles?.ItemList.map((item: any, i: number) => (
                 <Link
                   key={item.Id}
                   className="col-span-12 block sm:col-span-6 lg:col-span-4 xl:col-span-3"

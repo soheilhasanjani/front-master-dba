@@ -58,7 +58,9 @@ const ArticleSection: React.FC<ArticleSectionProps> = ({ onSubmit }) => {
         </Section>
         <Section className="col-span-12">
           <Label>متن</Label>
-          <Editor value={name} onChange={(e) => setName(e.target.value)} />
+          <Editor
+          // value={name} onChange={(e) => setName(e.target.value)}
+          />
         </Section>
       </div>
       <div className="col-span-4 grid h-fit grid-cols-12 gap-4">

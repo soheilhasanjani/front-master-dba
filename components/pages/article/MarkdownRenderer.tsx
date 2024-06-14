@@ -20,13 +20,12 @@ const MarkdownRenderer: React.FC<MarkdownProps> = ({ content }) => {
       if (children && children.props) {
         const language = getClassLanguage(props.className);
         if (language) {
-          return (
-            <SyntaxHighlighter
-              style={vscDarkPlus}
-              language={language}
-              children={children.props.children}
-            />
-          );
+          return null;
+          // <SyntaxHighlighter
+          //   style={vscDarkPlus}
+          //   language={language}
+          //   children={children.props.children}
+          // />
         }
       }
 
@@ -46,7 +45,7 @@ const MarkdownRenderer: React.FC<MarkdownProps> = ({ content }) => {
       <ReactMarkdown
         rehypePlugins={[rehypeRaw]}
         components={renderers}
-        children={content}
+        // children={content}
       />
     </div>
   );
