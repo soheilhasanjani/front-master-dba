@@ -1,5 +1,9 @@
 import * as panelCustomValueApi from "@/apis/panelCustomValueApi";
-import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
+import {
+  queryOptions,
+  useQuery,
+  useSuspenseQuery,
+} from "@tanstack/react-query";
 
 export const usePostPanelCustomValueGetLogImage = () => {
   return useSuspenseQuery({
@@ -8,11 +12,13 @@ export const usePostPanelCustomValueGetLogImage = () => {
   });
 };
 
+export const postPanelCustomValueGetFooterContentQueryOptions = queryOptions({
+  queryKey: ["postPanelCustomValueGetFooterContent"],
+  queryFn: () => panelCustomValueApi.postPanelCustomValueGetFooterContent(),
+});
+
 export const usePostPanelCustomValueGetFooterContent = () => {
-  return useSuspenseQuery({
-    queryKey: ["postPanelCustomValueGetFooterContent"],
-    queryFn: () => panelCustomValueApi.postPanelCustomValueGetFooterContent(),
-  });
+  return useSuspenseQuery(postPanelCustomValueGetFooterContentQueryOptions);
 };
 
 export const usePostPanelCustomValueGetPanelCustomeValue = () => {

@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import CustomTitleBox from "@/components/pages/landing/CustomTitleBox";
 import { usePostArticleGetAllArticlesForMainPage } from "@/hooks/apis/articleHookApi";

@@ -1,3 +1,5 @@
+"use client";
+
 import ArticleCard from "@/components/pages/landing/ArticleCard";
 import CustomTitleBox from "@/components/pages/landing/CustomTitleBox";
 import { usePostArticleGetAllArticlesForMainPage } from "@/hooks/apis/articleHookApi";

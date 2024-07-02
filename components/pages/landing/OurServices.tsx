@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { usePostProductGetAllProducts } from "@/hooks/apis/productHookApi";
 import { Users } from "react-feather";

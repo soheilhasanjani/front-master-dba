@@ -1,7 +1,7 @@
-import React, { Suspense } from "react";
+import React from "react";
 import TopNav from "@/components/layouts/PublicLayout/TopNav";
 import MainNav from "@/components/layouts/PublicLayout/MainNav";
-import Footer from "@/components/layouts/PublicLayout/Footer";
+import FooterServerComponent from "@/components/layouts/PublicLayout/FooterServerComponent";
 
 export default function PublicLayout({
   children,
@@ -13,9 +13,7 @@ export default function PublicLayout({
       <TopNav />
       <MainNav />
       <main>{children}</main>
-      <Suspense fallback={<></>}>
-        <Footer />
-      </Suspense>
+      <FooterServerComponent />
     </>
   );
 }
