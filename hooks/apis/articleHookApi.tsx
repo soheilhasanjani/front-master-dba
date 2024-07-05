@@ -21,6 +21,7 @@ export const usePostArticleGetArticleUsingSearch = (params: any) => {
     queryKey: ["postArticleGetArticleUsingSearch", params],
     queryFn: () => articleApi.postArticleGetArticleUsingSearch(params),
     enabled: !!params,
+    placeholderData: (previousData) => previousData,
   });
 };
 
