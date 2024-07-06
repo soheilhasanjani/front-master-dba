@@ -8,15 +8,7 @@ import ReferenceComponent, {
 import Textarea from "@/components/core/Textarea";
 import Editor from "@/components/core/TextEditor";
 
-export type ArticleSectionSubmitValue = {
-  articleType: 1;
-};
-
-type ArticleSectionProps = {
-  onSubmit: (value: ArticleSectionSubmitValue) => void;
-};
-
-const ArticleSection: React.FC<ArticleSectionProps> = ({ onSubmit }) => {
+const ArticleSection = () => {
   //
   const [name, setName] = useState("");
   const [latinName, setLatinName] = useState("");

@@ -2,19 +2,10 @@
 
 import React, { useState } from "react";
 import RadioButton from "@/components/core/RadioButton";
-import ArticleGroupSection, {
-  ArticleGroupSectionSubmitValue,
-} from "@/components/pages/dashboard/articles/add/ArticleGroupSection";
-import ArticleSection, {
-  ArticleSectionSubmitValue,
-} from "@/components/pages/dashboard/articles/add/ArticleSection";
-import { usePostArticleSave } from "@/hooks/apis/articleHookApi";
-
-type SubmitValue = ArticleGroupSectionSubmitValue | ArticleSectionSubmitValue;
+import ArticleGroupSection from "@/components/pages/dashboard/articles/add/ArticleGroupSection";
+import ArticleSection from "@/components/pages/dashboard/articles/add/ArticleSection";
 
 const AddArticlePage = () => {
-  //
-  const saveArticle = usePostArticleSave();
   //
   const [articleType, setArticleType] = useState(0);
   //
@@ -22,28 +13,6 @@ const AddArticlePage = () => {
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     setArticleType(+event.target.value);
-  };
-  //
-  const handleOnSubmit = (value: SubmitValue) => {
-    //
-    const formData = new FormData();
-    //
-    if (value.articleType === 0) {
-      //
-      formData.append(
-        "formdata",
-        JSON.stringify({
-          ArticleTypeId: value.articleType,
-          Name: value.name,
-          LatinName: value.latinName,
-        }),
-      );
-      //
-      saveArticle.mutate(formData, {
-        onSuccess: () => {},
-      });
-    } else if (value.articleType === 1) {
-    }
   };
   //
   return (
@@ -64,8 +33,8 @@ const AddArticlePage = () => {
           onChange={handleChangeArticleType}
         />
       </div>
-      {articleType === 0 && <ArticleGroupSection onSubmit={handleOnSubmit} />}
-      {articleType === 1 && <ArticleSection onSubmit={handleOnSubmit} />}
+      {articleType === 0 && <ArticleGroupSection />}
+      {articleType === 1 && <ArticleSection />}
     </div>
   );
 };

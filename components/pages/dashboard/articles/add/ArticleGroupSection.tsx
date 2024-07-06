@@ -1,26 +1,42 @@
 import React, { useState } from "react";
 import Input from "@/components/core/Input";
 import Label from "@/components/core/Label";
+import { usePostArticleSave } from "@/hooks/apis/articleHookApi";
 
-export type ArticleGroupSectionSubmitValue = {
-  articleType: 0;
-  name: string;
-  latinName: string;
-};
-
-type ArticleGroupSectionProps = {
-  onSubmit: (value: ArticleGroupSectionSubmitValue) => void;
-};
-
-const ArticleGroupSection: React.FC<ArticleGroupSectionProps> = ({
-  onSubmit,
-}) => {
+const ArticleGroupSection = () => {
+  //
+  const saveArticle = usePostArticleSave();
   //
   const [name, setName] = useState("");
   const [latinName, setLatinName] = useState("");
   //
   const handleOnSubmit = () => {
-    onSubmit({ articleType: 0, name, latinName });
+    //
+    const formData = new FormData();
+    //
+    formData.append(
+      "formdata",
+      JSON.stringify({
+        Id: 0,
+        Article_NextID: null,
+        Article_PreID: null,
+        Name: name,
+        LatinName: latinName,
+        Summery: "",
+        IsDraft: true,
+        IsEnable: true,
+        TimeToRead: 0,
+        IsTempSave: false,
+        KeyWords: "",
+        ArticleTypeId: "1",
+        ParentId: null,
+        RefrenceList: "[]",
+      }),
+    );
+    //
+    saveArticle.mutate(formData, {
+      onSuccess: () => {},
+    });
   };
   //
   return (

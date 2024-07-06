@@ -125,7 +125,7 @@ const ArticlesPage = () => {
         <div className="text-sm font-semibold">مقالات</div>
         <Link href="/dashboard/articles/article">
           <button className="h-10 whitespace-nowrap rounded border border-[#0f70b7] bg-[#0f70b7] px-3 text-xs font-normal text-white transition hover:bg-[#0f70b7]/90">
-            افزودن مقاله
+            افزودن گروه مقالات و مقاله
           </button>
         </Link>
       </div>
