@@ -1,15 +1,15 @@
 "use client";
 
-import React from "react";
-import { usePostSliderGetAllSliders } from "@/hooks/apis/sliderHookApi";
+import React, { FC } from "react";
 import Swiper from "@/components/core/Swiper";
 import { SwiperSlide } from "swiper/react";
 import Image from "next/image";
 
-const HeroSwiper = () => {
-  //
-  const { data } = usePostSliderGetAllSliders();
-  //
+interface HeroSwiper {
+  data: Array<any>;
+}
+
+const HeroSwiper: FC<HeroSwiper> = ({ data }) => {
   return (
     <Swiper className="h-[340px]" navigation>
       {data?.map((slide: any) => {
