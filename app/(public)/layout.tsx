@@ -1,7 +1,7 @@
 import React from "react";
 import TopNav from "@/components/layouts/PublicLayout/TopNav";
 import MainNav from "@/components/layouts/PublicLayout/MainNav";
-import FooterServerComponent from "@/components/layouts/PublicLayout/FooterServerComponent";
+import FooterSC from "@/components/layouts/PublicLayout/FooterSC";
 
 export default function PublicLayout({
   children,
@@ -13,7 +13,7 @@ export default function PublicLayout({
       <TopNav />
       <MainNav />
       <main>{children}</main>
-      <FooterServerComponent />
+      <FooterSC />
     </>
   );
 }

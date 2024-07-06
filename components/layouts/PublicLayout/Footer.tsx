@@ -1,14 +1,14 @@
 "use client";
 
-import { usePostPanelCustomValueGetFooterContent } from "@/hooks/apis/panelCustomValueHookApi";
 import Link from "next/link";
-import React from "react";
+import React, { FC } from "react";
 import { Mail, Phone } from "react-feather";
 
-const Footer = () => {
-  //
-  const { data } = usePostPanelCustomValueGetFooterContent();
-  //
+interface FooterProps {
+  data: any;
+}
+
+const Footer: FC<FooterProps> = ({ data }) => {
   return (
     <footer className="border-t border-[#e6e6e6] pt-2">
       <div className="container">
