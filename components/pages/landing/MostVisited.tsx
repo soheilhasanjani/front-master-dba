@@ -1,13 +1,14 @@
 "use client";
 
-import React from "react";
+import React, { FC } from "react";
 import CustomTitleBox from "@/components/pages/landing/CustomTitleBox";
-import { usePostArticleGetAllArticlesForMainPage } from "@/hooks/apis/articleHookApi";
 import ArticleCard from "@/components/pages/landing/ArticleCard";
 
-const MostVisited = () => {
-  //
-  const { data } = usePostArticleGetAllArticlesForMainPage();
+interface MostVisitedProps {
+  data: any;
+}
+
+const MostVisited: FC<MostVisitedProps> = ({ data }) => {
   //
   const mostVisitedArticles = data?.MostVisitedArticles;
   //

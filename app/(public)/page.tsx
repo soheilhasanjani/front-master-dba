@@ -1,7 +1,7 @@
 import HeroSwiperSC from "@/components/pages/landing/HeroSwiperSC";
-import MostVisitedServerComponent from "@/components/pages/landing/MostVisitedServerComponent";
+import MostVisitedSC from "@/components/pages/landing/MostVisitedSC";
 import LatestArticlesSC from "@/components/pages/landing/LatestArticlesSC";
-import OurServicesServerComponent from "@/components/pages/landing/OurServicesServerComponent";
+import OurServicesSC from "@/components/pages/landing/OurServicesSC";
 
 export default function Home() {
   return (
@@ -13,10 +13,10 @@ export default function Home() {
         <LatestArticlesSC />
       </div>
       <div>
-        <OurServicesServerComponent />
+        <OurServicesSC />
       </div>
       <div>
-        <MostVisitedServerComponent />
+        <MostVisitedSC />
       </div>
     </div>
   );

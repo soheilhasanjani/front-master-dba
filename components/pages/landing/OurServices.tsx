@@ -1,17 +1,17 @@
 "use client";
 
-import React from "react";
-import { usePostProductGetAllProducts } from "@/hooks/apis/productHookApi";
+import React, { FC } from "react";
 import { Users } from "react-feather";
 import Swiper from "@/components/core/Swiper";
 import { SwiperSlide } from "swiper/react";
 import Link from "next/link";
 import Image from "next/image";
 
-const OurServices = () => {
-  //
-  const { data } = usePostProductGetAllProducts();
-  //
+interface OurServicesProps {
+  data: any;
+}
+
+const OurServices: FC<OurServicesProps> = ({ data }) => {
   return (
     <div className="rounded bg-[rgb(237,237,237)] p-4">
       <div className="mb-4 flex w-full flex-col items-center justify-center">
