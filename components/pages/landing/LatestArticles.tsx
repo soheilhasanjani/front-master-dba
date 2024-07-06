@@ -1,13 +1,14 @@
 "use client";
 
+import React, { FC } from "react";
 import ArticleCard from "@/components/pages/landing/ArticleCard";
 import CustomTitleBox from "@/components/pages/landing/CustomTitleBox";
-import { usePostArticleGetAllArticlesForMainPage } from "@/hooks/apis/articleHookApi";
-import React from "react";
 
-const LatestArticles = () => {
-  //
-  const { data } = usePostArticleGetAllArticlesForMainPage();
+interface LatestArticlesProps {
+  data: any;
+}
+
+const LatestArticles: FC<LatestArticlesProps> = ({ data }) => {
   //
   const latestArticles = data?.LatestArticles;
   //

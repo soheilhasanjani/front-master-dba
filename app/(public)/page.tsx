@@ -1,6 +1,6 @@
 import HeroSwiperSC from "@/components/pages/landing/HeroSwiperSC";
 import MostVisitedServerComponent from "@/components/pages/landing/MostVisitedServerComponent";
-import LatestArticlesServerComponent from "@/components/pages/landing/LatestArticlesServerComponent";
+import LatestArticlesSC from "@/components/pages/landing/LatestArticlesSC";
 import OurServicesServerComponent from "@/components/pages/landing/OurServicesServerComponent";
 
 export default function Home() {
@@ -10,7 +10,7 @@ export default function Home() {
         <HeroSwiperSC />
       </div>
       <div>
-        <LatestArticlesServerComponent />
+        <LatestArticlesSC />
       </div>
       <div>
         <OurServicesServerComponent />

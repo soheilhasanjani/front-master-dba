@@ -1,9 +1,9 @@
-import { Suspense } from "react";
+import React, { Suspense } from "react";
 import { HOST_ADDRESS } from "@/configs/baseUrl";
-import HeroSwiper from "@/components/pages/landing/HeroSwiper";
+import LatestArticles from "@/components/pages/landing/LatestArticles";
 
 async function getData() {
-  const res = await fetch(HOST_ADDRESS + "/slider/GetAllSliders", {
+  const res = await fetch(HOST_ADDRESS + "/Article/GetAllArticlesForMainPage", {
     method: "POST",
   });
   if (!res.ok) {
@@ -12,15 +12,15 @@ async function getData() {
   return res.json();
 }
 
-const HeroSwiperSC = async () => {
+const LatestArticlesSC = async () => {
   //
   const data = await getData();
   //
   return (
     <Suspense fallback={<></>}>
-      <HeroSwiper data={data} />
+      <LatestArticles data={data} />
     </Suspense>
   );
 };
 
-export default HeroSwiperSC;
+export default LatestArticlesSC;

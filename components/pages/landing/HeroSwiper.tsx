@@ -5,11 +5,11 @@ import Swiper from "@/components/core/Swiper";
 import { SwiperSlide } from "swiper/react";
 import Image from "next/image";
 
-interface HeroSwiper {
+interface HeroSwiperProps {
   data: Array<any>;
 }
 
-const HeroSwiper: FC<HeroSwiper> = ({ data }) => {
+const HeroSwiper: FC<HeroSwiperProps> = ({ data }) => {
   return (
     <Swiper className="h-[340px]" navigation>
       {data?.map((slide: any) => {
