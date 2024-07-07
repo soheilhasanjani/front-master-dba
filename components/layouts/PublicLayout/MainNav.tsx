@@ -6,9 +6,9 @@ import Menu from "@/components/layouts/PublicLayout/Menu";
 const MainNav = () => {
   return (
     <nav className="border-b border-[#e6e6e6] py-4">
-      <div className="container flex items-center">
+      <div className="container flex items-center justify-between">
         <Menu />
-        <Link href="/" className="block h-[53px] w-[110px]">
+        <Link href="/" className="block h-[44px] w-[110px]">
           <LogoSC />
         </Link>
       </div>
