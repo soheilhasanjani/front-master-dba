@@ -17,7 +17,7 @@ const CategoryCard: FC<CategoryCardProps> = ({
 }) => {
   return (
     <Link
-      className="block"
+      className="block h-full"
       href={{
         pathname: hrefPathname,
       }}
