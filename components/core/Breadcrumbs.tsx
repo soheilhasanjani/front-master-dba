@@ -40,7 +40,7 @@ const Breadcrumbs: FC<BreadcrumbsProps> = ({
             key={item.id}
             className="flex items-center gap-2"
             onClick={() => {
-              if (item.onClick) item.onClick(item.id);
+              if (item.onClick && !isLastItem) item.onClick(item.id);
             }}
           >
             <div
