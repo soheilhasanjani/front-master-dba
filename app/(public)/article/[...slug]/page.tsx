@@ -1,71 +1,22 @@
 import React from "react";
 import ArticlesNavigationSC from "@/app/(public)/article/[...slug]/articles-navigation-sc";
 import ArticleContentSC from "@/app/(public)/article/[...slug]/article-content-sc";
-
-// const CustomBreadCrumb = ({ articleId }: { articleId: number }) => {
-//   //
-//   const { data } = usePostArticleGetBreadCrumbListOnArticleId({
-//     "BreadCrumbViewModel.id": articleId,
-//   });
-//   //
-//   const breadCrumbList: {
-//     id: number;
-//     label?: string;
-//     icon: React.ComponentType<IconProps>;
-//     ignoreMarginIcon?: boolean;
-//   }[] = [
-//     {
-//       id: 0,
-//       icon: Home,
-//       ignoreMarginIcon: true,
-//     },
-//     {
-//       id: 1,
-//       label: "مقالات",
-//       icon: ChevronLeft,
-//     },
-//     ...(Array.isArray(data)
-//       ? data.map((item: any) => ({
-//           id: item.Id,
-//           label: item.Name,
-//           icon: ChevronLeft,
-//         }))
-//       : []),
-//   ];
-//   //
-//   return (
-//     <ul className="flex items-center py-3">
-//       {breadCrumbList?.map((item) => (
-//         <li key={item.id} className="me-2">
-//           <Link href={"/"} className="flex items-center">
-//             <item.icon
-//               className={cn("mb-1", { "me-2": !item.ignoreMarginIcon })}
-//               size={18}
-//             />
-//             {item.label}
-//           </Link>
-//         </li>
-//       ))}
-//     </ul>
-//   );
-// };
+import ArticleBreadcrumbs from "@/app/(public)/article/[...slug]/article-breadcrumbs";
+import Container from "@/components/core/Container";
+import Grid from "@/components/core/Grid";
 
 const ArticlePage = ({ params: { slug } }: { params: { slug: string[] } }) => {
   //
   const articleId = +slug?.[0];
   //
   return (
-    <section className="px-3 xxl:container">
+    <Container>
       <div className="pb-3 pt-4">
-        {/* <CustomBreadCrumb articleId={articleId} /> */}
+        <ArticleBreadcrumbs id={articleId} />
       </div>
-      <div className="grid grid-cols-12 gap-8">
+      <Grid className="gap-6">
         <div className="col-span-3">
-          <nav>
-            <ul className="nav nav-list sticky" style={{ display: "inherit" }}>
-              <ArticlesNavigationSC />
-            </ul>
-          </nav>
+          <ArticlesNavigationSC />
         </div>
         <div className="col-span-9">
           <ArticleContentSC articleId={articleId} />
@@ -91,8 +42,8 @@ const ArticlePage = ({ params: { slug } }: { params: { slug: string[] } }) => {
             <img className="image-modal-content" id="img02" />
           </div>
         </div>
-      </div>
-    </section>
+      </Grid>
+    </Container>
   );
 };
 

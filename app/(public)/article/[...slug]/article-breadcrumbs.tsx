@@ -5,11 +5,11 @@ import Breadcrumbs from "@/components/core/Breadcrumbs";
 import { usePostArticleGetBreadCrumbListOnArticleId } from "@/hooks/apis/articleHookApi";
 import { useRouter } from "next/navigation";
 
-interface ArchiveBreadcrumbsProps {
-  id?: string;
+interface ArticleBreadcrumbsProps {
+  id?: number;
 }
 
-const ArchiveBreadcrumbs: FC<ArchiveBreadcrumbsProps> = ({ id }) => {
+const ArticleBreadcrumbs: FC<ArticleBreadcrumbsProps> = ({ id }) => {
   //
   const { push } = useRouter();
   //
@@ -55,4 +55,4 @@ const ArchiveBreadcrumbs: FC<ArchiveBreadcrumbsProps> = ({ id }) => {
   );
 };
 
-export default ArchiveBreadcrumbs;
+export default ArticleBreadcrumbs;

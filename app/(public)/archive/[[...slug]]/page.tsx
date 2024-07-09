@@ -38,7 +38,7 @@ const ArchivePage = async ({ params }: { params: { slug?: string[] } }) => {
   return (
     <section className="px-3 xxl:container">
       <div className="flex flex-col gap-4 py-4">
-        <ArchiveBreadcrumbs id={currentArchiveId} archivesId={archivesId} />
+        <ArchiveBreadcrumbs id={currentArchiveId} />
         <div className="grid grid-cols-12 gap-4">
           {data?.ItemList?.length
             ? data?.ItemList.map((item: any) => {
