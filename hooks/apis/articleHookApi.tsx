@@ -89,3 +89,11 @@ export const usePostArticleSave = () => {
     },
   });
 };
+
+export const usePostArticleGetAllArticlesForDropdown = (params: any) => {
+  return useQuery({
+    queryKey: ["postArticleGetAllArticlesForDropdown", params],
+    queryFn: () => articleApi.postArticleGetAllArticlesForDropdown(params),
+    enabled: !!params,
+  });
+};
