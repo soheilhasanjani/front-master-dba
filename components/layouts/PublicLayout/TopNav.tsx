@@ -5,7 +5,7 @@ import { Grid, LogIn, LogOut, User, UserCheck } from "react-feather";
 
 const TopNav = () => {
   return (
-    <div className="container">
+    <div className="px-3 xxl:container">
       <nav className="py-2">
         <div className="flex flex-wrap items-center justify-between gap-6 py-4">
           <ul className="flex items-center gap-4">
@@ -38,17 +38,17 @@ const TopNav = () => {
                     <User />
                   </a>
                   <ul
-                    className="p-2 dropdown-menu"
+                    className="dropdown-menu p-2"
                     aria-labelledby="navbarScrollingDropdown"
                   >
-                    <li className="pb-1 text-center d-block">
+                    <li className="d-block pb-1 text-center">
                       {"user.FullName"}
                     </li>
-                    <li className="pb-1 d-block">
+                    <li className="d-block pb-1">
                       <hr className="dropdown-divider" />
                     </li>
                     {10 > 0 ? (
-                      <li className="pb-1 d-block">
+                      <li className="d-block pb-1">
                         <Grid className="pe-1" />
                         <Link
                           href="/dashboard"
@@ -60,7 +60,7 @@ const TopNav = () => {
                         </Link>
                       </li>
                     ) : null}
-                    <li className="pb-1 d-block">
+                    <li className="d-block pb-1">
                       <UserCheck className="pe-1" />
                       <Link
                         href="/userProfile"
@@ -69,7 +69,7 @@ const TopNav = () => {
                         حساب شخصی من
                       </Link>
                     </li>
-                    <li className="pb-1 d-block">
+                    <li className="d-block pb-1">
                       <hr className="dropdown-divider" />
                     </li>
                     <li className="d-block">

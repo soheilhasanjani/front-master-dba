@@ -11,7 +11,7 @@ interface FooterProps {
 const Footer: FC<FooterProps> = ({ data }) => {
   return (
     <footer className="border-t border-[#e6e6e6] pt-2">
-      <div className="container">
+      <div className="px-3 xxl:container">
         <div className="grid grid-cols-12 gap-6">
           <div className="col-span-12 sm:col-span-6 md:col-span-6">
             <section className="mb-5">

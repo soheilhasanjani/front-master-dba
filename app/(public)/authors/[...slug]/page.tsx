@@ -24,7 +24,7 @@ const AuthorPage = () => {
   });
   //
   return (
-    <div className="container">
+    <div className="px-3 xxl:container">
       <div className="my-3 grid grid-cols-12 gap-4">
         <div className="mb-2 md:col-span-3">
           <div className="flex flex-col items-center rounded-lg bg-[#ededed] px-3 py-10">

@@ -40,7 +40,7 @@ const ContactUsPage = () => {
   };
   //
   return (
-    <div className="container py-8">
+    <div className="px-3 py-8 xxl:container">
       <div className="rounded bg-[#ededed] p-4">
         <div className="row about-title pb-2">
           <div className="co-md-12">تماس با ما</div>

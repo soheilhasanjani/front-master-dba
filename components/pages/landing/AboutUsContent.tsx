@@ -9,7 +9,7 @@ const AboutUsContent = () => {
   const { data } = usePostPanelCustomValueGetAboutPageAboutUs();
   //
   return (
-    <div className="container py-4">
+    <div className="px-3 py-4 xxl:container">
       <div className="rounded bg-[#ededed] p-8">
         {data?.AboutUsTitle && <h5 className="pb-4">{data?.AboutUsTitle}</h5>}
         <div className="text-justify">

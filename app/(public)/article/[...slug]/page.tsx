@@ -55,7 +55,7 @@ const ArticlePage = ({ params: { slug } }: { params: { slug: string[] } }) => {
   const articleId = +slug?.[0];
   //
   return (
-    <section className="container">
+    <section className="px-3 xxl:container">
       <div className="pb-3 pt-4">
         {/* <CustomBreadCrumb articleId={articleId} /> */}
       </div>
