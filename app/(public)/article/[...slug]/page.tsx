@@ -19,9 +19,12 @@ const ArticlePage = ({ params: { slug } }: { params: { slug: string[] } }) => {
           <ArticlesNavigationSC />
         </div>
         <div className="col-span-9">
-          <ArticleContentSC articleId={articleId} />
-
-          {/* {isLogin ? (
+          <Grid>
+            <div className="col-span-12">
+              <ArticleContentSC articleId={articleId} />
+            </div>
+            <div className="col-span-12">
+              {/* {isLogin ? (
               <Comment articleId={id} />
             ) : (
               <div className="mt-3 text-center alert alert-info" role="alert">
@@ -29,18 +32,13 @@ const ArticlePage = ({ params: { slug } }: { params: { slug: string[] } }) => {
               </div>
             )} */}
 
-          {/* <CommentList
+              {/* <CommentList
               articleId={id}
               articleComment={articleComment}
               islogin={isLogin}
             /> */}
-
-          <div id="imgZoomModal" className="image-modal">
-            {/* <span className="close" onClick={handleCloseImageModal}>
-                &times;
-              </span> */}
-            <img className="image-modal-content" id="img02" />
-          </div>
+            </div>
+          </Grid>
         </div>
       </Grid>
     </Container>
