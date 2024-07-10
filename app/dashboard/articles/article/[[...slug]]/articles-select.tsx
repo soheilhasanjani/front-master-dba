@@ -1,21 +1,13 @@
-import React, { FC, useMemo } from "react";
+import React, { useMemo } from "react";
 import { usePostArticleGetAllArticlesForDropdown } from "@/hooks/apis/articleHookApi";
-import dynamic from "next/dynamic";
-const Select = dynamic(() => import("@/components/core/Select"), {
-  ssr: false,
-});
+import Select, { SelectProps } from "@/components/core/Select";
 
-interface ArticlesSelectProps {
-  value: string;
-  onChange: (value: string) => void;
-  placeholder?: string;
-}
+interface ArticlesSelectProps extends Omit<SelectProps, "options"> {}
 
-const ArticlesSelect: FC<ArticlesSelectProps> = ({
-  value,
-  onChange,
-  placeholder,
-}) => {
+const ArticlesSelect: React.ForwardRefRenderFunction<
+  any,
+  ArticlesSelectProps
+> = ({ value, onChange, placeholder }, ref) => {
   //
   const { data } = usePostArticleGetAllArticlesForDropdown({});
   //
@@ -29,6 +21,7 @@ const ArticlesSelect: FC<ArticlesSelectProps> = ({
   //
   return (
     <Select
+      ref={ref}
       options={memoizedOptions}
       value={value}
       onChange={onChange}
@@ -38,4 +31,4 @@ const ArticlesSelect: FC<ArticlesSelectProps> = ({
   );
 };
 
-export default ArticlesSelect;
+export default React.forwardRef(ArticlesSelect);

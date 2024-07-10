@@ -1,18 +1,24 @@
 "use client";
 
-import React from "react";
-import ReactSelect, { StylesConfig } from "react-select";
-import { SingleValue } from "react-select";
+import React, { forwardRef } from "react";
+import ReactSelect, { StylesConfig, SingleValue } from "react-select";
 
 interface OptionType {
   value: string;
   label: string;
 }
 
-interface SelectProps {
+export interface SelectProps {
   value: string;
   options: OptionType[];
-  onChange: (value: string) => void;
+  onChange: (e: {
+    target: {
+      value: string;
+      name?: string;
+    };
+  }) => void;
+  onBlur?: () => void;
+  name?: string;
   placeholder?: string;
   isClearable?: boolean;
 }
@@ -55,24 +61,29 @@ const customStyles: StylesConfig<OptionType, false> = {
   }),
 };
 
-const Select: React.FC<SelectProps> = ({
-  value,
-  options,
-  onChange,
-  placeholder,
-  isClearable,
-}) => {
+const Select: React.ForwardRefRenderFunction<any, SelectProps> = (
+  { value, options, onChange, onBlur, name, placeholder, isClearable },
+  ref,
+) => {
   //
   const handleChange = (selectedOption: SingleValue<OptionType>) => {
-    onChange(selectedOption ? selectedOption.value : "");
+    onChange({
+      target: {
+        value: selectedOption ? selectedOption.value : "",
+        name,
+      },
+    });
   };
   //
   const selectedOption = options.find((option) => option.value === value);
   //
   return (
     <ReactSelect
+      ref={ref}
+      name={name}
       value={selectedOption}
       onChange={handleChange}
+      onBlur={onBlur}
       options={options}
       styles={customStyles}
       placeholder={placeholder}
@@ -81,4 +92,4 @@ const Select: React.FC<SelectProps> = ({
   );
 };
 
-export default Select;
+export default forwardRef(Select);

@@ -1,6 +1,17 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {
+  useEffect,
+  useRef,
+  useImperativeHandle,
+  forwardRef,
+} from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css"; // import styles
+
+interface RichTextEditorProps {
+  value: string;
+  onChange: (value: string) => void;
+  onBlur?: () => void;
+}
 
 const toolbarOptions = [
   ["bold", "italic", "underline", "strike"], // toggled buttons
@@ -27,9 +38,13 @@ const modules = {
   toolbar: toolbarOptions,
 };
 
-const RichTextEditor: React.FC = () => {
-  const [value, setValue] = useState("");
+const RichTextEditor: React.ForwardRefRenderFunction<
+  ReactQuill,
+  RichTextEditorProps
+> = ({ value, onChange, onBlur }, ref) => {
   const quillRef = useRef<ReactQuill>(null);
+
+  useImperativeHandle(ref, () => quillRef.current!);
 
   useEffect(() => {
     if (quillRef.current) {
@@ -37,15 +52,29 @@ const RichTextEditor: React.FC = () => {
       // Set default direction to RTL
       editor.format("direction", "rtl");
       editor.format("align", "right");
+      editor.root.addEventListener("blur", handleBlur);
     }
+
+    return () => {
+      if (quillRef.current) {
+        const editor = quillRef.current.getEditor();
+        editor.root.removeEventListener("blur", handleBlur);
+      }
+    };
   }, []);
+
+  const handleBlur = () => {
+    if (onBlur) {
+      onBlur();
+    }
+  };
 
   return (
     <ReactQuill
       ref={quillRef}
       className="[&_.ql-editor]:min-h-96"
       value={value}
-      onChange={setValue}
+      onChange={onChange}
       modules={modules}
       theme="snow"
       style={{
@@ -56,4 +85,4 @@ const RichTextEditor: React.FC = () => {
   );
 };
 
-export default RichTextEditor;
+export default forwardRef(RichTextEditor);
