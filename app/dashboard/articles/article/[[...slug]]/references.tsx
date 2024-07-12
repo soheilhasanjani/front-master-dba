@@ -3,9 +3,9 @@ import Input from "@/components/core/Input";
 import { Trash2 } from "react-feather";
 
 export type Reference = {
-  id: number;
-  title: string;
-  link: string;
+  Index: number;
+  Title: string;
+  Link: string;
 };
 
 interface ReferencesProps {
@@ -24,7 +24,7 @@ const References: React.FC<ReferencesProps> = ({ value = [], onChange }) => {
       onChange({
         target: {
           value: value.map((item) => {
-            if (id === item.id) {
+            if (id === item.Index) {
               return { ...item, [k]: v };
             }
             return item;
@@ -38,7 +38,7 @@ const References: React.FC<ReferencesProps> = ({ value = [], onChange }) => {
     if (onChange) {
       onChange({
         target: {
-          value: [...value, { id: Date.now(), title: "", link: "" }],
+          value: [...value, { Index: Date.now(), Title: "", Link: "" }],
         },
       });
     }
@@ -48,7 +48,7 @@ const References: React.FC<ReferencesProps> = ({ value = [], onChange }) => {
     if (onChange) {
       onChange({
         target: {
-          value: value.filter((item) => item.id !== id),
+          value: value.filter((item) => item.Index !== id),
         },
       });
     }
@@ -58,25 +58,25 @@ const References: React.FC<ReferencesProps> = ({ value = [], onChange }) => {
     <div className="flex flex-col gap-2">
       {value.map((item) => {
         return (
-          <div key={item.id} className="flex items-center gap-2">
+          <div key={item.Index} className="flex items-center gap-2">
             <Input
               placeholder="عنوان"
-              value={item.title}
+              value={item.Title}
               onChange={(e) =>
-                handleInputsItem(item.id, "title", e.target.value)
+                handleInputsItem(item.Index, "Title", e.target.value)
               }
             />
             <Input
               placeholder="لینک"
-              value={item.link}
+              value={item.Link}
               onChange={(e) =>
-                handleInputsItem(item.id, "link", e.target.value)
+                handleInputsItem(item.Index, "Link", e.target.value)
               }
             />
             <Trash2
               size="20px"
               className="flex-shrink-0 cursor-pointer text-red-500"
-              onClick={() => handleRemoveReference(item.id)}
+              onClick={() => handleRemoveReference(item.Index)}
             />
           </div>
         );

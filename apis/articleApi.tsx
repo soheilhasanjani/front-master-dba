@@ -94,3 +94,12 @@ export const postArticleGetAllArticlesForDropdown = async (params: any) => {
   });
   return data;
 };
+
+export const postArticleGetArticlesForEdit = async (params: any) => {
+  const { data }: any = await axiosInstance({
+    method: "post",
+    url: BASE_URL + "/GetArticlesForEdit",
+    params,
+  });
+  return data;
+};

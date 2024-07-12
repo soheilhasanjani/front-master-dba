@@ -68,10 +68,26 @@ const columns = (onClickTr: (id: number) => void) => [
   columnHelper.display({
     header: "عملیات",
     cell: (info) => {
+      //
       const data = info.row.original;
+      //
+      const articleGroupPathname =
+        "/dashboard/articles/group-article/" +
+        data.Id +
+        (data.ParentId ? "/" + data.ParentId : "");
+      //
+      const articlePathname =
+        "/dashboard/articles/article/" +
+        data.Id +
+        (data.ParentId ? "/" + data.ParentId : "");
+      //
       return (
         <div className="flex items-center gap-3">
-          <Link href={"/dashboard/articles/article/" + data.Id}>
+          <Link
+            href={
+              data.ArticleTypeId === 1 ? articleGroupPathname : articlePathname
+            }
+          >
             <Edit size={18} strokeWidth={1.5} className="mb-1" />
           </Link>
           <Trash2 size={18} strokeWidth={1.5} className="mb-1" />
@@ -123,7 +139,12 @@ const ArticlesPage = () => {
     <div className="p-5">
       <div className="flex items-center justify-between">
         <div className="text-sm font-semibold">مقالات</div>
-        <Link href="/dashboard/articles/article">
+        <Link
+          href={
+            "/dashboard/articles/group-article/add" +
+            (selectedFolder !== 0 ? "/" + selectedFolder : "")
+          }
+        >
           <button className="h-10 whitespace-nowrap rounded border border-[#0f70b7] bg-[#0f70b7] px-3 text-xs font-normal text-white transition hover:bg-[#0f70b7]/90">
             افزودن گروه مقالات و مقاله
           </button>

@@ -2,14 +2,16 @@ import React, { useMemo } from "react";
 import { usePostArticleGetAllArticlesForDropdown } from "@/hooks/apis/articleHookApi";
 import Select, { SelectProps } from "@/components/core/Select";
 
-interface ArticlesSelectProps extends Omit<SelectProps, "options"> {}
+interface ArticlesSelectProps extends Omit<SelectProps, "options"> {
+  parentId?: string;
+}
 
 const ArticlesSelect: React.ForwardRefRenderFunction<
   any,
   ArticlesSelectProps
-> = ({ value, onChange, placeholder }, ref) => {
+> = ({ value, onChange, placeholder, parentId }, ref) => {
   //
-  const { data } = usePostArticleGetAllArticlesForDropdown({});
+  const { data } = usePostArticleGetAllArticlesForDropdown({ Id: parentId });
   //
   const memoizedOptions = useMemo(() => {
     if (!Array.isArray(data)) return [];

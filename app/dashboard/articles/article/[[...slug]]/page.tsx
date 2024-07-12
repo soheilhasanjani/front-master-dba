@@ -1,13 +1,16 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import ArticleEditNavigator from "@/components/shared/article-edit-navigator";
 import Grid from "@/components/core/Grid";
 import Label from "@/components/core/Label";
 import Input from "@/components/core/Input";
 import Textarea from "@/components/core/Textarea";
 import ArticlesSelect from "@/app/dashboard/articles/article/[[...slug]]/articles-select";
-import { usePostArticleSave } from "@/hooks/apis/articleHookApi";
+import {
+  usePostArticleGetArticlesForEdit,
+  usePostArticleSave,
+} from "@/hooks/apis/articleHookApi";
 import RichTextEditor from "@/components/core/RichTextEditor";
 import References from "@/app/dashboard/articles/article/[[...slug]]/references";
 import { z } from "zod";
@@ -24,22 +27,36 @@ const schema = z.object({
   body: z.string().min(1, ""),
   keywords: z.string(),
   referenceList: z.array(
-    z.object({ id: z.number(), title: z.string(), link: z.string() }),
+    z.object({ Index: z.number(), Title: z.string(), Link: z.string() }),
   ),
 });
 
 // Define types for form data
 type FormData = z.infer<typeof schema>;
 
-const ArticlePage = () => {
+//
+const DEFAULT_IS_ENABLE = true;
+const DEFAULT_IS_DRAFT = true;
+//
+const ArticlePage = ({ params }: { params: { slug?: string[] } }) => {
+  //
+  const addOrArticleId = params?.slug?.[0];
+  const parentId = params?.slug?.[1];
   //
   const saveArticle = usePostArticleSave();
+  const { data: articleData } = usePostArticleGetArticlesForEdit(
+    addOrArticleId !== "add"
+      ? {
+          "ArticleViewModel.Id": addOrArticleId,
+        }
+      : null,
+  );
   //
   const {
     control,
     register,
     handleSubmit,
-    watch,
+    setValue,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
@@ -56,10 +73,6 @@ const ArticlePage = () => {
     },
   });
   //
-  const [isDraft, setIsDraft] = useState(true);
-  const [isEnable, setIsEnable] = useState(true);
-  const [parentId, setParentId] = useState(null);
-  //
   const handleOnSubmit = (values: FormData, isTempSave: boolean) => {
     //
     const formData = new FormData();
@@ -67,31 +80,53 @@ const ArticlePage = () => {
     formData.append(
       "formdata",
       JSON.stringify({
-        Id: 0,
+        Id: addOrArticleId !== "add" ? addOrArticleId : 0,
         // for article
         ArticleTypeId: "2",
         IsTempSave: isTempSave,
         // fill from states
-        IsDraft: isDraft,
-        IsEnable: isEnable,
-        ParentId: parentId,
-        Article_NextID: values.articleNextID || null,
-        Article_PreID: values.articlePreID || null,
+        IsDraft: articleData?.isDraft ?? DEFAULT_IS_DRAFT,
+        IsEnable: articleData?.isEnable ?? DEFAULT_IS_ENABLE,
+        ParentId: parentId ?? null,
+        Article_NextID: +values.articleNextID || null,
+        Article_PreID: +values.articlePreID || null,
         Name: values.name,
         LatinName: values.latinName,
         Summery: values.summery,
         TimeToRead: values.timeToRead,
         Body: values.body,
         KeyWords: values.keywords,
-        RefrenceList: JSON.stringify(values.referenceList),
+        RefrenceList: JSON.stringify(
+          values.referenceList.filter((r) => r.Link || r.Title),
+        ),
         //
       }),
     );
     //
-    // saveArticle.mutate(formData, {
-    //   onSuccess: () => {},
-    // });
+    saveArticle.mutate(formData, {
+      onSuccess: () => {},
+    });
   };
+  //
+  useEffect(() => {
+    if (addOrArticleId !== "add" && articleData) {
+      setValue(
+        "articleNextID",
+        articleData.Article_NextID ? String(articleData.Article_NextID) : "",
+      );
+      setValue(
+        "articlePreID",
+        articleData.Article_PreID ? String(articleData.Article_PreID) : "",
+      );
+      setValue("name", articleData.Name);
+      setValue("latinName", articleData.LatinName);
+      setValue("summery", articleData.Summery);
+      setValue("timeToRead", articleData.TimeToRead);
+      setValue("body", articleData.Body);
+      setValue("keywords", articleData.KeyWords);
+      setValue("referenceList", JSON.parse(articleData.Refrences));
+    }
+  }, [addOrArticleId, articleData]);
   //
   return (
     <form className="p-5">
@@ -144,6 +179,7 @@ const ArticlePage = () => {
             render={({ field }) => (
               <ArticlesSelect
                 {...field}
+                parentId={parentId}
                 placeholder="در صورت نیاز مقاله ای را انتخاب کنید"
               />
             )}
@@ -157,6 +193,7 @@ const ArticlePage = () => {
             render={({ field }) => (
               <ArticlesSelect
                 {...field}
+                parentId={parentId}
                 placeholder="در صورت نیاز مقاله ای را انتخاب کنید"
               />
             )}

@@ -97,3 +97,11 @@ export const usePostArticleGetAllArticlesForDropdown = (params: any) => {
     enabled: !!params,
   });
 };
+
+export const usePostArticleGetArticlesForEdit = (params: any) => {
+  return useQuery({
+    queryKey: ["postArticleGetArticlesForEdit", params],
+    queryFn: () => articleApi.postArticleGetArticlesForEdit(params),
+    enabled: !!params,
+  });
+};
