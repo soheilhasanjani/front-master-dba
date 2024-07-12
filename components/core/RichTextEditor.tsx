@@ -1,9 +1,5 @@
-import React, {
-  useEffect,
-  useRef,
-  useImperativeHandle,
-  forwardRef,
-} from "react";
+import { cn } from "@/utils/cn";
+import React, { useEffect, useRef, FC } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css"; // import styles
 
@@ -11,6 +7,7 @@ interface RichTextEditorProps {
   value: string;
   onChange: (value: string) => void;
   onBlur?: () => void;
+  isError?: boolean;
 }
 
 const toolbarOptions = [
@@ -38,29 +35,21 @@ const modules = {
   toolbar: toolbarOptions,
 };
 
-const RichTextEditor: React.ForwardRefRenderFunction<
-  ReactQuill,
-  RichTextEditorProps
-> = ({ value, onChange, onBlur }, ref) => {
+const RichTextEditor: FC<RichTextEditorProps> = ({
+  value,
+  onChange,
+  onBlur,
+  isError,
+}) => {
   const quillRef = useRef<ReactQuill>(null);
-
-  useImperativeHandle(ref, () => quillRef.current!);
 
   useEffect(() => {
     if (quillRef.current) {
       const editor = quillRef.current.getEditor();
       // Set default direction to RTL
-      editor.format("direction", "rtl");
-      editor.format("align", "right");
-      editor.root.addEventListener("blur", handleBlur);
+      // editor.format("direction", "rtl");
+      // editor.format("align", "right");
     }
-
-    return () => {
-      if (quillRef.current) {
-        const editor = quillRef.current.getEditor();
-        editor.root.removeEventListener("blur", handleBlur);
-      }
-    };
   }, []);
 
   const handleBlur = () => {
@@ -72,9 +61,13 @@ const RichTextEditor: React.ForwardRefRenderFunction<
   return (
     <ReactQuill
       ref={quillRef}
-      className="[&_.ql-editor]:min-h-96"
+      className={cn("[&_.ql-editor]:min-h-96", {
+        "[&_.ql-container]:!border-red-500 [&_.ql-toolbar]:!border-red-500":
+          isError,
+      })}
       value={value}
       onChange={onChange}
+      onBlur={onBlur}
       modules={modules}
       theme="snow"
       style={{
@@ -85,4 +78,4 @@ const RichTextEditor: React.ForwardRefRenderFunction<
   );
 };
 
-export default forwardRef(RichTextEditor);
+export default RichTextEditor;

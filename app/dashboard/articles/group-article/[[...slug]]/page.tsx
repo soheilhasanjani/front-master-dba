@@ -95,11 +95,11 @@ const ArticleGroupPage = ({ params }: { params: { slug?: string[] } }) => {
       <div className="grid grid-cols-12 gap-4 rounded bg-[#f8f9fa] p-4">
         <div className="col-span-12">
           <Label>عنوان</Label>
-          <Input {...register("name")} />
+          <Input {...register("name")} isError={!!errors?.name} />
         </div>
         <div className="col-span-12">
           <Label>عنوان لاتین</Label>
-          <Input {...register("latinName")} />
+          <Input {...register("latinName")} isError={!!errors?.latinName} />
         </div>
         <div className="col-span-12 flex justify-end">
           <button

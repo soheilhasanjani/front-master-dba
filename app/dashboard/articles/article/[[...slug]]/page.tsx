@@ -16,6 +16,7 @@ import References from "@/app/dashboard/articles/article/[[...slug]]/references"
 import { z } from "zod";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import omit from "lodash.omit";
 
 const schema = z.object({
   articleNextID: z.string(),
@@ -157,11 +158,11 @@ const ArticlePage = ({ params }: { params: { slug?: string[] } }) => {
         </div>
         <div className="col-span-6">
           <Label>عنوان</Label>
-          <Input {...register("name")} />
+          <Input {...register("name")} isError={!!errors?.name} />
         </div>
         <div className="col-span-6">
           <Label>عنوان لاتین</Label>
-          <Input {...register("latinName")} />
+          <Input {...register("latinName")} isError={!!errors?.latinName} />
         </div>
         <div className="col-span-4">
           <Label>مدت زمان مطالعه</Label>
@@ -169,6 +170,7 @@ const ArticlePage = ({ params }: { params: { slug?: string[] } }) => {
             type="number"
             placeholder="مقدار وارد شده براساس دقیقه می باشد"
             {...register("timeToRead", { valueAsNumber: true })}
+            isError={!!errors?.timeToRead}
           />
         </div>
         <div className="col-span-4">
@@ -201,14 +203,23 @@ const ArticlePage = ({ params }: { params: { slug?: string[] } }) => {
         </div>
         <div className="col-span-12">
           <Label>خلاصه</Label>
-          <Textarea rows={8} {...register("summery")} />
+          <Textarea
+            rows={8}
+            {...register("summery")}
+            isError={!!errors?.summery}
+          />
         </div>
         <div className="col-span-12">
           <Label>متن</Label>
           <Controller
             name="body"
             control={control}
-            render={({ field }) => <RichTextEditor {...field} />}
+            render={({ field }) => (
+              <RichTextEditor
+                {...omit(field, ["ref"])}
+                isError={!!errors?.body}
+              />
+            )}
           />
         </div>
         <div className="col-span-12">
@@ -217,6 +228,7 @@ const ArticlePage = ({ params }: { params: { slug?: string[] } }) => {
             rows={2}
             placeholder="کلمات کلیدی را با ویرگول (,) جدا نمایید"
             {...register("keywords")}
+            isError={!!errors?.keywords}
           />
         </div>
         <div className="col-span-12">
