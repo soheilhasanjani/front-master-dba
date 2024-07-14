@@ -1,8 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-const initialState: { isLogin: boolean } = {
+interface StateType {
+  isLogin: boolean;
+  isChecked: boolean;
+}
+
+const initialState: StateType = {
   isLogin: false,
+  isChecked: false,
 };
 
 export const authSlice = createSlice({
@@ -10,6 +16,7 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     setIsLogin: (state, action: PayloadAction<boolean>) => {
+      state.isChecked = true;
       state.isLogin = action.payload;
     },
   },

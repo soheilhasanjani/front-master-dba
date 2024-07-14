@@ -5,6 +5,7 @@ import ReactQueryProvider from "@/components/providers/ReactQueryProvider";
 import NextFontProvider from "@/components/providers/NextFontProvider";
 import ReduxProvider from "@/components/providers/ReduxProvider";
 import ReactToastifyProvider from "@/components/providers/ReactToastifyProvider";
+import InitializerProvider from "@/components/providers/initializer-provider";
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -12,6 +13,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
       <NextFontProvider>
         <ReduxProvider>
           {children}
+          <InitializerProvider />
           <ReactToastifyProvider />
         </ReduxProvider>
       </NextFontProvider>

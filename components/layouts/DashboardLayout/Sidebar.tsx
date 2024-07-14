@@ -9,7 +9,7 @@ import Image from "next/image";
 
 const Sidebar = () => {
   //
-  const { data: user } = useGetAccountGetUserData();
+  const { data: user } = useGetAccountGetUserData(true);
   const { data: panelMenu } = usePostPanelMenuGetPanelMenuOnUserRole();
   //
   return (
