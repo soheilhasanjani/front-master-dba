@@ -1,15 +1,15 @@
 "use client";
 
 import React, { FC } from "react";
-import KeyWordsList from "@/app/(public)/article/[...slug]/article-content/keywords";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/core/Popover";
 import ArticleInformation from "@/components/pages/article/ArticleInformation";
-import MarkdownRenderer from "@/components/pages/article/MarkdownRenderer";
 import Link from "next/link";
+import Keywords from "@/app/(public)/article/[...slug]/keywords";
+import MarkdownRenderer from "@/app/(public)/article/[...slug]/markdown-renderer";
 
 interface ArticleContentProps {
   data: any;
@@ -18,7 +18,6 @@ interface ArticleContentProps {
 const ArticleContent: FC<ArticleContentProps> = ({ data }) => {
   const article = data?.Article;
   if (!article) return null;
-  console.log(JSON.parse(article.Refrences));
   return (
     <div>
       <h2 className="mb-4 text-2xl">{article.Name}</h2>
@@ -57,7 +56,7 @@ const ArticleContent: FC<ArticleContentProps> = ({ data }) => {
             </PopoverContent>
           </Popover>
         )}
-        <KeyWordsList keyWordsList={article.KeyWordsList} />
+        <Keywords keyWordsList={article.KeyWordsList} />
       </footer>
     </div>
   );

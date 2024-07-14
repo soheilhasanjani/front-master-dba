@@ -14,29 +14,29 @@ type ArticleInformationProps = {
 
 const ArticleInformation = (props: ArticleInformationProps) => {
   return (
-    <ul className="mb-4 flex items-center gap-3">
+    <ul className="mb-3 flex items-center gap-4">
       {[
         {
           id: 0,
-          icon: <Calendar className="me-2" size="18px" />,
+          icon: <Calendar className="mb-1" size="18px" />,
           value: props.uploadDate,
         },
         {
           id: 1,
-          icon: <Clock className="me-2" size="18px" />,
+          icon: <Clock className="mb-1" size="18px" />,
           value: getDateAgo(props.updateDate),
         },
         {
           id: 2,
-          icon: <Watch className="me-2" size="18px" />,
+          icon: <Watch className="mb-1" size="18px" />,
           value: <>{props.timeToRead} دقیقه برای مطالعه</>,
         },
         {
           id: 3,
-          icon: <Eye className="me-2" size="18px" />,
+          icon: <Eye className="" size="18px" />,
           value: (
             <>
-              تعداد بازدید{" "}
+              تعداد بازدید
               <span>
                 {props.views > 1000
                   ? props.views / 1000 + " " + "هزار"
@@ -47,54 +47,21 @@ const ArticleInformation = (props: ArticleInformationProps) => {
         },
         {
           id: 4,
-          icon: <Eye className="me-2" size="18px" />,
+          icon: <Edit2 className="" size="18px" />,
           value: (
-            <>
-              {/* <OverlayTrigger
-                        trigger="hover"
-                        placement="left"
-                        rootClose
-                        overlay={popoverLeft2}
-                      >
-                        <div>
-                          <Edit2 className="me-2" size="18px" />
-                          <Link
-                            to={`/authorpage/${
-                              article.AuthorId
-                            }/${article.AuthorName.replace(" ", "_").replace(
-                              / /g,
-                              "_"
-                            )}`}
-                          >
-                            {" "}
-                            <span className="authorname">
-                              {article.AuthorName}
-                            </span>
-                          </Link>
-                        </div>
-                      </OverlayTrigger> */}
-            </>
-          ),
-        },
-        {
-          id: 5,
-          icon: <Edit2 className="me-2" size="18px" />,
-          value: (
-            <>
-              <Link
-                href={`/authorpage/${props.authorId}/${props.authorName
-                  .replace(" ", "_")
-                  .replace(/ /g, "_")}`}
-              >
-                {" "}
-                <span className="authorname">{props.authorName}</span>
-              </Link>
-            </>
+            <Link
+              href={`/authors/${props.authorId}/${props.authorName
+                .replace(" ", "_")
+                .replace(/ /g, "_")}`}
+            >
+              {" "}
+              <span className="authorname">{props.authorName}</span>
+            </Link>
           ),
         },
       ].map((item) => {
         return (
-          <li key={item.id} className="flex items-center gap-1">
+          <li key={item.id} className="flex items-center gap-1.5">
             {item.icon}
             {item.value}
           </li>
