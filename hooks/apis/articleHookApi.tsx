@@ -105,3 +105,27 @@ export const usePostArticleGetArticlesForEdit = (params: any) => {
     enabled: !!params,
   });
 };
+
+export const usePostArticleDeleteArticle = () => {
+  const QC = useQueryClient();
+  return useMutation({
+    mutationFn: articleApi.postArticleDeleteArticle,
+    onSuccess: () => {
+      QC.invalidateQueries({
+        queryKey: ["postArticleGetAllArticlesForDashboard"],
+      });
+    },
+  });
+};
+
+export const usePostArticleToggleEnable = () => {
+  const QC = useQueryClient();
+  return useMutation({
+    mutationFn: articleApi.postArticleToggleEnable,
+    onSuccess: () => {
+      QC.invalidateQueries({
+        queryKey: ["postArticleGetAllArticlesForDashboard"],
+      });
+    },
+  });
+};

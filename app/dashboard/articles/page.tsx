@@ -3,15 +3,26 @@
 import Breadcrumbs from "@/components/core/Breadcrumbs";
 import Input from "@/components/core/Input";
 import Table from "@/components/core/Table";
+import ConfirmDialog from "@/components/shared/confirm-dialog";
 import {
+  usePostArticleDeleteArticle,
   usePostArticleGetAllArticlesForDashboard,
   usePostArticleGetBreadCrumbListOnArticleId,
+  usePostArticleToggleEnable,
 } from "@/hooks/apis/articleHookApi";
+import { cn } from "@/utils/cn";
 import formatPersianDate from "@/utils/formatPersianDate";
 import { createColumnHelper } from "@tanstack/react-table";
 import Link from "next/link";
 import React, { useMemo, useState } from "react";
-import { Edit, FileText, Folder, Trash2 } from "react-feather";
+import {
+  CheckSquare,
+  Edit,
+  FileText,
+  Folder,
+  Trash2,
+  XSquare,
+} from "react-feather";
 
 type Article = {
   Name: string;
@@ -27,19 +38,28 @@ type Article = {
   UploadDateforOrderby: string;
 };
 
+interface ColumnsArgs {
+  onClickTr?: (data: Article) => void;
+  onClickAction?: (
+    data: Article & { actionType: "trash" | "temporary-trash" | "toggle" },
+  ) => void;
+}
+
 const columnHelper = createColumnHelper<Article>();
 
-const columns = (onClickTr: (id: number) => void) => [
+const columns = ({ onClickTr, onClickAction }: ColumnsArgs) => [
   columnHelper.accessor("Name", {
     header: "عنوان مقاله",
     cell: (info) => {
-      const articleTypeId = info.row.original.ArticleTypeId;
-      const Id = info.row.original.Id;
+      const data = info.row.original;
+      const articleTypeId = data.ArticleTypeId;
       return (
         <button
-          className="flex cursor-pointer items-center gap-2 pt-1"
+          className={cn("flex cursor-default items-center gap-2 pt-1", {
+            "cursor-pointer": articleTypeId === 1,
+          })}
           onClick={() => {
-            if (onClickTr) onClickTr(Id);
+            if (onClickTr) onClickTr(data);
           }}
         >
           {articleTypeId === 1 && (
@@ -83,6 +103,29 @@ const columns = (onClickTr: (id: number) => void) => [
       //
       return (
         <div className="flex items-center gap-3">
+          {data.ArticleTypeId == 2 && !data.IsDraft ? (
+            data.IsEnable ? (
+              <div
+                className="cursor-pointer"
+                onClick={() => {
+                  if (onClickAction)
+                    onClickAction({ actionType: "toggle", ...data });
+                }}
+              >
+                <CheckSquare size={"20px"} color="green" />
+              </div>
+            ) : (
+              <div
+                className="cursor-pointer"
+                onClick={() => {
+                  if (onClickAction)
+                    onClickAction({ actionType: "toggle", ...data });
+                }}
+              >
+                <XSquare size={"20px"} color="red" />
+              </div>
+            )
+          ) : null}
           <Link
             href={
               data.ArticleTypeId === 1 ? articleGroupPathname : articlePathname
@@ -90,12 +133,26 @@ const columns = (onClickTr: (id: number) => void) => [
           >
             <Edit size={18} strokeWidth={1.5} className="mb-1" />
           </Link>
-          <Trash2 size={18} strokeWidth={1.5} className="mb-1" />
           <Trash2
             size={18}
             strokeWidth={1.5}
-            className="mb-1 text-[orangered]"
+            className="mb-1 cursor-pointer"
+            onClick={() => {
+              if (onClickAction)
+                onClickAction({ actionType: "trash", ...data });
+            }}
           />
+          {(data.Article_CloneId != null || data.IsDraft) && (
+            <Trash2
+              size={18}
+              strokeWidth={1.5}
+              className="mb-1 cursor-pointer text-[orangered]"
+              onClick={() => {
+                if (onClickAction)
+                  onClickAction({ actionType: "temporary-trash", ...data });
+              }}
+            />
+          )}
         </div>
       );
     },
@@ -106,6 +163,13 @@ const ArticlesPage = () => {
   //
   const [selectedFolder, setSelectedFolder] = useState(0);
   //
+  const [targetDeleteArticle, setTargetDeleteArticle] = useState<{
+    id: number;
+    name: string;
+  } | null>(null);
+  //
+  const toggleEnable = usePostArticleToggleEnable();
+  const deleteArticle = usePostArticleDeleteArticle();
   const { data: breadCrumbData } = usePostArticleGetBreadCrumbListOnArticleId({
     "BreadCrumbViewModel.id": selectedFolder,
   });
@@ -135,6 +199,21 @@ const ArticlesPage = () => {
     [breadCrumbData],
   );
   //
+  const handleOnAcceptConfirmDialog = () => {
+    deleteArticle.mutate(
+      { "ArticleViewModel.Id": targetDeleteArticle?.id },
+      {
+        onSuccess: () => {
+          setTargetDeleteArticle(null);
+        },
+      },
+    );
+  };
+  //
+  const handleToggleEnable = (articleId: number) => {
+    toggleEnable.mutate({ "ArticleViewModel.Id": articleId });
+  };
+  //
   return (
     <div className="p-5">
       <div className="flex items-center justify-between">
@@ -162,10 +241,34 @@ const ArticlesPage = () => {
         </div>
         <Table
           data={sortedList}
-          columns={columns((id) => {
-            setSelectedFolder(id);
+          columns={columns({
+            onClickTr: (data) => {
+              if (data.ArticleTypeId === 1) setSelectedFolder(data.Id);
+            },
+            onClickAction: (data) => {
+              if (
+                data.actionType === "temporary-trash" ||
+                data.actionType === "trash"
+              ) {
+                setTargetDeleteArticle({
+                  id: data.Id,
+                  name: data.Name,
+                });
+              } else if (data.actionType === "toggle") {
+                handleToggleEnable(data.Id);
+              }
+            },
           })}
           isAnimationEnabled
+        />
+        <ConfirmDialog
+          open={!!targetDeleteArticle}
+          acceptButtonText="حذف"
+          description={`آیا از حذف "${targetDeleteArticle?.name}" مطمئن هستید ؟`}
+          onAccept={handleOnAcceptConfirmDialog}
+          onReject={() => {
+            setTargetDeleteArticle(null);
+          }}
         />
       </div>
     </div>

@@ -103,3 +103,21 @@ export const postArticleGetArticlesForEdit = async (params: any) => {
   });
   return data;
 };
+
+export const postArticleDeleteArticle = async (params: any) => {
+  const { data }: any = await axiosInstance({
+    method: "post",
+    url: BASE_URL + "/DeleteArticle",
+    params,
+  });
+  return data;
+};
+
+export const postArticleToggleEnable = async (params: any) => {
+  const { data }: any = await axiosInstance({
+    method: "post",
+    url: BASE_URL + "/ToggleEnable",
+    params,
+  });
+  return data;
+};
