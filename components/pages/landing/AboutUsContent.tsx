@@ -2,7 +2,7 @@
 
 import React from "react";
 import { usePostPanelCustomValueGetAboutPageAboutUs } from "@/hooks/apis/panelCustomValueHookApi";
-import MarkdownRenderer from "@/components/pages/article/MarkdownRenderer";
+import MarkdownRenderer from "@/components/shared/markdown-renderer";
 
 const AboutUsContent = () => {
   //

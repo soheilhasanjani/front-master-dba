@@ -9,7 +9,7 @@ import {
 import ArticleInformation from "@/components/pages/article/ArticleInformation";
 import Link from "next/link";
 import Keywords from "@/app/(public)/article/[...slug]/keywords";
-import MarkdownRenderer from "@/app/(public)/article/[...slug]/markdown-renderer";
+import MarkdownRenderer from "@/components/shared/markdown-renderer";
 
 interface ArticleContentProps {
   data: any;
