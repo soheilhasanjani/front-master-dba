@@ -49,39 +49,37 @@ const UserBox = () => {
     );
   //
   return (
-    <div className="loggein">
-      <Popover placement="bottom-start" typeInteract="click">
-        <PopoverTrigger>
-          <div className="flex items-center gap-2">
-            <User />
-            <Link href="/" className="font-14">
-              پروفایل من
-            </Link>
-          </div>
-        </PopoverTrigger>
-        <PopoverContent className="z-20 rounded-xl border bg-white p-3">
-          <ul className="flex flex-col gap-4">
-            <li>{user?.FullName}</li>
-            <hr className="dropdown-divider" />
-            {user?.IsAdmin && (
-              <li className="flex items-center gap-2">
-                <Grid />
-                <Link href="/dashboard">پنل ادمین</Link>
-              </li>
-            )}
+    <Popover placement="bottom-start" typeInteract="click">
+      <PopoverTrigger>
+        <div className="flex items-center gap-2">
+          <User />
+          <Link href="/" className="font-14">
+            پروفایل من
+          </Link>
+        </div>
+      </PopoverTrigger>
+      <PopoverContent className="z-20 rounded-xl border bg-white p-3">
+        <ul className="flex flex-col gap-4">
+          <li>{user?.FullName}</li>
+          <hr className="dropdown-divider" />
+          {user?.IsAdmin && (
             <li className="flex items-center gap-2">
-              <UserCheck />
-              <Link href="#">حساب شخصی من</Link>
+              <Grid />
+              <Link href="/dashboard">پنل ادمین</Link>
             </li>
-            <hr />
-            <li className="flex items-center gap-2">
-              <LogOut />
-              <button onClick={handleLogout}>خروج</button>
-            </li>
-          </ul>
-        </PopoverContent>
-      </Popover>
-    </div>
+          )}
+          <li className="flex items-center gap-2">
+            <UserCheck />
+            <Link href="#">حساب شخصی من</Link>
+          </li>
+          <hr />
+          <li className="flex items-center gap-2">
+            <LogOut />
+            <button onClick={handleLogout}>خروج</button>
+          </li>
+        </ul>
+      </PopoverContent>
+    </Popover>
   );
 };
 
