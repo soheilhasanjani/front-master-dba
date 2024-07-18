@@ -20,7 +20,22 @@ const OurServices: FC<OurServicesProps> = ({ data }) => {
           خدمات ما
         </h4>
       </div>
-      <Swiper navigation spaceBetween={20} slidesPerView={3}>
+      <Swiper
+        navigation
+        spaceBetween={20}
+        slidesPerView={1}
+        breakpoints={{
+          720: {
+            slidesPerView: 2,
+          },
+          992: {
+            slidesPerView: 3,
+          },
+          1400: {
+            slidesPerView: 4,
+          },
+        }}
+      >
         {data?.map((slide: any) => {
           return (
             <SwiperSlide key={slide.Id}>
