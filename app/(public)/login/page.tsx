@@ -66,7 +66,7 @@ const LoginPage = () => {
   //
   return (
     <div className="px-3 xxl:container">
-      <div className="my-10 grid grid-cols-12 overflow-hidden rounded">
+      <div className="my-10 grid grid-cols-12">
         <div className="col-span-12 md:col-span-8">
           <div className="h-full bg-[#f2f2f2] py-10">
             <header className="pb-4 text-center">
@@ -131,8 +131,8 @@ const LoginPage = () => {
             </div>
           </div>
         </div>
-        <div className="hidden bg-[#0f70b7] py-10 md:col-span-4 md:flex">
-          <div className="flex flex-col items-center px-3 text-center text-white">
+        <div className="hidden place-items-center bg-[#0f70b7] px-3 py-10 md:col-span-4 md:grid">
+          <div className="flex h-fit flex-col items-center text-center text-white">
             <span className="mb-5 rounded-full border border-[#c6c6c6] p-3">
               <User size={50} />
             </span>
