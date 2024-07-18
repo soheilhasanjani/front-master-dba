@@ -13,7 +13,7 @@ const Footer: FC<FooterProps> = ({ data }) => {
     <footer className="border-t border-[#e6e6e6] pt-2">
       <div className="px-3 xxl:container">
         <div className="grid grid-cols-12 gap-6">
-          <div className="col-span-12 sm:col-span-6 md:col-span-6">
+          <div className="col-span-12 lg:col-span-6">
             <section className="mb-5">
               <header className="mb-5 text-base leading-5 text-primary">
                 درباره دی بی ای
@@ -21,7 +21,7 @@ const Footer: FC<FooterProps> = ({ data }) => {
               <p>{data?.FooterAboutUsText}</p>
             </section>
           </div>
-          <div className="col-span-12 sm:col-span-6 md:col-span-3">
+          <div className="col-span-12 sm:col-span-6 lg:col-span-2">
             <section className="mb-5">
               <header className="mb-5 text-base leading-5 text-primary">
                 بخش های سایت
@@ -45,7 +45,7 @@ const Footer: FC<FooterProps> = ({ data }) => {
               </ul>
             </section>
           </div>
-          <div className="col-span-12 sm:col-span-6 md:col-span-3">
+          <div className="col-span-12 sm:col-span-6 lg:col-span-4">
             <section className="mb-5">
               <header className="mb-5 text-base leading-5 text-primary">
                 ارتباط با ما
@@ -67,7 +67,7 @@ const Footer: FC<FooterProps> = ({ data }) => {
             </section>
           </div>
         </div>
-        <p className="py-1 text-center text-xs">
+        <p className="py-3 text-center text-xs">
           کليه حقوق محصولات و محتوای اين سایت متعلق به مستر دی بی ای می باشد و
           هر گونه کپی برداری از محتوا و محصولات سایت غیر مجاز و بدون رضایت ماست
         </p>
