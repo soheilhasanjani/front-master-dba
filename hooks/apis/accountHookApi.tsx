@@ -14,3 +14,15 @@ export const usePostAccountRegister = () => {
     mutationFn: accountApi.postAccountRegister,
   });
 };
+
+export const usePostAccountGetVerifyCode = () => {
+  return useMutation({
+    mutationFn: accountApi.postAccountGetVerifyCode,
+  });
+};
+
+export const usePostAccountCheckVerifyCode = () => {
+  return useMutation({
+    mutationFn: accountApi.postAccountCheckVerifyCode,
+  });
+};

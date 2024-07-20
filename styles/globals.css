@@ -7,3 +7,9 @@
     @apply text-sm text-[#414141];
   }
 }
+
+@layer utilities {
+  .ltr {
+    direction: ltr;
+  }
+}

@@ -29,3 +29,26 @@ export const postAccountRegister = async (dto: any) => {
   });
   return data;
 };
+
+export const postAccountGetVerifyCode = async (dto: {
+  "checkVerifyCodeViewModel.Username": string;
+}) => {
+  const { data }: any = await axiosInstance({
+    method: "post",
+    url: BASE_URL + "/GetVerifyCode",
+    params: dto,
+  });
+  return data;
+};
+
+export const postAccountCheckVerifyCode = async (dto: {
+  "checkVerifyCodeViewModel.Code": string;
+  "checkVerifyCodeViewModel.Username": string;
+}) => {
+  const { data }: any = await axiosInstance({
+    method: "post",
+    url: BASE_URL + "/CheckVerifyCode",
+    params: dto,
+  });
+  return data;
+};
