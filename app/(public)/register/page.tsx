@@ -1,10 +1,14 @@
 "use client";
 
+import { postAccountVerifyCaptchaResponse } from "@/apis/accountApi";
+import { usePostAccountRegister } from "@/hooks/apis/accountHookApi";
+import useRecaptcha from "@/hooks/useRecaptcha";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import React from "react";
 import { Lock, Phone, User } from "react-feather";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { z } from "zod";
 
 // Define your form schema
@@ -24,6 +28,9 @@ type FormData = z.infer<typeof schema>;
 
 const RegisterPage = () => {
   //
+  const { getCaptchaToken } = useRecaptcha();
+  const accountRegister = usePostAccountRegister();
+  //
   const {
     register,
     handleSubmit,
@@ -39,24 +46,34 @@ const RegisterPage = () => {
     },
   });
   //
-  const onSubmit: SubmitHandler<FormData> = (data) => {
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
     //
-    // const querystring = new URLSearchParams();
-    // querystring.append("grant_type", "password");
-    // querystring.append("username", data.username);
-    // querystring.append("password", data.password);
-    // //
-    // login.mutate(querystring, {
-    //   onSuccess: (res) => {
-    //     dispatch(setIsLogin(true));
-    //     Cookies.set("TOKEN", res.access_token);
-    //     push("/");
-    //     toast.success("با موفقیت وارد شدید !");
-    //   },
-    //   onError: () => {
-    //     toast.error("خطایی رخ داده است !");
-    //   },
-    // });
+    try {
+      const captchaToken = await getCaptchaToken();
+      const verifyCaptcha = await postAccountVerifyCaptchaResponse({
+        CaptchaToken: captchaToken as string,
+      });
+      if (verifyCaptcha.Success === true && verifyCaptcha.score >= 0.6) {
+        accountRegister.mutate(
+          {
+            FName: data.firstName,
+            Mobile: data.mobile,
+            Password: data.password,
+            RepeatPassword: data.repeatPassword,
+          },
+          {
+            onSuccess: () => {
+              toast.success("با موفقیت انجام شد !");
+            },
+            onError: () => {
+              toast.error("خطایی رخ داده است !");
+            },
+          },
+        );
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
   //
   return (

@@ -1,10 +1,16 @@
 import * as accountApi from "@/apis/accountApi";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 export const useGetAccountGetUserData = (enabled: boolean) => {
   return useQuery({
     queryKey: ["getAccountGetUserData"],
     queryFn: () => accountApi.getAccountGetUserData(),
     enabled: enabled,
+  });
+};
+
+export const usePostAccountRegister = () => {
+  return useMutation({
+    mutationFn: accountApi.postAccountRegister,
   });
 };

@@ -20,7 +20,7 @@ const UserBox = () => {
   const { push } = useRouter();
   const dispatch = useAppDispatch();
   const { isChecked, isLogin } = useAppSelector((state) => state.auth);
-  const { data: user } = useGetAccountGetUserData(isChecked);
+  const { data: user } = useGetAccountGetUserData(isChecked && isLogin);
   //
   const handleLogout = () => {
     dispatch(setIsLogin(false));
