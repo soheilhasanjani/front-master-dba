@@ -2,126 +2,115 @@
 
 import Input from "@/components/core/Input";
 import Textarea from "@/components/core/Textarea";
-import React, { useState } from "react";
+import { usePostContentUsSave } from "@/hooks/apis/contentUsHookApi";
+import { zodResolver } from "@hookform/resolvers/zod";
+import Image from "next/image";
+import React from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import { z } from "zod";
+
+// Define your form schema
+const schema = z.object({
+  fullName: z.string().min(1, "وارد کردن نام و نام خانوادگی الزامیست !"),
+  email: z
+    .string()
+    .email("لطفا ایمیل صحیح وارد کنید.")
+    .min(1, "وارد کردن ایمیل الزامیست !"),
+  subject: z.string().min(1, "وارد کردن موضوع الزامیست !"),
+  description: z.string().min(1, "وارد کردن توضیحات الزامیست !"),
+});
+
+type FormData = z.infer<typeof schema>;
 
 const ContactUsPage = () => {
   //
-  const [FullName, setFullName] = useState("");
-  const [Email, setEmail] = useState("");
-  const [Subject, setSubject] = useState("");
-  const [Description, setDescription] = useState("");
+  const contentUsSave = usePostContentUsSave();
   //
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    // try {
-    //   if (validation.current.allValid()) {
-    //     var model = {
-    //       FullName,
-    //       Email,
-    //       Subject,
-    //       Description,
-    //     };
-
-    //     const { data } = await SaveConectUs(model);
-    //     if (data.Status == "success") {
-    //       successMessage("پیام شما با موفقیت ثبت شد");
-    //       resetStates();
-    //     } else {
-    //       errorMessage("مشکلی پیش آمده");
-    //     }
-    //   } else {
-    //     validation.current.showMessages();
-    //     forceUpdate(1);
-    //   }
-    // } catch (ex) {
-    //   errorMessage("مشکلی پیش آمده" + ex);
-    // }
+  const {
+    reset,
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
+    mode: "onBlur",
+    resolver: zodResolver(schema),
+    defaultValues: {
+      fullName: "",
+      email: "",
+      subject: "",
+      description: "",
+    },
+  });
+  //
+  const onSubmit: SubmitHandler<FormData> = (data) => {
+    //
+    contentUsSave.mutate(
+      {
+        FullName: data.fullName,
+        Email: data.email,
+        Subject: data.subject,
+        Description: data.description,
+      },
+      {
+        onSuccess: (res) => {
+          toast.success(res.Message);
+          reset();
+        },
+        onError: (err) => {
+          toast.error("خطایی رخ داده است !");
+        },
+      },
+    );
   };
   //
   return (
-    <div className="px-3 py-8 xxl:container">
-      <div className="rounded bg-[#ededed] p-4">
-        <div className="row about-title pb-2">
-          <div className="co-md-12">تماس با ما</div>
+    <div className="px-3 xxl:container">
+      <div className="my-10 grid grid-cols-12 items-center gap-3 rounded bg-[#ededed] p-10">
+        <div className="col-span-12 md:col-span-6">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="flex flex-col gap-3"
+          >
+            <header className="pb-4 text-center">
+              <h2 className="text-xl font-semibold">تماس با ما</h2>
+            </header>
+            <div>
+              <Input
+                placeholder="نام و نام خانوادگی"
+                {...register("fullName")}
+              />
+              <span className="text-red-500">{errors?.fullName?.message}</span>
+            </div>
+            <div>
+              <Input placeholder="ایمیل" {...register("email")} />
+              <span className="text-red-500">{errors?.email?.message}</span>
+            </div>
+            <div>
+              <Input placeholder="موضوع" {...register("subject")} />
+              <span className="text-red-500">{errors?.subject?.message}</span>
+            </div>
+            <div>
+              <Textarea placeholder="توضیحات" {...register("description")} />
+              <span className="text-red-500">
+                {errors?.description?.message}
+              </span>
+            </div>
+            <button
+              className="h-10 rounded border border-[#0f70b7] bg-[#0f70b7] text-white transition-colors hover:bg-white hover:text-[#0f70b7]"
+              type="submit"
+            >
+              ثبت
+            </button>
+          </form>
         </div>
-        <div className="about-content grid grid-cols-12">
-          <div className="col-span-6">
-            <form onSubmit={handleSubmit}>
-              <div className="col-auto mb-2">
-                <Input
-                  className="form-control"
-                  type="text"
-                  placeholder="نام و نام خانوادگی"
-                  aria-label="default input example"
-                  value={FullName}
-                  onChange={(e) => {
-                    setFullName(e.target.value);
-                    // validation.current.showMessageFor("FullName");
-                  }}
-                />
-              </div>
-              {/* {validation.current.message("FullName", FullName, "required")} */}
-              <div className="col-auto mb-2">
-                <Input
-                  // class="form-control"
-                  type="text"
-                  placeholder="ایمیل"
-                  aria-label="default input example"
-                  value={Email}
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                    // validation.current.showMessageFor("Email");
-                  }}
-                />
-              </div>
-              {/* {validation.current.message("Email", Email, "required")} */}
-              <div className="col-auto mb-2">
-                <Input
-                  // class="form-control"
-                  type="text"
-                  placeholder="موضوع"
-                  aria-label="default input example"
-                  value={Subject}
-                  onChange={(e) => {
-                    setSubject(e.target.value);
-                    // validation.current.showMessageFor("Subject");
-                  }}
-                />
-              </div>
-              {/* {validation.current.message("Subject", Subject, "required")} */}
-              <div className="col-auto mb-2">
-                <Textarea
-                  className="form-control"
-                  // type="text"
-                  placeholder="توضیحات"
-                  aria-label="default input example"
-                  style={{ resize: "vertical" }}
-                  value={Description}
-                  onChange={(e) => {
-                    setDescription(e.target.value);
-                    // validation.current.showMessageFor("Description");
-                  }}
-                />
-              </div>
-              {/* {validation.current.message(
-                "Description",
-                Description,
-                "required",
-              )} */}
-              <div className="d-grid gap-2">
-                <button
-                  className="btn main-background-color-btn text-white"
-                  type="submit"
-                >
-                  ثبت
-                </button>
-              </div>
-            </form>
-          </div>
-          <div className="col-span-6">
-            <img src="/images/undraw-contact.svg" />
-          </div>
+        <div className="relative col-span-6 hidden h-full md:block">
+          <Image
+            fill
+            alt=""
+            src="/images/undraw-contact.svg"
+            className="size-full"
+          />
         </div>
       </div>
     </div>
