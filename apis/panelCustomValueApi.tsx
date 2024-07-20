@@ -33,3 +33,12 @@ export const postPanelCustomValueGetAboutPageAboutUs = async () => {
   });
   return data;
 };
+
+export const postPanelCustomValueSave = async (dto: any) => {
+  const { data }: any = await axiosInstance({
+    method: "post",
+    url: BASE_URL + "/Save",
+    data: dto,
+  });
+  return data;
+};

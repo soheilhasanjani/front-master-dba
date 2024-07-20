@@ -3,23 +3,36 @@
 import Input from "@/components/core/Input";
 import Label from "@/components/core/Label";
 import Textarea from "@/components/core/Textarea";
-import { usePostPanelCustomValueGetPanelCustomeValue } from "@/hooks/apis/panelCustomValueHookApi";
+import {
+  usePostPanelCustomValueGetPanelCustomeValue,
+  usePostPanelCustomValueSave,
+} from "@/hooks/apis/panelCustomValueHookApi";
 import React, { useEffect } from "react";
 import { Bookmark } from "react-feather";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { toast } from "react-toastify";
+import RichTextEditor from "@/components/core/RichTextEditor";
+import omit from "lodash.omit";
+import SectionHead from "@/app/dashboard/section-head";
+import staticFileUrl from "@/utils/staticFileUrl";
+import InputFileWithPreview from "@/components/core/InputFileWithPreview";
 
 // Define your form schema
 const schema = z.object({
-  WebSiteTitle: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
-  MainPageKeyWord: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
-  MainPageAboutUsTitle: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
-  MainPageAboutUsText: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
-  FooterAboutUsText: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
-  Tel: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
-  Fax: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
-  EnamadCode: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
+  websiteTitle: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
+  websiteLogo: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
+  mainPageKeyword: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
+  mainPageAboutUsTitle: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
+  mainPageAboutUsText: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
+  mainPageAboutUsImageUrl: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
+  footerAboutUsText: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
+  tel: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
+  fax: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
+  enamadCode: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
+  aboutUsTitle: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
+  aboutUsText: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
 });
 
 // TypeScript types for form values
@@ -28,42 +41,84 @@ type FormData = z.infer<typeof schema>;
 const DashboardPage = () => {
   //
   const { data } = usePostPanelCustomValueGetPanelCustomeValue();
+  const panelCustomValueSave = usePostPanelCustomValueSave();
   //
   const {
+    control,
     register,
     handleSubmit,
     formState: { errors },
     reset,
     setValue,
+    watch,
   } = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues: {
-      WebSiteTitle: "",
-      MainPageKeyWord: "",
-      MainPageAboutUsTitle: "",
-      MainPageAboutUsText: "",
-      FooterAboutUsText: "",
-      Tel: "",
-      Fax: "",
-      EnamadCode: "",
+      websiteTitle: "",
+      websiteLogo: "",
+      mainPageKeyword: "",
+      mainPageAboutUsTitle: "",
+      mainPageAboutUsText: "",
+      mainPageAboutUsImageUrl: "",
+      footerAboutUsText: "",
+      tel: "",
+      fax: "",
+      enamadCode: "",
+      aboutUsTitle: "",
+      aboutUsText: "",
     },
   });
   //
-  const onSubmit: SubmitHandler<FormData> = (data) => {};
+  const onSubmit: SubmitHandler<FormData> = (data) => {
+    //
+    const formData = new FormData();
+    //
+    formData.append("WebSiteTitle", data.websiteTitle);
+    formData.append("WebsiteLogo", data.websiteLogo);
+    formData.append("MainPageKeyWord", data.mainPageKeyword);
+    formData.append("MainPageAboutUsTitle", data.mainPageAboutUsTitle);
+    formData.append("MainPageAboutUsText", data.mainPageAboutUsText);
+    formData.append("MainPageAboutUsImageUrl", data.mainPageAboutUsImageUrl);
+    formData.append("FooterAboutUsText", data.footerAboutUsText);
+    formData.append("Tel", data.tel);
+    formData.append("Fax", data.fax);
+    formData.append("EnamadCode", data.enamadCode);
+    formData.append("AboutUsTitle", data.aboutUsTitle);
+    formData.append("AboutUsText", data.aboutUsText);
+    //
+    panelCustomValueSave.mutate(formData, {
+      onSuccess: () => {
+        //
+        toast.success("تغییرات با موفقیت ثبت شد");
+        //
+      },
+      onError: () => {
+        //
+        toast.error("خطایی رخ داده است!");
+        //
+      },
+    });
+  };
   //
   useEffect(() => {
     if (data) {
-      setValue("WebSiteTitle", data.WebSiteTitle);
-      setValue("MainPageKeyWord", data.MainPageKeyWord);
-      setValue("MainPageAboutUsTitle", data.MainPageAboutUsTitle);
-      setValue("MainPageAboutUsText", data.MainPageAboutUsText);
-      setValue("FooterAboutUsText", data.FooterAboutUsText);
-      setValue("Tel", data.Tel);
-      setValue("Fax", data.Fax);
-      setValue("EnamadCode", data.EnamadCode);
+      setValue("websiteTitle", data.WebSiteTitle);
+      setValue("websiteLogo", data.WebsiteLogoUrl);
+      setValue("mainPageKeyword", data.MainPageKeyWord);
+      setValue("mainPageAboutUsTitle", data.MainPageAboutUsTitle);
+      setValue("mainPageAboutUsText", data.MainPageAboutUsText);
+      setValue("mainPageAboutUsImageUrl", data.MainPageAboutUsImageUrl);
+      setValue("footerAboutUsText", data.FooterAboutUsText);
+      setValue("tel", data.Tel);
+      setValue("fax", data.Fax);
+      setValue("enamadCode", data.EnamadCode);
+      setValue("aboutUsTitle", data.AboutUsTitle);
+      setValue("aboutUsText", data.AboutUsText);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
+  //
+  const websiteLogo = watch("websiteLogo");
   //
   return (
     <div className="p-5">
@@ -74,26 +129,31 @@ const DashboardPage = () => {
           className="flex flex-col gap-10"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <div className="">
-            <div className="mb-3 flex items-center gap-2 border-b pb-3">
-              <Bookmark />
-              <h6>تنظیمات سایت</h6>
-            </div>
-
+          <input
+            type="file"
+            onChange={(e) => {
+              console.log(e.target.value);
+            }}
+          />
+          <div>
+            <SectionHead title="تنظیمات سایت" icon={<Bookmark />} />
             <div className="grid grid-cols-12 gap-4">
               <div className="col-span-12">
                 <Label>عنوان سایت</Label>
-                <Input {...register("WebSiteTitle")} />
+                <Input {...register("websiteTitle")} />
               </div>
               <div className="col-span-12">
                 <Label>لوگو سایت</Label>
                 <div className="col-sm-9">
-                  <Input
-                    type="file"
-                    onChange={(e) => {
-                      // setImageFile(e);
-                      // setWebsiteLogo(e.target.files[0]);
-                    }}
+                  <Controller
+                    name="websiteLogo"
+                    control={control}
+                    render={({ field }) => (
+                      <InputFileWithPreview
+                        {...field}
+                        isError={!!errors?.websiteLogo}
+                      />
+                    )}
                   />
                 </div>
                 <div className="col-sm-1">
@@ -108,7 +168,7 @@ const DashboardPage = () => {
                 <Label> کلمات کلیدی صفحه اصلی</Label>
                 <div className="col-sm-10">
                   <Input
-                    {...register("MainPageKeyWord")}
+                    {...register("mainPageKeyword")}
                     placeholder="کلمات را با , جدا کنید"
                   />
                 </div>
@@ -116,21 +176,17 @@ const DashboardPage = () => {
             </div>
           </div>
 
-          <div className="">
-            <div className="mb-3 flex items-center gap-2 border-b pb-3">
-              <Bookmark />
-              <h6>صفحه اصلی</h6>
-            </div>
-
+          <div>
+            <SectionHead title="صفحه اصلی" icon={<Bookmark />} />
             <div className="grid grid-cols-12 gap-4">
               <div className="col-span-12">
                 <Label>عنوان درباره ما</Label>
-                <Input {...register("MainPageAboutUsTitle")} />
+                <Input {...register("mainPageAboutUsTitle")} />
               </div>
               <div className="col-span-12">
                 <Label>متن درباره ما</Label>
                 <Textarea
-                  {...register("MainPageAboutUsText")}
+                  {...register("mainPageAboutUsText")}
                   rows={5}
                   className="resize-y"
                 />
@@ -157,133 +213,51 @@ const DashboardPage = () => {
             </div>
           </div>
 
-          <div className="">
-            <div className="mb-3 flex items-center gap-2 border-b pb-3">
-              <Bookmark />
-              <h6>فوتر</h6>
-            </div>
-
+          <div>
+            <SectionHead title="فوتر" icon={<Bookmark />} />
             <div className="grid grid-cols-12 gap-4">
               <div className="col-span-12">
                 <Label>متن درباره ما</Label>
                 <Textarea
                   rows={5}
                   className="resize-y"
-                  {...register("FooterAboutUsText")}
+                  {...register("footerAboutUsText")}
                 />
               </div>
               <div className="col-span-12">
                 <Label>تلفن</Label>
-                <Input {...register("Tel")} />
+                <Input {...register("tel")} />
               </div>
               <div className="col-span-12">
                 <Label>ایمیل</Label>
-                <Input {...register("Fax")} />
+                <Input {...register("fax")} />
               </div>
               <div className="col-span-12">
                 <Label>ای نماد</Label>
-                <Input {...register("EnamadCode")} />
+                <Input {...register("enamadCode")} />
               </div>
             </div>
           </div>
 
           <div>
-            <div className="mb-3 flex items-center gap-2 border-b pb-3">
-              <Bookmark />
-              <h6>درباره ما</h6>
-            </div>
-
+            <SectionHead title="درباره ما" icon={<Bookmark />} />
             <div className="grid grid-cols-12 gap-4">
               <div className="col-span-12">
                 <Label>عنوان درباره ما</Label>
-                <Input
-                // value={AboutUsTitle}
-                // onChange={(e) => setAboutUsTitle(e.target.value)}
-                />
+                <Input {...register("aboutUsTitle")} />
               </div>
-
               <div className="col-span-12">
                 <Label>متن درباره ما</Label>
-                {/* <Editor
-                tinymceScriptSrc={
-                  process.env.PUBLIC_URL + "/tinymce/tinymce.min.js"
-                }
-                onInit={(evt, editor) => (editorRef.current = editor)}
-                initialValue={AboutUsText}
-                init={{
-                  height: 600,
-                  menubar: true,
-                  directionality: "rtl",
-                  plugins: [
-                    "advlist",
-                    "autolink",
-                    "lists",
-                    "link",
-                    "image",
-                    "imagetools",
-                    "charmap",
-                    "anchor",
-                    "searchreplace",
-                    "visualblocks",
-                    "code",
-                    "codesample",
-                    "fullscreen",
-                    "insertdatetime",
-                    "media",
-                    "table",
-                    "preview",
-                    "help",
-                    "wordcount",
-                    "emoticons",
-                    "quickbars",
-                    "pagebreak",
-                    "nonbreaking",
-                    "searchreplace ",
-                    "directionality",
-                    "textcolor colorpicker",
-                    "print",
-                  ],
-                  toolbar:
-                    "undo redo | bold italic underline strikethrough |formats blocks fontsize|" +
-                    "alignleft aligncenter alignright justify alignjustify  " +
-                    "pagebreak nonbreaking searchreplace| bullist numlist outdent indent | " +
-                    "removeformat forecolor| codesample |table image media link emoticons |preview fullscreen " +
-                    "styleselect ltr rtl forecolor backcolor print ",
-
-                  quickbars_image_toolbar: true,
-                  quickbars_image_toolbar:
-                    "alignleft aligncenter alignright rotateleft rotateright | flipv fliph | editimage imageoptions ",
-                  quickbars_selection_toolbar:
-                    "bold italic | quicklink blockquote",
-                  quickbars_insert_toolbar:
-                    "quickimage quicktable | hr pagebreak",
-                  advlist_bullet_styles: "square",
-                  a11y_advanced_options: true,
-                  image_title: true,
-                  codesample_global_prismjs: true,
-                  forced_root_block: "div",
-                  images_file_types: "jpg,png,jpeg,sql,pdf,docx",
-                  file_picker_types: "file image media",
-                  images_upload_handler: handleImageUpload,
-                  codesample_languages: [
-                    { text: "Python", value: "python" },
-                    { text: "HTML/XML", value: "markup" },
-                    { text: "CSS", value: "css" },
-                    { text: "JavaScript", value: "javascript" },
-                    { text: "C#", value: "csharp" },
-                    { text: "SQL", value: "sql" },
-                  ],
-                  content_style:
-                    "@font-face {" +
-                    'font-family: "IranSanse";' +
-                    'src: url("../fonts/BYekan-webfont.eot") format("eot"),' +
-                    'url("../fonts/BYekan-webfont.woff") format("woff"),' +
-                    'url("../fonts/BYekan-webfont.ttf") format("truetype");' +
-                    'url("../fonts/IRANSansWeb.woff2") format("woff")' +
-                    "};" +
-                    "body { font-family:IranSanse; font-size:14px }",
-                }}
-              /> */}
+                {/* <Controller
+                  name="aboutUsText"
+                  control={control}
+                  render={({ field }) => (
+                    <RichTextEditor
+                      {...omit(field, ["ref"])}
+                      isError={!!errors?.aboutUsText}
+                    />
+                  )}
+                /> */}
               </div>
             </div>
           </div>

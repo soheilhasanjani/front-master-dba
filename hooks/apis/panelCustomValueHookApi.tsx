@@ -1,7 +1,9 @@
 import * as panelCustomValueApi from "@/apis/panelCustomValueApi";
 import {
   queryOptions,
+  useMutation,
   useQuery,
+  useQueryClient,
   useSuspenseQuery,
 } from "@tanstack/react-query";
 
@@ -34,5 +36,17 @@ export const usePostPanelCustomValueGetAboutPageAboutUs = () => {
     queryKey: ["postPanelCustomValueGetAboutPageAboutUs"],
     queryFn: () =>
       panelCustomValueApi.postPanelCustomValueGetAboutPageAboutUs(),
+  });
+};
+
+export const usePostPanelCustomValueSave = () => {
+  const QC = useQueryClient();
+  return useMutation({
+    mutationFn: panelCustomValueApi.postPanelCustomValueSave,
+    onSuccess: () => {
+      QC.invalidateQueries({
+        queryKey: ["postPanelCustomValueGetPanelCustomeValue"],
+      });
+    },
   });
 };
