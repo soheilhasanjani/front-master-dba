@@ -18,15 +18,17 @@ import omit from "lodash.omit";
 import SectionHead from "@/app/dashboard/section-head";
 import staticFileUrl from "@/utils/staticFileUrl";
 import InputFileWithPreview from "@/components/core/InputFileWithPreview";
+import ImageInput from "@/app/dashboard/image-input";
+import Editor from "@/components/core/Editor";
 
 // Define your form schema
 const schema = z.object({
   websiteTitle: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
-  websiteLogo: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
+  websiteLogo: z.union([z.instanceof(File), z.string(), z.null()]),
   mainPageKeyword: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
   mainPageAboutUsTitle: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
   mainPageAboutUsText: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
-  mainPageAboutUsImageUrl: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
+  mainPageAboutUsImageUrl: z.union([z.instanceof(File), z.string(), z.null()]),
   footerAboutUsText: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
   tel: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
   fax: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
@@ -74,11 +76,19 @@ const DashboardPage = () => {
     const formData = new FormData();
     //
     formData.append("WebSiteTitle", data.websiteTitle);
-    formData.append("WebsiteLogo", data.websiteLogo);
+    formData.append(
+      "WebsiteLogo",
+      data.websiteLogo instanceof File ? data.websiteLogo : "",
+    );
     formData.append("MainPageKeyWord", data.mainPageKeyword);
     formData.append("MainPageAboutUsTitle", data.mainPageAboutUsTitle);
     formData.append("MainPageAboutUsText", data.mainPageAboutUsText);
-    formData.append("MainPageAboutUsImageUrl", data.mainPageAboutUsImageUrl);
+    formData.append(
+      "MainPageAboutUsImageUrl",
+      data.mainPageAboutUsImageUrl instanceof File
+        ? data.mainPageAboutUsImageUrl
+        : "",
+    );
     formData.append("FooterAboutUsText", data.footerAboutUsText);
     formData.append("Tel", data.tel);
     formData.append("Fax", data.fax);
@@ -129,12 +139,6 @@ const DashboardPage = () => {
           className="flex flex-col gap-10"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <input
-            type="file"
-            onChange={(e) => {
-              console.log(e.target.value);
-            }}
-          />
           <div>
             <SectionHead title="تنظیمات سایت" icon={<Bookmark />} />
             <div className="grid grid-cols-12 gap-4">
@@ -144,34 +148,23 @@ const DashboardPage = () => {
               </div>
               <div className="col-span-12">
                 <Label>لوگو سایت</Label>
-                <div className="col-sm-9">
-                  <Controller
-                    name="websiteLogo"
-                    control={control}
-                    render={({ field }) => (
-                      <InputFileWithPreview
-                        {...field}
-                        isError={!!errors?.websiteLogo}
-                      />
-                    )}
-                  />
-                </div>
-                <div className="col-sm-1">
-                  {/* <img
-                src={WebsiteLogoUrl}
-                style={{ width: "110px", cursor: "pointer" }}
-                onClick={() => handleShowImageModal(WebsiteLogoUrl)}
-              /> */}
-                </div>
+                <Controller
+                  control={control}
+                  name="websiteLogo"
+                  render={({ field }) => (
+                    <ImageInput
+                      value={field.value}
+                      onChange={(file) => field.onChange(file)}
+                    />
+                  )}
+                />
               </div>
               <div className="col-span-12">
                 <Label> کلمات کلیدی صفحه اصلی</Label>
-                <div className="col-sm-10">
-                  <Input
-                    {...register("mainPageKeyword")}
-                    placeholder="کلمات را با , جدا کنید"
-                  />
-                </div>
+                <Input
+                  {...register("mainPageKeyword")}
+                  placeholder="کلمات را با , جدا کنید"
+                />
               </div>
             </div>
           </div>
@@ -193,22 +186,16 @@ const DashboardPage = () => {
               </div>
               <div className="col-span-12">
                 <Label>عکس درباره ما</Label>
-                <div className="col-sm-9">
-                  <Input
-                    type="file"
-                    onChange={(e) => {
-                      // setImageFile(e);
-                      // setMainPageAboutUsImageUrl(e.target.files[0]);
-                    }}
-                  />
-                </div>
-                <div className="col-sm-1">
-                  {/* <img
-                src={MainPageAboutUsImageUrl}
-                style={{ width: "110px", cursor: "pointer" }}
-                onClick={() => handleShowImageModal(MainPageAboutUsImageUrl)}
-              /> */}
-                </div>
+                <Controller
+                  control={control}
+                  name="mainPageAboutUsImageUrl"
+                  render={({ field }) => (
+                    <ImageInput
+                      value={field.value}
+                      onChange={(file) => field.onChange(file)}
+                    />
+                  )}
+                />
               </div>
             </div>
           </div>
@@ -248,7 +235,7 @@ const DashboardPage = () => {
               </div>
               <div className="col-span-12">
                 <Label>متن درباره ما</Label>
-                {/* <Controller
+                <Controller
                   name="aboutUsText"
                   control={control}
                   render={({ field }) => (
@@ -257,7 +244,8 @@ const DashboardPage = () => {
                       isError={!!errors?.aboutUsText}
                     />
                   )}
-                /> */}
+                />
+                <Editor />
               </div>
             </div>
           </div>
