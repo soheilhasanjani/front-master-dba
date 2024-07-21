@@ -10,31 +10,26 @@ import {
 import React, { useEffect } from "react";
 import { Bookmark } from "react-feather";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { toast } from "react-toastify";
-import RichTextEditor from "@/components/core/RichTextEditor";
-import omit from "lodash.omit";
 import SectionHead from "@/app/dashboard/section-head";
-import staticFileUrl from "@/utils/staticFileUrl";
-import InputFileWithPreview from "@/components/core/InputFileWithPreview";
 import ImageInput from "@/app/dashboard/image-input";
-import Editor from "@/components/core/Editor";
+import TinymceReact from "@/components/core/TinymceReact";
 
 // Define your form schema
 const schema = z.object({
-  websiteTitle: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
+  websiteTitle: z.string(),
   websiteLogo: z.union([z.instanceof(File), z.string(), z.null()]),
-  mainPageKeyword: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
-  mainPageAboutUsTitle: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
-  mainPageAboutUsText: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
+  mainPageKeyword: z.string(),
+  mainPageAboutUsTitle: z.string(),
+  mainPageAboutUsText: z.string(),
   mainPageAboutUsImageUrl: z.union([z.instanceof(File), z.string(), z.null()]),
-  footerAboutUsText: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
-  tel: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
-  fax: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
-  enamadCode: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
-  aboutUsTitle: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
-  aboutUsText: z.string().min(1, "وارد کردن نام کاربری الزامیست !"),
+  footerAboutUsText: z.string(),
+  tel: z.string(),
+  fax: z.string(),
+  enamadCode: z.string(),
+  aboutUsTitle: z.string(),
+  aboutUsText: z.string(),
 });
 
 // TypeScript types for form values
@@ -54,7 +49,7 @@ const DashboardPage = () => {
     setValue,
     watch,
   } = useForm<FormData>({
-    resolver: zodResolver(schema),
+    // resolver: zodResolver(schema),
     defaultValues: {
       websiteTitle: "",
       websiteLogo: "",
@@ -112,23 +107,21 @@ const DashboardPage = () => {
   //
   useEffect(() => {
     if (data) {
-      setValue("websiteTitle", data.WebSiteTitle);
-      setValue("websiteLogo", data.WebsiteLogoUrl);
-      setValue("mainPageKeyword", data.MainPageKeyWord);
-      setValue("mainPageAboutUsTitle", data.MainPageAboutUsTitle);
-      setValue("mainPageAboutUsText", data.MainPageAboutUsText);
-      setValue("mainPageAboutUsImageUrl", data.MainPageAboutUsImageUrl);
-      setValue("footerAboutUsText", data.FooterAboutUsText);
-      setValue("tel", data.Tel);
-      setValue("fax", data.Fax);
-      setValue("enamadCode", data.EnamadCode);
-      setValue("aboutUsTitle", data.AboutUsTitle);
-      setValue("aboutUsText", data.AboutUsText);
+      setValue("websiteTitle", data.WebSiteTitle ?? "");
+      setValue("websiteLogo", data.WebsiteLogoUrl ?? "");
+      setValue("mainPageKeyword", data.MainPageKeyWord ?? "");
+      setValue("mainPageAboutUsTitle", data.MainPageAboutUsTitle ?? "");
+      setValue("mainPageAboutUsText", data.MainPageAboutUsText ?? "");
+      setValue("mainPageAboutUsImageUrl", data.MainPageAboutUsImageUrl ?? "");
+      setValue("footerAboutUsText", data.FooterAboutUsText ?? "");
+      setValue("tel", data.Tel ?? "");
+      setValue("fax", data.Fax ?? "");
+      setValue("enamadCode", data.EnamadCode ?? "");
+      setValue("aboutUsTitle", data.AboutUsTitle ?? "");
+      setValue("aboutUsText", data.AboutUsText ?? "");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
-  //
-  const websiteLogo = watch("websiteLogo");
   //
   return (
     <div className="p-5">
@@ -239,13 +232,12 @@ const DashboardPage = () => {
                   name="aboutUsText"
                   control={control}
                   render={({ field }) => (
-                    <RichTextEditor
-                      {...omit(field, ["ref"])}
-                      isError={!!errors?.aboutUsText}
+                    <TinymceReact
+                      value={field.value}
+                      onChange={(value) => field.onChange(value)}
                     />
                   )}
                 />
-                <Editor />
               </div>
             </div>
           </div>

@@ -11,12 +11,11 @@ import {
   usePostArticleGetArticlesForEdit,
   usePostArticleSave,
 } from "@/hooks/apis/articleHookApi";
-import RichTextEditor from "@/components/core/RichTextEditor";
 import References from "@/app/dashboard/articles/article/[[...slug]]/references";
 import { z } from "zod";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import omit from "lodash.omit";
+import TinymceReact from "@/components/core/TinymceReact";
 
 const schema = z.object({
   articleNextID: z.string(),
@@ -215,9 +214,9 @@ const ArticlePage = ({ params }: { params: { slug?: string[] } }) => {
             name="body"
             control={control}
             render={({ field }) => (
-              <RichTextEditor
-                {...omit(field, ["ref"])}
-                isError={!!errors?.body}
+              <TinymceReact
+                value={field.value}
+                onChange={(value) => field.onChange(value)}
               />
             )}
           />

@@ -39,6 +39,7 @@ export const postPanelCustomValueSave = async (dto: any) => {
     method: "post",
     url: BASE_URL + "/Save",
     data: dto,
+    headers: { "Content-Type": "multipart/form-data" },
   });
   return data;
 };
