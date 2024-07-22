@@ -66,7 +66,7 @@ const LoginPage = () => {
   //
   return (
     <div className="px-3 xxl:container">
-      <div className="my-10 grid grid-cols-12">
+      <div className="my-10 grid grid-cols-12 overflow-hidden rounded">
         <div className="col-span-12 md:col-span-8">
           <div className="h-full bg-[#f2f2f2] py-10">
             <header className="pb-4 text-center">
