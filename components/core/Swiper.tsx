@@ -1,16 +1,17 @@
 import React from "react";
 import { Swiper as SwiperJs } from "swiper/react";
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
+import { Navigation, Autoplay } from "swiper/modules";
 import { SwiperOptions } from "swiper/types";
 import "swiper/css";
 import "swiper/css/navigation";
+import "swiper/css/autoplay";
 
 const Swiper = ({
   children,
   ...config
 }: { children: React.ReactNode; className?: string } & SwiperOptions) => {
   return (
-    <SwiperJs modules={[Navigation, Pagination, Scrollbar, A11y]} {...config}>
+    <SwiperJs modules={[Navigation, Autoplay]} {...config}>
       {children}
     </SwiperJs>
   );

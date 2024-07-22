@@ -30,8 +30,8 @@ const Footer: FC<FooterProps> = ({ data }) => {
                 {[
                   { id: 0, label: "قوانین و مقررات", href: "" },
                   { id: 1, label: "نویسندگان", href: "/authors" },
-                  { id: 2, label: "درباره ما", href: "/aboutUs" },
-                  { id: 3, label: "همکاری با ما", href: "/contactus" },
+                  { id: 2, label: "درباره ما", href: "/about-us" },
+                  { id: 3, label: "همکاری با ما", href: "/contact-us" },
                 ].map((item) => (
                   <li key={item.id}>
                     <Link

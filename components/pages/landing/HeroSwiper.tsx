@@ -11,10 +11,10 @@ interface HeroSwiperProps {
 
 const HeroSwiper: FC<HeroSwiperProps> = ({ data }) => {
   return (
-    <Swiper className="h-[340px]" navigation>
+    <Swiper navigation autoplay>
       {data?.map((slide: any) => {
         return (
-          <SwiperSlide key={slide.Id} className="h-[340px]">
+          <SwiperSlide key={slide.Id} className="aspect-[1325/364] w-full">
             <Image
               src={"http://masterdba.ir:8080" + slide.ImageUrl}
               fill
