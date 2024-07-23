@@ -21,7 +21,7 @@ const AboutUsPage = async () => {
   const data = await getData();
   //
   return (
-    <div className="px-3 py-4 xxl:container">
+    <div className="min-h-[60svh] px-3 py-4 xxl:container">
       <div className="rounded bg-[#ededed] p-8">
         {data?.AboutUsTitle && <h5 className="pb-4">{data?.AboutUsTitle}</h5>}
         <div className="text-justify">

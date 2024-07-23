@@ -18,7 +18,7 @@ const AuthorsPage = async () => {
   const data = await getData();
   //
   return (
-    <div className="my-4 px-3 xxl:container">
+    <div className="my-4 min-h-[60svh] px-3 xxl:container">
       <div className="grid grid-cols-12 gap-4">
         {data?.map((author: any) => (
           <div

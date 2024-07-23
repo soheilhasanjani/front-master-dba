@@ -10,7 +10,7 @@ const ArticlePage = ({ params: { slug } }: { params: { slug: string[] } }) => {
   const articleId = +slug?.[0];
   //
   return (
-    <Container>
+    <Container className="min-h-[60svh]">
       <div className="pb-3 pt-4">
         <ArticleBreadcrumbs id={articleId} />
       </div>

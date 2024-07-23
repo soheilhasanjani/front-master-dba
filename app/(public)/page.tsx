@@ -5,7 +5,7 @@ import OurServicesSC from "@/components/pages/landing/OurServicesSC";
 
 export default function Home() {
   return (
-    <div className="flex flex-col gap-y-4 px-3 py-4 xxl:container">
+    <div className="flex min-h-[60svh] flex-col gap-y-4 px-3 py-4 xxl:container">
       <div>
         <HeroSwiperSC />
       </div>

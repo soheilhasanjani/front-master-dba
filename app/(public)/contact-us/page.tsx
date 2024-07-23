@@ -65,7 +65,7 @@ const ContactUsPage = () => {
   };
   //
   return (
-    <div className="px-3 xxl:container">
+    <div className="min-h-[60svh] px-3 xxl:container">
       <div className="my-10 grid grid-cols-12 items-center gap-3 rounded bg-[#ededed] p-10">
         <div className="col-span-12 md:col-span-6">
           <form

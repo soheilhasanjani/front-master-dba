@@ -37,7 +37,7 @@ const ArchivePage = async ({ params }: { params: { slug?: string[] } }) => {
   });
   //
   return (
-    <section className="px-3 xxl:container">
+    <section className="min-h-[60svh] px-3 xxl:container">
       <div className="flex flex-col gap-4 py-4">
         <ArchiveBreadcrumbs id={currentArchiveId} />
         <div className="grid grid-cols-12 gap-4">

@@ -63,7 +63,7 @@ const ForgetPasswordPage = ({ params }: { params: { mobile: string } }) => {
   };
   //
   return (
-    <div className="my-10 px-3 xxl:container">
+    <div className="my-10 min-h-[60svh] px-3 xxl:container">
       <div className="flex justify-center">
         <form
           autoComplete="off"

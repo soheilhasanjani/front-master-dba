@@ -8,7 +8,7 @@ const AuthorPage = ({ params }: { params: { slug: string[] } }) => {
   const authorId = slug?.[0];
   //
   return (
-    <div className="px-3 xxl:container">
+    <div className="min-h-[60svh] px-3 xxl:container">
       <div className="my-3 grid grid-cols-12 gap-4">
         <div className="col-span-12 lg:col-span-3">
           <AuthorInfoSC authorId={authorId} />
