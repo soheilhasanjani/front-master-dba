@@ -1,24 +1,13 @@
 import React from "react";
-import Link from "next/link";
 import SearchBox from "@/components/layouts/PublicLayout/SearchBox";
 import UserBox from "@/components/layouts/PublicLayout/UserBox";
+import MainLink from "@/components/layouts/PublicLayout/MainLink";
 
 const TopNav = () => {
   return (
     <nav className="px-3 xxl:container">
       <div className="flex flex-wrap items-center justify-between gap-3 pt-3">
-        <ul className="flex items-center gap-4">
-          <li>
-            <Link href="/about-us" className="hover:text-primary">
-              درباره ما
-            </Link>
-          </li>
-          <li>
-            <Link href="/contact-us" className="hover:text-primary">
-              تماس با ما
-            </Link>
-          </li>
-        </ul>
+        <MainLink />
         <div className="order-1 w-full lg:order-none lg:max-w-lg">
           <SearchBox />
         </div>

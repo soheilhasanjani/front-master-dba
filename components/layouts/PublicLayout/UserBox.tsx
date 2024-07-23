@@ -12,12 +12,14 @@ import {
 import { useGetAccountGetUserData } from "@/hooks/apis/accountHookApi";
 import { setIsLogin } from "@/redux/authSlice";
 import Cookies from "js-cookie";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
+import { cn } from "@/utils/cn";
 
 const UserBox = () => {
   const queryClient = useQueryClient();
   const { push } = useRouter();
+  const pathname = usePathname();
   const dispatch = useAppDispatch();
   const { isChecked, isLogin } = useAppSelector((state) => state.auth);
   const { data: user } = useGetAccountGetUserData(isChecked && isLogin);
@@ -36,13 +38,20 @@ const UserBox = () => {
       <div className="flex items-center gap-4">
         <Link
           href="/login"
-          className="flex items-center gap-1 hover:text-primary"
+          className={cn("flex items-center gap-1 hover:text-primary", {
+            "text-primary": pathname.startsWith("/login"),
+          })}
         >
           <LogIn className="pe-1" />
           ورود
         </Link>
         |
-        <Link href="/register" className="hover:text-primary">
+        <Link
+          href="/register"
+          className={cn("hover:text-primary", {
+            "text-primary": pathname.startsWith("/register"),
+          })}
+        >
           عضویت
         </Link>
       </div>

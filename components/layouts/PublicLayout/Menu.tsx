@@ -63,7 +63,10 @@ const Menu = () => {
                 <div
                   key={item.id}
                   className={cn("hover:text-primary", {
-                    "text-primary": item.href === pathname,
+                    "text-primary":
+                      item.href === "/"
+                        ? pathname === "/"
+                        : pathname.startsWith(item.href),
                   })}
                 >
                   <Link
@@ -88,7 +91,10 @@ const Menu = () => {
             <li
               key={item.id}
               className={cn("hover:text-primary", {
-                "text-primary": item.href === pathname,
+                "text-primary":
+                  item.href === "/"
+                    ? pathname === "/"
+                    : pathname.startsWith(item.href),
               })}
             >
               <Link
