@@ -25,7 +25,7 @@ const AuthorInfoSC: React.FC<AuthorInfoSCProps> = async ({ authorId }) => {
   const data = await getData({ authorId });
   //
   return (
-    <div className="flex flex-col items-center rounded-lg bg-[#ededed] px-3 py-10">
+    <div className="sticky top-4 flex flex-col items-center rounded-lg bg-[#ededed] px-3 py-10">
       <div className="relative aspect-square size-[150px] overflow-hidden rounded-full border-4 border-[gray]">
         {data?.ImageUrl ? (
           <Image
