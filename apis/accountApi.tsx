@@ -63,3 +63,15 @@ export const postAccountCheckMobileNumber = async (dto: {
   });
   return data;
 };
+
+export const postAccountChangePassword = async (dto: {
+  Username: string;
+  Password: string;
+}) => {
+  const { data } = await axiosInstance({
+    method: "post",
+    url: BASE_URL + "/ChangePassword",
+    data: dto,
+  });
+  return data;
+};

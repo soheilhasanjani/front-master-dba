@@ -32,3 +32,9 @@ export const usePostAccountCheckMobileNumber = () => {
     mutationFn: accountApi.postAccountCheckMobileNumber,
   });
 };
+
+export const usePostAccountChangePassword = () => {
+  return useMutation({
+    mutationFn: accountApi.postAccountChangePassword,
+  });
+};

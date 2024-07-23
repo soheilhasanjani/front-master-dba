@@ -62,7 +62,7 @@ const VerifyCodeDialog: React.FC<VerifyCodeDialogProps> = ({
           if (res.Status == "success") {
             onOpenChange(false);
             toast.success("عملیات با موفقیت انجام شد");
-            push("/login");
+            push("/forget-password/" + username);
           } else {
             toast.error(res.Message);
           }
