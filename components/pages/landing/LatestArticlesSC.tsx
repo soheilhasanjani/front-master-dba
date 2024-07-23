@@ -5,6 +5,7 @@ import LatestArticles from "@/components/pages/landing/LatestArticles";
 async function getData() {
   const res = await fetch(HOST_ADDRESS + "/Article/GetAllArticlesForMainPage", {
     method: "POST",
+    cache: "no-store",
   });
   if (!res.ok) {
     throw new Error("Failed to fetch data");

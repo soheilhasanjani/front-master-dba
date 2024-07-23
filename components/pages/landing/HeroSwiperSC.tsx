@@ -5,6 +5,7 @@ import HeroSwiper from "@/components/pages/landing/HeroSwiper";
 async function getData() {
   const res = await fetch(HOST_ADDRESS + "/slider/GetAllSliders", {
     method: "POST",
+    cache: "no-store",
   });
   if (!res.ok) {
     throw new Error("Failed to fetch data");

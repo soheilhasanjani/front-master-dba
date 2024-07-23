@@ -5,6 +5,7 @@ import Footer from "@/components/layouts/PublicLayout/Footer";
 async function getData() {
   const res = await fetch(HOST_ADDRESS + "/PanelCustomValue/GetFooterContent", {
     method: "POST",
+    cache: "no-store",
   });
   if (!res.ok) {
     throw new Error("Failed to fetch data");

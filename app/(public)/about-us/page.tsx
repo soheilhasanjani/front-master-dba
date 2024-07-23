@@ -7,6 +7,7 @@ async function getData() {
     HOST_ADDRESS + "/PanelCustomValue/GetAboutPageAboutUs",
     {
       method: "POST",
+      cache: "no-store",
     },
   );
   if (!res.ok) {

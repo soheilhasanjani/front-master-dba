@@ -11,6 +11,7 @@ async function getData({ authorId }: { authorId: string }) {
     HOST_ADDRESS + "/user/GetPublisherProfileData?userViewModel.ID=" + authorId,
     {
       method: "POST",
+      cache: "no-store",
     },
   );
   if (!res.ok) {

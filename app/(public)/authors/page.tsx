@@ -5,6 +5,7 @@ import AuthorCard from "@/app/(public)/authors/author-card";
 async function getData() {
   const res = await fetch(HOST_ADDRESS + "/user/GetAllAuthorList", {
     method: "POST",
+    cache: "no-store",
   });
   if (!res.ok) {
     throw new Error("Failed to fetch data");

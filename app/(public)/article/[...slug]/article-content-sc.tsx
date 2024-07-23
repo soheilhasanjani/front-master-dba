@@ -15,6 +15,7 @@ async function getData(articleId: number) {
       }).toString(),
     {
       method: "POST",
+      cache: "no-store",
     },
   );
   if (!res.ok) {

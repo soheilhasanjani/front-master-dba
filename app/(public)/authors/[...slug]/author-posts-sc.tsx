@@ -17,6 +17,7 @@ async function getData({ authorId }: { authorId: string }) {
     headers: {
       "Content-Type": "application/json",
     },
+    cache: "no-store",
   });
   if (!res.ok) {
     throw new Error("Failed to fetch data");
