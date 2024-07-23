@@ -15,12 +15,14 @@ const HeroSwiper: FC<HeroSwiperProps> = ({ data }) => {
       {data?.map((slide: any) => {
         return (
           <SwiperSlide key={slide.Id} className="aspect-[1325/364] w-full">
-            <Image
-              src={"http://masterdba.ir:8080" + slide.ImageUrl}
-              fill
-              className="h-full w-full rounded object-cover"
-              alt={slide.Name}
-            />
+            <a href={slide.LinkUrl} target="_blank">
+              <Image
+                src={"http://masterdba.ir:8080" + slide.ImageUrl}
+                fill
+                className="h-full w-full rounded object-cover"
+                alt={slide.Name}
+              />
+            </a>
           </SwiperSlide>
         );
       })}
