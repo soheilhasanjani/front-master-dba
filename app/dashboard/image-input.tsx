@@ -54,6 +54,7 @@ const ImageInput: React.FC<ImageInputProps> = ({ value, onChange }) => {
       {imageUrl ? (
         <>
           <button
+            type="button"
             onClick={() => setOpen(true)}
             className="h-10 w-full rounded bg-[#0f70b7] px-3 text-sm font-medium text-white transition hover:bg-[#0f70b7]/90"
           >
@@ -67,6 +68,7 @@ const ImageInput: React.FC<ImageInputProps> = ({ value, onChange }) => {
                 className="w-full max-w-xs rounded-md object-cover"
               />
               <button
+                type="button"
                 onClick={handleButtonClick}
                 className="mt-4 h-10 w-full rounded bg-[#0f70b7] px-3 text-sm font-medium text-white transition hover:bg-[#0f70b7]/90"
               >
@@ -77,6 +79,7 @@ const ImageInput: React.FC<ImageInputProps> = ({ value, onChange }) => {
         </>
       ) : (
         <button
+          type="button"
           onClick={handleButtonClick}
           className="h-10 w-full rounded bg-[#0f70b7] px-3 text-sm font-medium text-white transition hover:bg-[#0f70b7]/90"
         >
