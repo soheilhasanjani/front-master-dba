@@ -52,7 +52,7 @@ const OurServices: FC<OurServicesProps> = ({ data }) => {
                   {slide.Description}
                 </p>
                 <Link
-                  href="#"
+                  href="/contact-us"
                   className="inline-block rounded bg-primary px-3 py-1.5 text-white"
                 >
                   درخواست دمو

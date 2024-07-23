@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/hooks/reduxHooks";
 import { setIsLogin } from "@/redux/authSlice";
 import Cookies from "js-cookie";
+import ForgetPassword from "@/app/(public)/login/forget-password";
 
 // Define your form schema
 const schema = z.object({
@@ -125,9 +126,7 @@ const LoginPage = () => {
                 </button>
               </form>
 
-              <div className="mt-10 text-center">
-                رمز عبور خود را فراموش کرده اید؟
-              </div>
+              <ForgetPassword />
             </div>
           </div>
         </div>

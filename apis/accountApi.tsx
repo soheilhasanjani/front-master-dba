@@ -52,3 +52,14 @@ export const postAccountCheckVerifyCode = async (dto: {
   });
   return data;
 };
+
+export const postAccountCheckMobileNumber = async (dto: {
+  "checkMobileNumberViewModel.Mobile": string;
+}) => {
+  const { data } = await axiosInstance({
+    method: "post",
+    url: BASE_URL + "/CheckMobileNumber",
+    params: dto,
+  });
+  return data;
+};

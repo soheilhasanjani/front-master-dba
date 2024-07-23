@@ -26,3 +26,9 @@ export const usePostAccountCheckVerifyCode = () => {
     mutationFn: accountApi.postAccountCheckVerifyCode,
   });
 };
+
+export const usePostAccountCheckMobileNumber = () => {
+  return useMutation({
+    mutationFn: accountApi.postAccountCheckMobileNumber,
+  });
+};
