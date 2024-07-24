@@ -9,7 +9,14 @@ import {
 import ArticleInformation from "@/components/pages/article/ArticleInformation";
 import Link from "next/link";
 import Keywords from "@/app/(public)/article/[...slug]/keywords";
-import MarkdownRenderer from "@/components/shared/markdown-renderer";
+import dynamic from "next/dynamic";
+
+const MarkdownRenderer = dynamic(
+  () => import("@/components/shared/markdown-renderer"),
+  {
+    ssr: false,
+  },
+);
 
 interface ArticleContentProps {
   data: any;
