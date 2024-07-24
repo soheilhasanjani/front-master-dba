@@ -1,13 +1,51 @@
 "use client";
 
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import Tree from "@/components/core/Tree";
 
 interface ArticlesNavigationProps {
   data: any;
+  articleId: number;
 }
 
-const ArticlesNavigation: FC<ArticlesNavigationProps> = ({ data }) => {
+type TreeNode = {
+  id: number;
+  name: string;
+  children?: TreeNode[];
+};
+
+const findParentIds = (dataArray: TreeNode[], id: number): number[] => {
+  const searchTree = (data: TreeNode, parentIds: number[] = []): number[] => {
+    if (data.id === id) {
+      return [...parentIds, data.id];
+    }
+
+    if (data.children && data.children.length) {
+      for (const child of data.children) {
+        const result = searchTree(child, [...parentIds, data.id]);
+        if (result.length) {
+          return result;
+        }
+      }
+    }
+
+    return [];
+  };
+
+  for (const data of dataArray) {
+    const result = searchTree(data);
+    if (result.length) {
+      return result;
+    }
+  }
+
+  return [];
+};
+
+const ArticlesNavigation: FC<ArticlesNavigationProps> = ({
+  data,
+  articleId,
+}) => {
   //
   const formattedList = data ? (JSON.parse(data) as Array<any>) : [];
   //
@@ -23,13 +61,26 @@ const ArticlesNavigation: FC<ArticlesNavigationProps> = ({ data }) => {
     }
   };
   //
-  const x = formattedList.reduce((value, currentData) => {
+  const treeData = formattedList.reduce((value, currentData) => {
     return [...value, formatting(currentData)];
   }, []);
   //
-  const [treeState, setTreeState] = useState<Record<string, boolean>>({});
+  const [treeState, setTreeState] = useState<Array<number>>([]);
   //
-  return <Tree data={x} value={treeState} onChange={setTreeState} />;
+  useEffect(() => {
+    if (articleId && Array.isArray(treeData)) {
+      setTreeState(findParentIds(treeData, articleId));
+    }
+  }, []);
+  //
+  return (
+    <Tree
+      data={treeData}
+      value={treeState}
+      onChange={setTreeState}
+      highlighting={[articleId]}
+    />
+  );
 };
 
 export default ArticlesNavigation;

@@ -4,7 +4,6 @@ import React, { useEffect } from "react";
 import MarkdownIt from "markdown-it";
 import Prism from "prismjs"; // Prism.js library
 import { IMAGE_BASE_URL } from "@/configs/baseUrl";
-import "highlight.js/styles/default.css";
 import "prismjs/themes/prism.css"; // Prism.js theme for syntax highlighting
 
 interface MarkdownProps {

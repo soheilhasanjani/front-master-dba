@@ -13,13 +13,13 @@ async function getData() {
   return res.json();
 }
 
-const ArticlesNavigationSC = async () => {
+const ArticlesNavigationSC = async ({ articleId }: { articleId: number }) => {
   //
   const data = await getData();
   //
   return (
     <Suspense fallback={<></>}>
-      <ArticlesNavigation data={data} />
+      <ArticlesNavigation data={data} articleId={articleId} />
     </Suspense>
   );
 };

@@ -3,46 +3,53 @@ import React, { FC } from "react";
 import { ChevronLeft } from "react-feather";
 
 interface TreeItem {
-  id: string;
+  id: number;
   name: string;
   children?: TreeItem[];
-  mainItem?: boolean;
 }
 
 interface TreeProps {
   data: Array<TreeItem>;
-  value: Record<string, boolean>;
-  onChange: (value: Record<string, boolean>) => void;
+  value: Array<number>;
+  onChange: (value: Array<number>) => void;
+  highlighting?: Array<number>;
 }
 
 const ctx = React.createContext<{
-  value: Record<string, boolean>;
-  onChange: (value: Record<string, boolean>) => void;
+  value: Array<number>;
+  onChange: (value: Array<number>) => void;
+  highlighting?: Array<number>;
 } | null>(null);
 
 const TreeProvider = ctx.Provider;
 
 const useTree = () => React.useContext(ctx);
 
-const Tree: React.FC<TreeProps> = ({ data, value, onChange }) => {
+const Tree: React.FC<TreeProps> = ({ data, value, onChange, highlighting }) => {
   return (
-    <TreeProvider value={{ value, onChange }}>
+    <TreeProvider value={{ value, onChange, highlighting }}>
       <div className="flex flex-col gap-2">
         {data.map((item) => (
-          <TreeItem key={item.id} {...item} mainItem />
+          <TreeItem key={item.id} {...item} />
         ))}
       </div>
     </TreeProvider>
   );
 };
 
-const TreeItem: FC<TreeItem> = ({ id, name, children, mainItem }) => {
+const TreeItem: FC<TreeItem> = ({ id, name, children }) => {
   const tree = useTree();
-
-  const isCollapsed = tree?.value[id] ?? true;
+  const isExpanded = tree?.value.includes(id);
+  const isHighlight = tree?.highlighting?.includes(id);
 
   const toggleCollapse = () => {
-    if (children) tree?.onChange({ ...tree?.value, [id]: !isCollapsed });
+    if (children) {
+      if (isExpanded) {
+        tree?.onChange(tree?.value.filter((valueId) => valueId !== id));
+      } else {
+        tree?.onChange([...tree.value, id]);
+      }
+    }
   };
   return (
     <div className="w-full">
@@ -50,22 +57,24 @@ const TreeItem: FC<TreeItem> = ({ id, name, children, mainItem }) => {
         onClick={toggleCollapse}
         className={cn(
           "flex w-full items-center justify-between rounded p-2 hover:bg-black/5",
-          { "bg-black/10": !isCollapsed },
-          { "": !mainItem },
+          { "bg-black/10": isExpanded },
+          { "bg-primary text-white hover:bg-primary/90": isHighlight },
         )}
       >
-        <span className="block truncate">{name}</span>
+        <span className="block truncate" title={name}>
+          {name}
+        </span>
         {children && (
           <ChevronLeft
             size={"16px"}
             className={cn(
               "transition-transform",
-              !isCollapsed ? "-rotate-90" : "rotate-0",
+              isExpanded ? "-rotate-90" : "rotate-0",
             )}
           />
         )}
       </button>
-      {!isCollapsed && children && (
+      {isExpanded && children && (
         <div className="ms-2 mt-2 flex flex-col gap-2 border-s border-dashed ps-2">
           {children.map((child) => (
             <TreeItem key={child.id} {...child} />

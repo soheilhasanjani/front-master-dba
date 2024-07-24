@@ -16,7 +16,7 @@ const ArticlePage = ({ params: { slug } }: { params: { slug: string[] } }) => {
       </div>
       <Grid className="gap-6">
         <div className="col-span-3">
-          <ArticlesNavigationSC />
+          <ArticlesNavigationSC articleId={articleId} />
         </div>
         <div className="col-span-9">
           <Grid>
