@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { usePostCommentGetArticleComment } from "@/hooks/apis/commentHookApi";
 import staticFileUrl from "@/utils/staticFileUrl";
 import { useAppSelector } from "@/hooks/reduxHooks";
@@ -14,9 +14,14 @@ interface ArticleCommentListProps {
   articleId: number;
 }
 
+type CommentDialogData = Record<string, any> | null;
+
 const ArticleCommentList: React.FC<ArticleCommentListProps> = ({
   articleId,
 }) => {
+  //
+  const [commentDialogData, setCommentDialogData] =
+    useState<CommentDialogData>(null);
   //
   const { isChecked, isLogin } = useAppSelector((state) => state.auth);
   const { data: user } = useGetAccountGetUserData(isChecked && isLogin);
@@ -28,7 +33,7 @@ const ArticleCommentList: React.FC<ArticleCommentListProps> = ({
   });
   //
   return (
-    <div>
+    <>
       <div className="flex flex-col gap-4 pb-4">
         {comments?.length > 0 &&
           comments
@@ -56,7 +61,12 @@ const ArticleCommentList: React.FC<ArticleCommentListProps> = ({
                       item.UserId != user.ID &&
                       user.IsAdmin && (
                         <span
-                        // onClick={() => handleReplayComment(item)}
+                          onClick={() =>
+                            setCommentDialogData({
+                              isReplay: true,
+                              ...item,
+                            })
+                          }
                         >
                           <Image
                             width={30}
@@ -148,7 +158,7 @@ const ArticleCommentList: React.FC<ArticleCommentListProps> = ({
               </div>
             ))}
       </div>
-    </div>
+    </>
   );
 };
 
