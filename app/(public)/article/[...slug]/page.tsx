@@ -4,6 +4,7 @@ import ArticleContentSC from "@/app/(public)/article/[...slug]/article-content-s
 import ArticleBreadcrumbs from "@/app/(public)/article/[...slug]/article-breadcrumbs";
 import Container from "@/components/core/Container";
 import Grid from "@/components/core/Grid";
+import ArticleComment from "@/app/(public)/article/[...slug]/article-comment";
 
 const ArticlePage = ({ params: { slug } }: { params: { slug: string[] } }) => {
   //
@@ -14,29 +15,19 @@ const ArticlePage = ({ params: { slug } }: { params: { slug: string[] } }) => {
       <div className="pb-3 pt-4">
         <ArticleBreadcrumbs id={articleId} />
       </div>
-      <Grid className="gap-6">
+      <Grid className="mb-4 gap-6">
         <div className="col-span-3">
-          <ArticlesNavigationSC articleId={articleId} />
+          <div className="sticky top-4">
+            <ArticlesNavigationSC articleId={articleId} />
+          </div>
         </div>
         <div className="col-span-9">
-          <Grid>
+          <Grid className="gap-8">
             <div className="col-span-12">
               <ArticleContentSC articleId={articleId} />
             </div>
             <div className="col-span-12">
-              {/* {isLogin ? (
-              <Comment articleId={id} />
-            ) : (
-              <div className="mt-3 text-center alert alert-info" role="alert">
-                <span className="font-bold">برای ثبت نظر باید وارد شوید</span>
-              </div>
-            )} */}
-
-              {/* <CommentList
-              articleId={id}
-              articleComment={articleComment}
-              islogin={isLogin}
-            /> */}
+              <ArticleComment articleId={articleId} />
             </div>
           </Grid>
         </div>
