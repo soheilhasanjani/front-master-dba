@@ -112,6 +112,7 @@ const ArticleGroupPage = ({ params }: { params: { slug?: string[] } }) => {
         </div>
         <div className="col-span-12 flex justify-end">
           <button
+            disabled={saveArticle.isPending}
             type="button"
             onClick={handleSubmit(handleOnSubmit)}
             className="h-10 rounded border border-[#0f70b7] bg-[#0f70b7] px-4 text-xs text-white transition-colors hover:bg-white hover:text-[#0f70b7] disabled:pointer-events-none disabled:border-[#5096c7] disabled:bg-[#5096c7]"

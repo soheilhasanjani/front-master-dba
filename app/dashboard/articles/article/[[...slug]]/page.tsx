@@ -145,6 +145,7 @@ const ArticlePage = ({ params }: { params: { slug?: string[] } }) => {
           <div className="text-base font-bold">ثبت مقاله جدید</div>
           <div className="flex items-center gap-2">
             <button
+              disabled={saveArticle.isPending}
               onClick={() =>
                 handleSubmit((values) => handleOnSubmit(values, false))()
               }
@@ -154,6 +155,7 @@ const ArticlePage = ({ params }: { params: { slug?: string[] } }) => {
               ثبت نهایی
             </button>
             <button
+              disabled={saveArticle.isPending}
               onClick={() =>
                 handleSubmit((values) => handleOnSubmit(values, true))()
               }
