@@ -142,17 +142,18 @@ const columns = ({ onClickTr, onClickAction }: ColumnsArgs) => [
                 onClickAction({ actionType: "trash", ...data });
             }}
           />
-          {(data.Article_CloneId != null || data.IsDraft) && (
-            <Trash2
-              size={18}
-              strokeWidth={1.5}
-              className="mb-1 cursor-pointer text-[orangered]"
-              onClick={() => {
-                if (onClickAction)
-                  onClickAction({ actionType: "temporary-trash", ...data });
-              }}
-            />
-          )}
+          {(data.Article_CloneId != null || data.IsDraft) &&
+            data.ArticleTypeId === 2 && (
+              <Trash2
+                size={18}
+                strokeWidth={1.5}
+                className="mb-1 cursor-pointer text-[orangered]"
+                onClick={() => {
+                  if (onClickAction)
+                    onClickAction({ actionType: "temporary-trash", ...data });
+                }}
+              />
+            )}
         </div>
       );
     },

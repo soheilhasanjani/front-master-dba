@@ -16,6 +16,8 @@ import { z } from "zod";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import TinymceReact from "@/components/core/TinymceReact";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 const schema = z.object({
   articleNextID: z.string(),
@@ -43,6 +45,7 @@ const ArticlePage = ({ params }: { params: { slug?: string[] } }) => {
   const addOrArticleId = params?.slug?.[0];
   const parentId = params?.slug?.[1];
   //
+  const { push } = useRouter();
   const saveArticle = usePostArticleSave();
   const { data: articleData } = usePostArticleGetArticlesForEdit(
     addOrArticleId !== "add"
@@ -104,7 +107,13 @@ const ArticlePage = ({ params }: { params: { slug?: string[] } }) => {
     );
     //
     saveArticle.mutate(formData, {
-      onSuccess: () => {},
+      onSuccess: () => {
+        toast.success("با موفقیت ثبت گردید.");
+        push("/dashboard/articles/");
+      },
+      onError: () => {
+        toast.error("خطایی رخ داده است.");
+      },
     });
   };
   //

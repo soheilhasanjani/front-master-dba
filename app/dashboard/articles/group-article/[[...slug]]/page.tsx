@@ -11,6 +11,8 @@ import Input from "@/components/core/Input";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 const schema = z.object({
   name: z.string().min(1, ""),
@@ -29,6 +31,7 @@ const ArticleGroupPage = ({ params }: { params: { slug?: string[] } }) => {
   const addOrArticleGroupId = params?.slug?.[0];
   const parentId = params?.slug?.[1];
   //
+  const { push } = useRouter();
   const saveArticle = usePostArticleSave();
   const { data: articleData } = usePostArticleGetArticlesForEdit(
     addOrArticleGroupId !== "add"
@@ -78,7 +81,13 @@ const ArticleGroupPage = ({ params }: { params: { slug?: string[] } }) => {
     );
     //
     saveArticle.mutate(formData, {
-      onSuccess: () => {},
+      onSuccess: () => {
+        toast.success("با موفقیت ثبت گردید.");
+        push("/dashboard/articles/");
+      },
+      onError: () => {
+        toast.error("خطایی رخ داده است.");
+      },
     });
   };
   //
