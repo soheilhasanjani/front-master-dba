@@ -2,6 +2,7 @@
 
 import Breadcrumbs from "@/components/core/Breadcrumbs";
 import Input from "@/components/core/Input";
+import Pagination from "@/components/core/Pagination";
 import Table from "@/components/core/Table";
 import ConfirmDialog from "@/components/shared/confirm-dialog";
 import {
@@ -160,6 +161,8 @@ const columns = ({ onClickTr, onClickAction }: ColumnsArgs) => [
   }),
 ];
 
+const PER_PAGE = 10;
+
 const ArticlesPage = () => {
   //
   const [selectedFolder, setSelectedFolder] = useState(0);
@@ -174,9 +177,12 @@ const ArticlesPage = () => {
   const { data: breadCrumbData } = usePostArticleGetBreadCrumbListOnArticleId({
     "BreadCrumbViewModel.id": selectedFolder,
   });
+  //
+  const [forcePage, setForcePage] = useState(0);
+  //
   const { data } = usePostArticleGetAllArticlesForDashboard({
     Id: selectedFolder,
-    paginetedata: { perpage: 10, currntpage: 1, skip: 0 },
+    paginetedata: { perpage: PER_PAGE, currntpage: forcePage + 1, skip: 0 },
   });
   //
   const sortedList = useMemo(() => {
@@ -262,6 +268,15 @@ const ArticlesPage = () => {
           })}
           isAnimationEnabled
         />
+        {data?.TotalItems && (
+          <Pagination
+            forcePage={forcePage}
+            pageCount={Math.ceil(data?.TotalItems / PER_PAGE)}
+            onPageChange={({ selected }) => {
+              setForcePage(selected);
+            }}
+          />
+        )}
         <ConfirmDialog
           open={!!targetDeleteArticle}
           acceptButtonText="حذف"
