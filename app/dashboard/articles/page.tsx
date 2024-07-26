@@ -253,12 +253,14 @@ const ArticlesPage = () => {
               if (data.ArticleTypeId === 1) setSelectedFolder(data.Id);
             },
             onClickAction: (data) => {
-              if (
-                data.actionType === "temporary-trash" ||
-                data.actionType === "trash"
-              ) {
+              if (data.actionType === "trash") {
                 setTargetDeleteArticle({
                   id: data.Id,
+                  name: data.Name,
+                });
+              } else if (data.actionType === "temporary-trash") {
+                setTargetDeleteArticle({
+                  id: data.Article_CloneId,
                   name: data.Name,
                 });
               } else if (data.actionType === "toggle") {
