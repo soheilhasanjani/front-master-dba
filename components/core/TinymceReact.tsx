@@ -1,6 +1,12 @@
 import React from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { IRANYekanX } from "@/theme/fonts";
+import { toast } from "react-toastify";
+import {
+  usePostFileInfoGetRelativeUrl,
+  usePostFileInfoSaveSingleFile,
+} from "@/hooks/apis/fileInfoHookApi";
+import staticFileUrl from "@/utils/staticFileUrl";
 
 interface TinymceReactProps {
   value?: string;
@@ -8,6 +14,29 @@ interface TinymceReactProps {
 }
 
 const TinymceReact: React.FC<TinymceReactProps> = ({ value, onChange }) => {
+  //
+  const saveSingleFile = usePostFileInfoSaveSingleFile();
+  const getRelativeUrl = usePostFileInfoGetRelativeUrl();
+  //
+  const handleImageUpload = async (blobInfo: any) => {
+    let formData = new FormData();
+    formData.append("File", blobInfo.blob());
+    formData.append("directoryName", "articles");
+
+    const resSave = await saveSingleFile.mutateAsync(formData);
+    if (resSave.Status == "success") {
+      const result = await getRelativeUrl.mutateAsync({
+        stream_id: resSave.Data,
+      });
+      const src = staticFileUrl(result.Data) as string;
+      return src as string;
+    } else {
+      toast.error(
+        "افزودن عکس مورد نظر دچار مشکل شده است. لطفا دوباره تلاش کنید.",
+      );
+    }
+    return "";
+  };
   //
   return (
     <>
@@ -72,7 +101,7 @@ const TinymceReact: React.FC<TinymceReactProps> = ({ value, onChange }) => {
           file_picker_types: "file image media",
           extended_valid_elements:
             "img[class=zoom-img-class|style|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name]",
-          //   images_upload_handler: handleImageUpload,
+          images_upload_handler: handleImageUpload,
           codesample_languages: [
             { text: "Python", value: "python" },
             { text: "HTML/XML", value: "markup" },
