@@ -23,3 +23,15 @@ export const usePostCommentSaveComment = () => {
     },
   });
 };
+
+export const usePostCommentDeleteComment = () => {
+  const QC = useQueryClient();
+  return useMutation({
+    mutationFn: commentApi.postCommentDeleteComment,
+    onSuccess: () => {
+      QC.invalidateQueries({
+        queryKey: ["postCommentGetArticleComment"],
+      });
+    },
+  });
+};

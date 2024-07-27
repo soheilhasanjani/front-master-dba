@@ -26,3 +26,14 @@ export const postCommentSaveComment = async (dto: {
   });
   return data;
 };
+
+export const postCommentDeleteComment = async (dto: {
+  "CommentViewModel.Id": string;
+}) => {
+  const { data }: any = await axiosInstance({
+    method: "post",
+    url: BASE_URL + "/DeleteComment",
+    params: dto,
+  });
+  return data;
+};
