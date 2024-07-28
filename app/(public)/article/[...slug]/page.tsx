@@ -50,12 +50,12 @@ const ArticlePage = ({ params: { slug } }: { params: { slug: string[] } }) => {
         <ArticleBreadcrumbs id={articleId} />
       </div>
       <Grid className="mb-4 gap-6">
-        <div className="col-span-3">
+        <div className="col-span-12 lg:col-span-3">
           <div className="sticky top-4">
             <ArticlesNavigationSC articleId={articleId} />
           </div>
         </div>
-        <div className="col-span-9">
+        <div className="col-span-12 lg:col-span-9">
           <Grid className="gap-8">
             <div className="col-span-12">
               <ArticleContentSC articleId={articleId} />

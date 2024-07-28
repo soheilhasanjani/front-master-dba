@@ -51,7 +51,7 @@ const ArticleAddComment: React.FC<ArticleAddCommentProps> = ({ articleId }) => {
         <form onSubmit={handleSubmit}>
           <MarkdownEditor value={description} onChange={setDescription} />
           <button
-            disabled={!description}
+            disabled={!description || saveComment.isPending}
             type="submit"
             className="mt-4 h-10 w-full rounded border border-[#0f70b7] bg-[#0f70b7] px-4 text-xs text-white transition-colors hover:bg-white hover:text-[#0f70b7] disabled:pointer-events-none disabled:border-[#5096c7] disabled:bg-[#5096c7]"
           >

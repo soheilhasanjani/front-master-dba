@@ -15,10 +15,14 @@ export const postCommentGetArticleComment = async (dto: {
   return data;
 };
 
-export const postCommentSaveComment = async (dto: {
-  ArticleId: number;
-  Description: string;
-}) => {
+export const postCommentSaveComment = async (
+  dto:
+    | {
+        ArticleId: number;
+        Description: string;
+      }
+    | any,
+) => {
   const { data }: any = await axiosInstance({
     method: "post",
     url: BASE_URL + "/SaveComment",
