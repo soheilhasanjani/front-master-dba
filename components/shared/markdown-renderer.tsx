@@ -34,9 +34,9 @@ const prependBaseUrlToImages = (html: string, baseUrl: string): string => {
   const imgTagRegex = /<img\b[^>]*\bsrc="([^"]*)"/gi;
 
   // Replace each relative src with the base URL prepended
-  return html.replace(imgTagRegex, (match, src) => {
+  return html.replace(imgTagRegex, (match, src: string) => {
     // If the src is not an absolute URL, prepend the base URL
-    if (src) {
+    if (src && !src.startsWith("http")) {
       return match.replace(src, `${baseUrl}/${src}`);
     }
     return match; // return the original match if src is already absolute
