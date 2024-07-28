@@ -13,21 +13,29 @@ interface TreeProps {
   value: Array<number>;
   onChange: (value: Array<number>) => void;
   highlighting?: Array<number>;
+  onLeafClick: (item: TreeItem) => void;
 }
 
 const ctx = React.createContext<{
   value: Array<number>;
   onChange: (value: Array<number>) => void;
   highlighting?: Array<number>;
+  onLeafClick: (item: TreeItem) => void;
 } | null>(null);
 
 const TreeProvider = ctx.Provider;
 
 const useTree = () => React.useContext(ctx);
 
-const Tree: React.FC<TreeProps> = ({ data, value, onChange, highlighting }) => {
+const Tree: React.FC<TreeProps> = ({
+  data,
+  value,
+  onChange,
+  highlighting,
+  onLeafClick,
+}) => {
   return (
-    <TreeProvider value={{ value, onChange, highlighting }}>
+    <TreeProvider value={{ value, onChange, highlighting, onLeafClick }}>
       <div className="flex flex-col gap-2">
         {data.map((item) => (
           <TreeItem key={item.id} {...item} />
@@ -49,6 +57,8 @@ const TreeItem: FC<TreeItem> = ({ id, name, children }) => {
       } else {
         tree?.onChange([...tree.value, id]);
       }
+    } else {
+      if (tree?.onLeafClick) tree?.onLeafClick({ id, name });
     }
   };
   return (

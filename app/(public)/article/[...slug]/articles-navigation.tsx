@@ -2,6 +2,7 @@
 
 import React, { FC, useEffect, useState } from "react";
 import Tree from "@/components/core/Tree";
+import { useRouter } from "next/navigation";
 
 interface ArticlesNavigationProps {
   data: any;
@@ -47,6 +48,8 @@ const ArticlesNavigation: FC<ArticlesNavigationProps> = ({
   articleId,
 }) => {
   //
+  const { push } = useRouter();
+  //
   const formattedList = data ? (JSON.parse(data) as Array<any>) : [];
   //
   const formatting = (data: any) => {
@@ -79,6 +82,11 @@ const ArticlesNavigation: FC<ArticlesNavigationProps> = ({
       value={treeState}
       onChange={setTreeState}
       highlighting={[articleId]}
+      onLeafClick={(item) => {
+        push(
+          `/article/${item.id}/${item.name.replace(" ", "_").replace(/ /g, "_")}`,
+        );
+      }}
     />
   );
 };
