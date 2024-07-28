@@ -1,6 +1,11 @@
 import React from "react";
 import { HOST_ADDRESS } from "@/configs/baseUrl";
 import AuthorCard from "@/app/(public)/authors/author-card";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "نویسندگان | Database Administrator",
+};
 
 async function getData() {
   const res = await fetch(HOST_ADDRESS + "/user/GetAllAuthorList", {

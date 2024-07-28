@@ -1,22 +1,12 @@
 "use client";
 
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 //
-import MarkdownIt from "markdown-it";
-import MdEditor from "react-markdown-editor-lite";
 import { usePostCommentSaveComment } from "@/hooks/apis/commentHookApi";
 import { toast } from "react-toastify";
 import { useAppSelector } from "@/hooks/reduxHooks";
 import { useGetAccountGetUserData } from "@/hooks/apis/accountHookApi";
-import "highlight.js/styles/atom-one-light.css";
-import "react-markdown-editor-lite/lib/index.css";
-
-const mdParser = new MarkdownIt({
-  html: true,
-  linkify: true,
-  typographer: true,
-});
+import MarkdownEditor from "@/app/(public)/article/[...slug]/markdown-editor";
 
 interface ArticleAddCommentProps {
   articleId: number;
@@ -29,14 +19,6 @@ const ArticleAddComment: React.FC<ArticleAddCommentProps> = ({ articleId }) => {
   //
   const [description, setDescription] = useState("");
   const saveComment = usePostCommentSaveComment();
-
-  const handleEditorChange = ({ text }: { text: string }) => {
-    setDescription(text);
-  };
-
-  function renderHTML(text: string) {
-    return mdParser.render(text);
-  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -67,15 +49,7 @@ const ArticleAddComment: React.FC<ArticleAddCommentProps> = ({ articleId }) => {
       <h3 className="mb-2 font-bold text-primary"> نظرات کاربران </h3>
       {user ? (
         <form onSubmit={handleSubmit}>
-          <MdEditor
-            style={{
-              height: "200px",
-            }}
-            value={description}
-            onChange={handleEditorChange}
-            renderHTML={renderHTML}
-            custom-html-style
-          />
+          <MarkdownEditor value={description} onChange={setDescription} />
           <button
             disabled={!description}
             type="submit"

@@ -43,3 +43,19 @@ export const postPanelCustomValueSave = async (dto: any) => {
   });
   return data;
 };
+
+export const postPanelCustomValueGetWebSiteTitle = async () => {
+  const { data }: any = await axiosInstance({
+    method: "post",
+    url: BASE_URL + "/GetWebSiteTitle",
+  });
+  return data;
+};
+
+export const postPanelCustomValueGetMainPageKeyWord = async () => {
+  const { data }: any = await axiosInstance({
+    method: "post",
+    url: BASE_URL + "/GetMainPageKeyWord",
+  });
+  return data;
+};

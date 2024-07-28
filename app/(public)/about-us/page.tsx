@@ -1,6 +1,11 @@
 import React from "react";
 import { HOST_ADDRESS } from "@/configs/baseUrl";
 import MarkdownRenderer from "@/components/shared/markdown-renderer";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "درباره ما |  Database Administrator",
+};
 
 async function getData() {
   const res = await fetch(
