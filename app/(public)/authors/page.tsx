@@ -2,10 +2,17 @@ import React from "react";
 import { HOST_ADDRESS } from "@/configs/baseUrl";
 import AuthorCard from "@/app/(public)/authors/author-card";
 import { Metadata } from "next";
+import { postPanelCustomValueGetWebSiteTitle } from "@/apis/panelCustomValueApi";
 
-export const metadata: Metadata = {
-  title: "نویسندگان | Database Administrator",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  // fetch data
+  // Wait for the promises to resolve
+  const [title] = await Promise.all([postPanelCustomValueGetWebSiteTitle()]);
+
+  return {
+    title: `نویسندگان | ${title}`,
+  };
+}
 
 async function getData() {
   const res = await fetch(HOST_ADDRESS + "/user/GetAllAuthorList", {

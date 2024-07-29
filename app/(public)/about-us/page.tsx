@@ -2,10 +2,17 @@ import React from "react";
 import { HOST_ADDRESS } from "@/configs/baseUrl";
 import MarkdownRenderer from "@/components/shared/markdown-renderer";
 import { Metadata } from "next";
+import { postPanelCustomValueGetWebSiteTitle } from "@/apis/panelCustomValueApi";
 
-export const metadata: Metadata = {
-  title: "درباره ما |  Database Administrator",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  // fetch data
+  // Wait for the promises to resolve
+  const [title] = await Promise.all([postPanelCustomValueGetWebSiteTitle()]);
+
+  return {
+    title: `درباره ما | ${title}`,
+  };
+}
 
 async function getData() {
   const res = await fetch(

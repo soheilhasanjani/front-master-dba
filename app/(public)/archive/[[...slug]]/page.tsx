@@ -3,6 +3,18 @@ import ArchiveBreadcrumbs from "@/app/(public)/archive/[[...slug]]/archive-bread
 import CategoryCard from "@/app/(public)/archive/[[...slug]]/category-card";
 import ArticleCard from "@/components/pages/landing/ArticleCard";
 import { HOST_ADDRESS } from "@/configs/baseUrl";
+import { Metadata } from "next";
+import { postPanelCustomValueGetWebSiteTitle } from "@/apis/panelCustomValueApi";
+
+export async function generateMetadata(): Promise<Metadata> {
+  // fetch data
+  // Wait for the promises to resolve
+  const [title] = await Promise.all([postPanelCustomValueGetWebSiteTitle()]);
+
+  return {
+    title: `مقالات | ${title}`,
+  };
+}
 
 async function getData(dto: any) {
   const res = await fetch(

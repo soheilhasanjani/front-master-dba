@@ -1,6 +1,18 @@
 import React from "react";
 import AuthorInfoSC from "@/app/(public)/authors/[...slug]/author-info-sc";
 import AuthorPostsSC from "@/app/(public)/authors/[...slug]/author-posts-sc";
+import { postPanelCustomValueGetWebSiteTitle } from "@/apis/panelCustomValueApi";
+import { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+  // fetch data
+  // Wait for the promises to resolve
+  const [title] = await Promise.all([postPanelCustomValueGetWebSiteTitle()]);
+
+  return {
+    title: `نویسندگان | ${title}`,
+  };
+}
 
 const AuthorPage = ({ params }: { params: { slug: string[] } }) => {
   //
