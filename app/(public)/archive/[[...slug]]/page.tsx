@@ -43,7 +43,7 @@ const ArchivePage = async ({ params }: { params: { slug?: string[] } }) => {
     Id: currentArchiveId ?? null,
     paginetedata: {
       currntpage: 1,
-      perpage: 100,
+      perpage: 10000,
       skip: 0,
     },
   });
@@ -62,9 +62,7 @@ const ArchivePage = async ({ params }: { params: { slug?: string[] } }) => {
                   >
                     {item.ArticleTypeId === 1 ? (
                       <CategoryCard
-                        hrefPathname={
-                          "/archive/" + archivesId?.join("/") + "/" + item.Id
-                        }
+                        hrefPathname={"/archive/" + item.Id}
                         name={item.Name}
                         latinName={item.LatinName}
                         numberOfChild={item.NumberOfChild}

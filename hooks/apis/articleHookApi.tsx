@@ -38,6 +38,7 @@ export const usePostArticleGetBreadCrumbListOnArticleId = (params: any) => {
     queryKey: ["postArticleGetBreadCrumbListOnArticleId", params],
     queryFn: () => articleApi.postArticleGetBreadCrumbListOnArticleId(params),
     enabled: !!params,
+    placeholderData: (previousData) => previousData,
   });
 };
 

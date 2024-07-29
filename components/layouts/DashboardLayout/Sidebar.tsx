@@ -6,9 +6,12 @@ import isEmpty from "lodash.isempty";
 import { useGetAccountGetUserData } from "@/hooks/apis/accountHookApi";
 import { usePostPanelMenuGetPanelMenuOnUserRole } from "@/hooks/apis/panelMenuHookApi";
 import Image from "next/image";
+import { cn } from "@/utils/cn";
+import { usePathname } from "next/navigation";
 
 const Sidebar = () => {
   //
+  const pathname = usePathname();
   const { data: user } = useGetAccountGetUserData(true);
   const { data: panelMenu } = usePostPanelMenuGetPanelMenuOnUserRole();
   //
@@ -48,7 +51,16 @@ const Sidebar = () => {
             : []),
         ].map((item, i) => (
           <li key={i}>
-            <Link href={item.href} className="block px-2 py-2">
+            <Link
+              href={item.href}
+              className={cn("block px-2 py-2", {
+                "text-primary":
+                  (item.href === "/dashboard" && pathname === "/dashboard") ||
+                  (item.href !== "/dashboard" &&
+                    pathname.startsWith(item.href)),
+                "!text-[#414141]": item.href === "/",
+              })}
+            >
               <span className="ms-0.5 text-xs">{item.label}</span>
             </Link>
           </li>
