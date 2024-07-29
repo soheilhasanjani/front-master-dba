@@ -42,7 +42,7 @@ const OurServices: FC<OurServicesProps> = ({ data }) => {
               <div className="flex flex-col items-center gap-4 rounded border border-[rgb(0,0,0,.27)] px-4 py-4 hover:border-primary">
                 <Image
                   src={"http://masterdba.ir:8080" + slide.ImageUrl}
-                  className="rounded-full"
+                  className="size-[130px] flex-shrink-0 rounded-full object-cover"
                   width={130}
                   height={130}
                   alt={slide.Title}
