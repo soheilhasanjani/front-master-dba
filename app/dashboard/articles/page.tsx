@@ -250,7 +250,10 @@ const ArticlesPage = () => {
           data={sortedList}
           columns={columns({
             onClickTr: (data) => {
-              if (data.ArticleTypeId === 1) setSelectedFolder(data.Id);
+              if (data.ArticleTypeId === 1) {
+                setForcePage(0);
+                setSelectedFolder(data.Id);
+              }
             },
             onClickAction: (data) => {
               if (data.actionType === "trash") {

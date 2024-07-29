@@ -9,6 +9,7 @@ import {
 } from "@/components/core/Popover";
 import staticFileUrl from "@/utils/staticFileUrl";
 import Image from "next/image";
+import formatPersianDate from "@/utils/formatPersianDate";
 
 type ArticleInformationProps = {
   uploadDate: number;
@@ -29,7 +30,9 @@ const ArticleInformation = (props: ArticleInformationProps) => {
         {
           id: 0,
           icon: <Calendar className="mb-1" size="18px" />,
-          value: props.uploadDate,
+          value: (
+            <div dir="ltr">{formatPersianDate(new Date(props.uploadDate))}</div>
+          ),
         },
         {
           id: 1,

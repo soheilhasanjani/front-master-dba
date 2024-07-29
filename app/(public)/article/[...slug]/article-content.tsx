@@ -33,7 +33,7 @@ const ArticleContent: FC<ArticleContentProps> = ({ data }) => {
         authorName={article.AuthorName}
         timeToRead={article.TimeToRead}
         updateDate={article.UpdateDate}
-        uploadDate={article.UploadDate}
+        uploadDate={article.UploadDateforOrderby}
         views={article.Views}
         authorImage={article.AuthorImage}
         authorDescription={article.AuthorDescription}
