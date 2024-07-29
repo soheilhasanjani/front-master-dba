@@ -2,6 +2,13 @@ import getDateAgo from "@/utils/getDateAgo";
 import Link from "next/link";
 import React from "react";
 import { Calendar, Clock, Edit2, Eye, Watch } from "react-feather";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/core/Popover";
+import staticFileUrl from "@/utils/staticFileUrl";
+import Image from "next/image";
 
 type ArticleInformationProps = {
   uploadDate: number;
@@ -10,6 +17,9 @@ type ArticleInformationProps = {
   views: number;
   authorName: string;
   authorId: number;
+  authorImage: any;
+  authorDescription: any;
+  authorEmail: any;
 };
 
 const ArticleInformation = (props: ArticleInformationProps) => {
@@ -49,14 +59,44 @@ const ArticleInformation = (props: ArticleInformationProps) => {
           id: 4,
           icon: <Edit2 className="" size="18px" />,
           value: (
-            <Link
-              href={`/authors/${props.authorId}/${props.authorName
-                .replace(" ", "_")
-                .replace(/ /g, "_")}`}
-            >
-              {" "}
-              <span className="authorname">{props.authorName}</span>
-            </Link>
+            <>
+              <Popover placement="bottom-start" typeInteract="hover">
+                <PopoverTrigger>
+                  <Link
+                    className="font-bold text-primary"
+                    href={`/authors/${props.authorId}/${props.authorName
+                      .replace(" ", "_")
+                      .replace(/ /g, "_")}`}
+                  >
+                    <span>{props.authorName}</span>
+                  </Link>
+                </PopoverTrigger>
+                <PopoverContent className="max-w-72 rounded-xl border bg-white p-3 outline-none">
+                  <div className="flex flex-col gap-4">
+                    <div className="flex items-center gap-2">
+                      <Image
+                        alt=""
+                        width={50}
+                        height={50}
+                        className="size-[50px] flex-shrink-0 rounded-full border object-cover"
+                        src={
+                          props.authorImage === null
+                            ? "/images/writer.jpg"
+                            : staticFileUrl(props.authorImage)
+                        }
+                      />
+                      <div className="flex flex-col gap-2">
+                        <h6>{props.authorName}</h6>
+                        <p>{props.authorEmail}</p>
+                      </div>
+                    </div>
+                    <div className="pt-1">
+                      <p>{props.authorDescription}</p>
+                    </div>
+                  </div>
+                </PopoverContent>
+              </Popover>
+            </>
           ),
         },
       ].map((item) => {

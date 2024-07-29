@@ -35,6 +35,9 @@ const ArticleContent: FC<ArticleContentProps> = ({ data }) => {
         updateDate={article.UpdateDate}
         uploadDate={article.UploadDate}
         views={article.Views}
+        authorImage={article.AuthorImage}
+        authorDescription={article.AuthorDescription}
+        authorEmail={article.AuthorEmail}
       />
       <hr />
       <section className="mt-4">
