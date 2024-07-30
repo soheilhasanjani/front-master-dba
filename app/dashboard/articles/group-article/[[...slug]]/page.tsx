@@ -98,6 +98,12 @@ const ArticleGroupPage = ({ params }: { params: { slug?: string[] } }) => {
     }
   }, [addOrArticleGroupId, articleData]);
   //
+  useEffect(() => {
+    window.onbeforeunload = function () {
+      return "Are you sure you want to leave?";
+    };
+  }, []);
+  //
   return (
     <div className="p-5">
       <ArticleEditNavigator />

@@ -137,6 +137,12 @@ const ArticlePage = ({ params }: { params: { slug?: string[] } }) => {
     }
   }, [addOrArticleId, articleData]);
   //
+  useEffect(() => {
+    window.onbeforeunload = function () {
+      return "Are you sure you want to leave?";
+    };
+  }, []);
+  //
   return (
     <form className="p-5">
       <ArticleEditNavigator />
