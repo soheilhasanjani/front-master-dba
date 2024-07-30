@@ -121,3 +121,14 @@ export const postArticleToggleEnable = async (params: any) => {
   });
   return data;
 };
+
+export const postArticleSaveArticleVisit = async (params: {
+  "ArticleViewModel.id": string;
+}) => {
+  const { data }: any = await axiosInstance({
+    method: "post",
+    url: BASE_URL + "/SaveArticleVisit",
+    params,
+  });
+  return data;
+};

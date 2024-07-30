@@ -130,3 +130,15 @@ export const usePostArticleToggleEnable = () => {
     },
   });
 };
+
+export const usePostArticleSaveArticleVisit = () => {
+  // const QC = useQueryClient();
+  return useMutation({
+    mutationFn: articleApi.postArticleSaveArticleVisit,
+    // onSuccess: () => {
+    //   QC.invalidateQueries({
+    //     queryKey: ["postArticleGetAllArticlesForDashboard"],
+    //   });
+    // },
+  });
+};

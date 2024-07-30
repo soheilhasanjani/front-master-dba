@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import {
   Popover,
   PopoverContent,
@@ -10,6 +10,7 @@ import ArticleInformation from "@/components/pages/article/ArticleInformation";
 import Link from "next/link";
 import Keywords from "@/app/(public)/article/[...slug]/keywords";
 import dynamic from "next/dynamic";
+import { usePostArticleSaveArticleVisit } from "@/hooks/apis/articleHookApi";
 
 const MarkdownRenderer = dynamic(
   () => import("@/components/shared/markdown-renderer"),
@@ -23,7 +24,16 @@ interface ArticleContentProps {
 }
 
 const ArticleContent: FC<ArticleContentProps> = ({ data }) => {
+  //
   const article = data?.Article;
+  //
+  const saveArticleVisit = usePostArticleSaveArticleVisit();
+  //
+  useEffect(() => {
+    if (article.Id)
+      saveArticleVisit.mutate({ "ArticleViewModel.id": article.Id });
+  }, [article.Id]);
+  //
   if (!article) return null;
   return (
     <div>
