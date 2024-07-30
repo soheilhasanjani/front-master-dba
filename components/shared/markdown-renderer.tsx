@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect } from "react";
 import Prism from "prismjs";
 import staticFileUrl from "@/utils/staticFileUrl";
@@ -65,23 +67,6 @@ const enhanceCodeBlocks = (htmlContent: string): string => {
   });
 
   return doc.body.innerHTML;
-};
-
-// Copy Button Component
-const CopyButton: React.FC<{ code: string }> = ({ code }) => {
-  const copyCode = () => {
-    navigator.clipboard.writeText(code);
-    alert("Code copied to clipboard!");
-  };
-
-  return (
-    <button
-      onClick={copyCode}
-      style={{ position: "absolute", top: 0, right: 0 }}
-    >
-      Copy
-    </button>
-  );
 };
 
 const MarkdownRenderer: React.FC<MarkdownProps> = ({ content }) => {
