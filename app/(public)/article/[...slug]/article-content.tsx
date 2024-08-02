@@ -12,8 +12,8 @@ import Keywords from "@/app/(public)/article/[...slug]/keywords";
 import dynamic from "next/dynamic";
 import { usePostArticleSaveArticleVisit } from "@/hooks/apis/articleHookApi";
 
-const MarkdownRenderer = dynamic(
-  () => import("@/components/shared/markdown-renderer"),
+const RichTextDisplay = dynamic(
+  () => import("@/components/shared/rich-text-display"),
   {
     ssr: false,
   },
@@ -51,7 +51,7 @@ const ArticleContent: FC<ArticleContentProps> = ({ data }) => {
       />
       <hr />
       <section className="mt-4">
-        {article.Body ? <MarkdownRenderer content={article.Body} /> : null}
+        {article.Body ? <RichTextDisplay content={article.Body} /> : null}
       </section>
       <footer>
         {article.Refrences && (

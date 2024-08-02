@@ -1,6 +1,13 @@
 import React, { FC, Suspense } from "react";
 import { HOST_ADDRESS } from "@/configs/baseUrl";
-import ArticleContent from "@/app/(public)/article/[...slug]/article-content";
+import dynamic from "next/dynamic";
+
+const ArticleContent = dynamic(
+  () => import("@/app/(public)/article/[...slug]/article-content"),
+  {
+    ssr: false,
+  },
+);
 
 interface ArticleContentSCProps {
   articleId: number;
