@@ -18,6 +18,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import TinymceReact from "@/components/core/TinymceReact";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { IMAGE_BASE_URL } from "@/configs/baseUrl";
 
 const schema = z.object({
   articleNextID: z.string(),
@@ -39,6 +40,25 @@ type FormData = z.infer<typeof schema>;
 //
 const DEFAULT_IS_ENABLE = true;
 const DEFAULT_IS_DRAFT = true;
+//
+function removeStringFromImgSrc(
+  htmlContent: string,
+  stringToRemove: string,
+): string {
+  return htmlContent.replace(
+    new RegExp(`<img\\s+[^>]*src=["']${stringToRemove}`, "g"),
+    '<img src="',
+  );
+}
+//
+function addStringToImgSrc(htmlContent: string, stringToAdd: string): string {
+  return htmlContent.replace(/<img\s+[^>]*src=["']([^"']+)/g, (match, p1) => {
+    if (!p1.startsWith("http://") && !p1.startsWith("https://")) {
+      return match.replace(p1, stringToAdd + p1);
+    }
+    return match;
+  });
+}
 //
 const ArticlePage = ({ params }: { params: { slug?: string[] } }) => {
   //
@@ -97,7 +117,7 @@ const ArticlePage = ({ params }: { params: { slug?: string[] } }) => {
         LatinName: values.latinName,
         Summery: values.summery,
         TimeToRead: values.timeToRead,
-        Body: values.body,
+        Body: removeStringFromImgSrc(values.body, IMAGE_BASE_URL + "/"),
         KeyWords: values.keywords,
         RefrenceList: JSON.stringify(
           values.referenceList.filter((r) => r.Link || r.Title),
@@ -131,7 +151,10 @@ const ArticlePage = ({ params }: { params: { slug?: string[] } }) => {
       setValue("latinName", articleData.LatinName);
       setValue("summery", articleData.Summery);
       setValue("timeToRead", articleData.TimeToRead);
-      setValue("body", articleData.Body);
+      setValue(
+        "body",
+        addStringToImgSrc(articleData.Body, IMAGE_BASE_URL + "/"),
+      );
       setValue("keywords", articleData.KeyWords);
       setValue("referenceList", JSON.parse(articleData.Refrences));
     }
