@@ -116,6 +116,13 @@ const RichTextDisplay: React.FC<RichTextDisplayProps> = ({ content }) => {
 
     const handleImageClick = (event: Event) => {
       const img = event.currentTarget as HTMLImageElement;
+      if (
+        img.parentElement &&
+        img.parentElement.classList.contains("copy-button")
+      ) {
+        // Ignore the click if the image is inside a copy button
+        return;
+      }
       setImageSrc(img.src);
     };
 
