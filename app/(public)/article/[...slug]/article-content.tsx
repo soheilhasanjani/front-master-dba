@@ -48,6 +48,8 @@ const ArticleContent: FC<ArticleContentProps> = ({ data }) => {
         authorImage={article.AuthorImage}
         authorDescription={article.AuthorDescription}
         authorEmail={article.AuthorEmail}
+        parentId={article.ParentId}
+        id={article.Id}
       />
       <hr />
       <section className="mt-4">
