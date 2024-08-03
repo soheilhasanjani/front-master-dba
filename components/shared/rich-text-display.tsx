@@ -36,6 +36,7 @@ const processImageSrc = (htmlString: string): string => {
   const doc = parseHTMLString(htmlString);
   const images = doc.body.querySelectorAll("img");
   images.forEach((img) => {
+    img.style.cursor = "zoom-in";
     let src = img.getAttribute("src");
     if (src) {
       const isAbsoluteUrl = /^(?:[a-z]+:)?\/\//i.test(src);
