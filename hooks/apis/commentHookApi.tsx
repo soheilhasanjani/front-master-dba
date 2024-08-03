@@ -1,5 +1,10 @@
 import * as commentApi from "@/apis/commentApi";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  useInfiniteQuery,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 
 export const usePostCommentGetArticleComment = (params: {
   ArticleId: number;
@@ -9,6 +14,26 @@ export const usePostCommentGetArticleComment = (params: {
   return useQuery({
     queryKey: ["postCommentGetArticleComment", params],
     queryFn: () => commentApi.postCommentGetArticleComment(params),
+  });
+};
+
+export const useInfiniteArticleComment = (params: {
+  ArticleId: number;
+  perSection: number;
+}) => {
+  return useInfiniteQuery({
+    // eslint-disable-next-line @tanstack/query/exhaustive-deps
+    queryKey: ["ArticleComment"],
+    queryFn: ({ pageParam }) => {
+      return commentApi.postCommentGetArticleComment({
+        ...params,
+        currentSection: pageParam,
+      });
+    },
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, _, lastPageParam) => {
+      return lastPage.length >= params.perSection ? lastPageParam + 1 : null;
+    },
   });
 };
 

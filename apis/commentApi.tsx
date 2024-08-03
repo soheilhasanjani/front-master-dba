@@ -2,7 +2,7 @@ import axiosInstance from "@/configs/axios";
 
 const BASE_URL = "/Comment";
 
-export const postCommentGetArticleComment = async (dto: {
+export const postCommentGetArticleComment = async (dto?: {
   ArticleId: number;
   perSection: number;
   currentSection: number;
