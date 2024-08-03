@@ -26,21 +26,33 @@ const ForgetPasswordDialog: React.FC<ForgetPasswordDialogProps> = ({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="z-20 m-4 min-w-80 rounded bg-white p-4">
-        <DialogHeading className="mb-4 text-center text-base font-bold">
+        {/* <DialogHeading className="mb-4 text-center text-base font-bold">
           فراموشی رمز
-        </DialogHeading>
+        </DialogHeading> */}
         <div className="flex w-full flex-col gap-4">
           <div className="">
-            <Label>شماره موبایل</Label>
-            <Input value={mobile} onChange={(e) => setMobile(e.target.value)} />
+            {/* <Label>شماره موبایل</Label> */}
+            <Input
+              value={mobile}
+              onChange={(e) => setMobile(e.target.value)}
+              placeholder="شماره موبایل را وارد نمایید"
+            />
           </div>
-          <button
-            onClick={() => onSubmit(mobile)}
-            disabled={mobile === ""}
-            className="h-10 w-full rounded border border-[#0f70b7] bg-[#0f70b7] text-white transition hover:bg-white hover:text-[#0f70b7] disabled:opacity-50"
-          >
-            ارسال کد
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => onSubmit(mobile)}
+              disabled={mobile === ""}
+              className="h-10 w-full rounded border border-[#0f70b7] bg-[#0f70b7] text-white transition hover:bg-white hover:text-[#0f70b7] disabled:opacity-50"
+            >
+              ارسال کد
+            </button>
+            <button
+              onClick={() => onOpenChange(false)}
+              className="h-10 w-full rounded border border-[#6c757d] bg-[#6c757d] text-white transition hover:bg-white hover:text-[#6c757d] disabled:opacity-50"
+            >
+              انصراف
+            </button>
+          </div>
         </div>
       </DialogContent>
     </Dialog>

@@ -32,7 +32,7 @@ const ForgetPassword = () => {
           setMobile("");
           setIsOpenForgetPasswordDialog(true);
         }}
-        className="mt-10 block w-full text-center"
+        className="mt-10 block w-full text-center hover:text-primary"
       >
         رمز عبور خود را فراموش کرده اید؟
       </button>
