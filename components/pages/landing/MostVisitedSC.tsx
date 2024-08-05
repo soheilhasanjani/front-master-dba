@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React from "react";
 import MostVisited from "@/components/pages/landing/MostVisited";
 import { HOST_ADDRESS } from "@/configs/baseUrl";
 
@@ -17,11 +17,7 @@ const MostVisitedSC = async () => {
   //
   const data = await getData();
   //
-  return (
-    <Suspense fallback={<></>}>
-      <MostVisited data={data} />
-    </Suspense>
-  );
+  return <MostVisited data={data} />;
 };
 
 export default MostVisitedSC;

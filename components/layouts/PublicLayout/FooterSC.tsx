@@ -17,11 +17,7 @@ const FooterSC = async () => {
   //
   const data = await getData();
   //
-  return (
-    <Suspense fallback={<></>}>
-      <Footer data={data} />
-    </Suspense>
-  );
+  return <Footer data={data} />;
 };
 
 export default FooterSC;

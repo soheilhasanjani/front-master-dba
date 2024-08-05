@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import TopNav from "@/components/layouts/PublicLayout/TopNav";
 import MainNav from "@/components/layouts/PublicLayout/MainNav";
 import FooterSC from "@/components/layouts/PublicLayout/FooterSC";
@@ -13,7 +13,9 @@ export default function PublicLayout({
       <TopNav />
       <MainNav />
       <main>{children}</main>
-      <FooterSC />
+      <Suspense fallback={<></>}>
+        <FooterSC />
+      </Suspense>
     </>
   );
 }

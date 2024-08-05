@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React from "react";
 import Logo from "@/components/layouts/PublicLayout/Logo";
 import { HOST_ADDRESS } from "@/configs/baseUrl";
 
@@ -17,11 +17,7 @@ const LogoSC = async () => {
   //
   const data = await getData();
   //
-  return (
-    <Suspense fallback={<></>}>
-      <Logo data={data} />
-    </Suspense>
-  );
+  return <Logo data={data} />;
 };
 
 export default LogoSC;

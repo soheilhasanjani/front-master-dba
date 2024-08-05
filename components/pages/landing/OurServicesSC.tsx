@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React from "react";
 import OurServices from "@/components/pages/landing/OurServices";
 import { HOST_ADDRESS } from "@/configs/baseUrl";
 
@@ -17,11 +17,7 @@ const OurServicesSC = async () => {
   //
   const data = await getData();
   //
-  return (
-    <Suspense fallback={<></>}>
-      <OurServices data={data} />
-    </Suspense>
-  );
+  return <OurServices data={data} />;
 };
 
 export default OurServicesSC;

@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React from "react";
 import { HOST_ADDRESS } from "@/configs/baseUrl";
 import LatestArticles from "@/components/pages/landing/LatestArticles";
 
@@ -17,11 +17,7 @@ const LatestArticlesSC = async () => {
   //
   const data = await getData();
   //
-  return (
-    <Suspense fallback={<></>}>
-      <LatestArticles data={data} />
-    </Suspense>
-  );
+  return <LatestArticles data={data} />;
 };
 
 export default LatestArticlesSC;

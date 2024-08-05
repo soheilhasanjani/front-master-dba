@@ -2,21 +2,30 @@ import HeroSwiperSC from "@/components/pages/landing/HeroSwiperSC";
 import MostVisitedSC from "@/components/pages/landing/MostVisitedSC";
 import LatestArticlesSC from "@/components/pages/landing/LatestArticlesSC";
 import OurServicesSC from "@/components/pages/landing/OurServicesSC";
+import { Suspense } from "react";
 
 export default function Home() {
   return (
     <div className="flex min-h-[60svh] flex-col gap-y-4 px-3 py-4 xxl:container">
       <div>
-        <HeroSwiperSC />
+        <Suspense fallback={<></>}>
+          <HeroSwiperSC />
+        </Suspense>
       </div>
       <div>
-        <LatestArticlesSC />
+        <Suspense fallback={<></>}>
+          <LatestArticlesSC />
+        </Suspense>
       </div>
       <div>
-        <OurServicesSC />
+        <Suspense fallback={<></>}>
+          <OurServicesSC />
+        </Suspense>
       </div>
       <div>
-        <MostVisitedSC />
+        <Suspense fallback={<></>}>
+          <MostVisitedSC />
+        </Suspense>
       </div>
     </div>
   );
