@@ -1,7 +1,11 @@
 import React from "react";
 import SearchBox from "@/components/layouts/PublicLayout/SearchBox";
-import UserBox from "@/components/layouts/PublicLayout/UserBox";
 import MainLink from "@/components/layouts/PublicLayout/MainLink";
+import dynamic from "next/dynamic";
+const UserBox = dynamic(
+  () => import("@/components/layouts/PublicLayout/UserBox"),
+  { ssr: false },
+);
 
 const TopNav = () => {
   return (

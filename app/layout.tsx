@@ -8,9 +8,6 @@ import {
   postPanelCustomValueGetWebSiteTitle,
 } from "@/apis/panelCustomValueApi";
 import staticFileUrl from "@/utils/staticFileUrl";
-import { Agent, setGlobalDispatcher } from "undici";
-
-setGlobalDispatcher(new Agent({ connect: { timeout: 60_000 } }));
 
 export async function generateMetadata(): Promise<Metadata> {
   // fetch data

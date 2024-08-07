@@ -59,7 +59,7 @@ const UserBox = () => {
   //
   return (
     <Popover placement="bottom-start" typeInteract="click">
-      <PopoverTrigger>
+      <PopoverTrigger asChild>
         <div className="flex items-center gap-2">
           <User />
           <Link href="/" className="font-14">
