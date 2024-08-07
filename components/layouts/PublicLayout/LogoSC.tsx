@@ -1,21 +1,23 @@
 import React from "react";
 import Logo from "@/components/layouts/PublicLayout/Logo";
 import { HOST_ADDRESS } from "@/configs/baseUrl";
+import axios from "axios";
 
 async function getData() {
-  const res = await fetch(HOST_ADDRESS + "/PanelCustomValue/GetLogImage", {
-    method: "POST",
-    cache: "no-store",
-  });
-  if (!res.ok) {
+  try {
+    const res = await axios.post(
+      HOST_ADDRESS + "/PanelCustomValue/GetLogImagez",
+    );
+    return res.data;
+  } catch (error) {
     throw new Error("Failed to fetch data");
   }
-  return res.json();
 }
 
 const LogoSC = async () => {
   //
   const data = await getData();
+  console.log(data);
   //
   return <Logo data={data} />;
 };

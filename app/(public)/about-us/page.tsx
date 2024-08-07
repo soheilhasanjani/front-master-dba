@@ -1,8 +1,10 @@
+export const dynamic = "force-dynamic";
+
 import React from "react";
 import { HOST_ADDRESS } from "@/configs/baseUrl";
-import MarkdownRenderer from "@/components/shared/markdown-renderer";
 import { Metadata } from "next";
 import { postPanelCustomValueGetWebSiteTitle } from "@/apis/panelCustomValueApi";
+import Content from "@/app/(public)/about-us/content";
 
 export async function generateMetadata(): Promise<Metadata> {
   // fetch data
@@ -34,14 +36,7 @@ const AboutUsPage = async () => {
   //
   return (
     <div className="min-h-[60svh] px-3 py-4 xxl:container">
-      <div className="rounded bg-[#ededed] p-8">
-        {data?.AboutUsTitle && <h5 className="pb-4">{data?.AboutUsTitle}</h5>}
-        <div className="text-justify">
-          {data?.AboutUsText ? (
-            <MarkdownRenderer content={data?.AboutUsText} />
-          ) : null}
-        </div>
-      </div>
+      <Content data={data} />
     </div>
   );
 };
