@@ -2,6 +2,8 @@ import React, { Suspense } from "react";
 import TopNav from "@/components/layouts/PublicLayout/TopNav";
 import MainNav from "@/components/layouts/PublicLayout/MainNav";
 import FooterSC from "@/components/layouts/PublicLayout/FooterSC";
+import { ErrorBoundary } from "react-error-boundary";
+import LoadingComponent from "@/components/shared/loading-component";
 
 export default function PublicLayout({
   children,
@@ -13,9 +15,11 @@ export default function PublicLayout({
       <TopNav />
       <MainNav />
       <main>{children}</main>
-      <Suspense fallback={<></>}>
-        <FooterSC />
-      </Suspense>
+      <ErrorBoundary fallback={<div></div>}>
+        <Suspense fallback={<LoadingComponent />}>
+          <FooterSC />
+        </Suspense>
+      </ErrorBoundary>
     </>
   );
 }

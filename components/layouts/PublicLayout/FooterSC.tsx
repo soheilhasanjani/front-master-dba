@@ -1,16 +1,17 @@
-import React, { Suspense } from "react";
+import React from "react";
 import { HOST_ADDRESS } from "@/configs/baseUrl";
 import Footer from "@/components/layouts/PublicLayout/Footer";
+import axios from "axios";
 
 async function getData() {
-  const res = await fetch(HOST_ADDRESS + "/PanelCustomValue/GetFooterContent", {
-    method: "POST",
-    cache: "no-store",
-  });
-  if (!res.ok) {
+  try {
+    const res = await axios.post(
+      HOST_ADDRESS + "/PanelCustomValue/GetFooterContent",
+    );
+    return res.data;
+  } catch (error) {
     throw new Error("Failed to fetch data");
   }
-  return res.json();
 }
 
 const FooterSC = async () => {

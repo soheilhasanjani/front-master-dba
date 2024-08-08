@@ -7,6 +7,7 @@ import { Metadata } from "next";
 import axiosInstance from "@/configs/axios";
 import LoadingComponent from "@/components/shared/loading-component";
 import dynamic from "next/dynamic";
+import { ErrorBoundary } from "react-error-boundary";
 const ArticleComment = dynamic(
   () => import("@/app/(public)/article/[...slug]/article-comment"),
   {
@@ -64,17 +65,21 @@ const ArticlePage = ({ params: { slug } }: { params: { slug: string[] } }) => {
       <Grid className="mb-4 gap-6">
         <div className="col-span-12 lg:col-span-3">
           <div className="sticky top-4">
-            <Suspense fallback={<LoadingComponent />}>
-              <ArticlesNavigationSC articleId={articleId} />
-            </Suspense>
+            <ErrorBoundary fallback={<div></div>}>
+              <Suspense fallback={<LoadingComponent />}>
+                <ArticlesNavigationSC articleId={articleId} />
+              </Suspense>
+            </ErrorBoundary>
           </div>
         </div>
         <div className="col-span-12 lg:col-span-9">
           <Grid className="gap-8">
             <div className="col-span-12">
-              <Suspense fallback={<LoadingComponent />}>
-                <ArticleContentSC articleId={articleId} />
-              </Suspense>
+              <ErrorBoundary fallback={<div></div>}>
+                <Suspense fallback={<LoadingComponent />}>
+                  <ArticleContentSC articleId={articleId} />
+                </Suspense>
+              </ErrorBoundary>
             </div>
             <div className="col-span-12">
               <ArticleComment articleId={articleId} />
