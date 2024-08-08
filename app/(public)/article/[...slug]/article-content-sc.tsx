@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import { HOST_ADDRESS } from "@/configs/baseUrl";
 import dynamic from "next/dynamic";
 import axios from "axios";
+import axiosRetry from "axios-retry";
 
 const ArticleContent = dynamic(
   () => import("@/app/(public)/article/[...slug]/article-content"),
@@ -14,9 +15,17 @@ interface ArticleContentSCProps {
   articleId: number;
 }
 
+// Create an Axios instance with a timeout and retry logic
+const axiosInstance = axios.create({
+  timeout: 10000, // 10 seconds timeout
+});
+
+// Apply retry logic to the Axios instance
+axiosRetry(axiosInstance, { retries: 3 });
+
 async function getData(articleId: number) {
   try {
-    const res = await axios.post(
+    const res = await axiosInstance.post(
       HOST_ADDRESS +
         "/Article/GetArticleDetail?" +
         new URLSearchParams({

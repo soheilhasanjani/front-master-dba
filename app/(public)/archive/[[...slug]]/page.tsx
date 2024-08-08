@@ -6,6 +6,7 @@ import { HOST_ADDRESS } from "@/configs/baseUrl";
 import { Metadata } from "next";
 import { postPanelCustomValueGetWebSiteTitle } from "@/apis/panelCustomValueApi";
 import axios from "axios";
+import axiosRetry from "axios-retry";
 
 export async function generateMetadata(): Promise<Metadata> {
   // fetch data
@@ -17,9 +18,17 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
+// Create an Axios instance with a timeout and retry logic
+const axiosInstance = axios.create({
+  timeout: 10000, // 10 seconds timeout
+});
+
+// Apply retry logic to the Axios instance
+axiosRetry(axiosInstance, { retries: 3 });
+
 async function getData(dto: any) {
   try {
-    const res = await axios.post(
+    const res = await axiosInstance.post(
       HOST_ADDRESS + "/Article/GetAllArticlesForArchiveWithPaginate",
       dto,
       {

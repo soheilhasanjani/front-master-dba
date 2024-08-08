@@ -2,14 +2,23 @@ import React from "react";
 import { HOST_ADDRESS } from "@/configs/baseUrl";
 import ArticleCard from "@/components/pages/landing/ArticleCard";
 import axios from "axios";
+import axiosRetry from "axios-retry";
 
 interface AuthorPostsSCProps {
   authorId: string;
 }
 
+// Create an Axios instance with a timeout and retry logic
+const axiosInstance = axios.create({
+  timeout: 10000, // 10 seconds timeout
+});
+
+// Apply retry logic to the Axios instance
+axiosRetry(axiosInstance, { retries: 3 });
+
 async function getData({ authorId }: { authorId: string }) {
   try {
-    const res = await axios.post(
+    const res = await axiosInstance.post(
       HOST_ADDRESS + "/Article/GetAllArticlesOnAuthrId",
       {
         Id: null,

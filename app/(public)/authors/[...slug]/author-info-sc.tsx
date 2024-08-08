@@ -2,14 +2,23 @@ import React from "react";
 import { HOST_ADDRESS } from "@/configs/baseUrl";
 import Image from "next/image";
 import axios from "axios";
+import axiosRetry from "axios-retry";
 
 interface AuthorInfoSCProps {
   authorId: string;
 }
 
+// Create an Axios instance with a timeout and retry logic
+const axiosInstance = axios.create({
+  timeout: 10000, // 10 seconds timeout
+});
+
+// Apply retry logic to the Axios instance
+axiosRetry(axiosInstance, { retries: 3 });
+
 async function getData({ authorId }: { authorId: string }) {
   try {
-    const res = await axios.post(
+    const res = await axiosInstance.post(
       HOST_ADDRESS +
         "/user/GetPublisherProfileData?userViewModel.ID=" +
         authorId,
