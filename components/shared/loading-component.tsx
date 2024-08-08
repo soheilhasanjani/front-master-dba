@@ -1,7 +1,7 @@
 import React from "react";
 import { Loader } from "react-feather";
 
-const Loading = () => {
+const LoadingComponent = () => {
   return (
     <div className="flex justify-center">
       <Loader className="animate-spin text-primary" />
@@ -9,4 +9,4 @@ const Loading = () => {
   );
 };
 
-export default Loading;
+export default LoadingComponent;

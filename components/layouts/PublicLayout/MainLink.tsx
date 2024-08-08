@@ -13,6 +13,7 @@ const MainLink = () => {
     <ul className="flex items-center gap-4">
       <li>
         <Link
+          prefetch={false}
           href="/about-us"
           className={cn("hover:text-primary", {
             "text-primary": pathname.startsWith("/about-us"),
@@ -23,6 +24,7 @@ const MainLink = () => {
       </li>
       <li>
         <Link
+          prefetch={false}
           href="/contact-us"
           className={cn("hover:text-primary", {
             "text-primary": pathname.startsWith("/contact-us"),

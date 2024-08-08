@@ -53,6 +53,7 @@ const OurServices: FC<OurServicesProps> = ({ data }) => {
                 </p>
                 <Link
                   href="/contact-us"
+                  prefetch={false}
                   className="inline-block rounded bg-primary px-3 py-1.5 text-white"
                 >
                   درخواست دمو

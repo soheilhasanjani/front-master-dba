@@ -70,6 +70,7 @@ const Menu = () => {
                   })}
                 >
                   <Link
+                    prefetch={false}
                     href={item.href}
                     className="flex min-w-32 items-center gap-2"
                     aria-label={item.ariaLabel}
@@ -98,6 +99,7 @@ const Menu = () => {
               })}
             >
               <Link
+                prefetch={false}
                 href={item.href}
                 className="flex items-center gap-1"
                 aria-label={item.ariaLabel}

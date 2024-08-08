@@ -89,6 +89,7 @@ const ListContent: FC<ListContentProps> = ({
           return (
             <li key={suggestion.Id}>
               <Link
+                prefetch={false}
                 href={`/article/${suggestion?.Id}/${suggestion.Name.replace(
                   " ",
                   "_",

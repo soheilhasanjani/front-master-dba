@@ -128,6 +128,7 @@ const columns = ({ onClickTr, onClickAction }: ColumnsArgs) => [
             )
           ) : null}
           <Link
+            prefetch={false}
             href={
               data.ArticleTypeId === 1 ? articleGroupPathname : articlePathname
             }
@@ -226,6 +227,7 @@ const ArticlesPage = () => {
       <div className="flex items-center justify-between">
         <div className="text-sm font-semibold">مقالات</div>
         <Link
+          prefetch={false}
           href={
             "/dashboard/articles/group-article/add" +
             (selectedFolder !== 0 ? "/" + selectedFolder : "")

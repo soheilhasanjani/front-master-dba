@@ -1,23 +1,23 @@
 import React from "react";
 import { HOST_ADDRESS } from "@/configs/baseUrl";
 import Image from "next/image";
+import axios from "axios";
 
 interface AuthorInfoSCProps {
   authorId: string;
 }
 
 async function getData({ authorId }: { authorId: string }) {
-  const res = await fetch(
-    HOST_ADDRESS + "/user/GetPublisherProfileData?userViewModel.ID=" + authorId,
-    {
-      method: "POST",
-      cache: "no-store",
-    },
-  );
-  if (!res.ok) {
+  try {
+    const res = await axios.post(
+      HOST_ADDRESS +
+        "/user/GetPublisherProfileData?userViewModel.ID=" +
+        authorId,
+    );
+    return res.data;
+  } catch (error) {
     throw new Error("Failed to fetch data");
   }
-  return res.json();
 }
 
 const AuthorInfoSC: React.FC<AuthorInfoSCProps> = async ({ authorId }) => {

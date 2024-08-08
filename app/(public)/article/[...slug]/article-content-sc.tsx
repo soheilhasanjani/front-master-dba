@@ -1,6 +1,7 @@
-import React, { FC, Suspense } from "react";
+import React, { FC } from "react";
 import { HOST_ADDRESS } from "@/configs/baseUrl";
 import dynamic from "next/dynamic";
+import axios from "axios";
 
 const ArticleContent = dynamic(
   () => import("@/app/(public)/article/[...slug]/article-content"),
@@ -14,32 +15,25 @@ interface ArticleContentSCProps {
 }
 
 async function getData(articleId: number) {
-  const res = await fetch(
-    HOST_ADDRESS +
-      "/Article/GetArticleDetail?" +
-      new URLSearchParams({
-        "ArticleViewModel.id": String(articleId),
-      }).toString(),
-    {
-      method: "POST",
-      cache: "no-store",
-    },
-  );
-  if (!res.ok) {
+  try {
+    const res = await axios.post(
+      HOST_ADDRESS +
+        "/Article/GetArticleDetail?" +
+        new URLSearchParams({
+          "ArticleViewModel.id": String(articleId),
+        }).toString(),
+    );
+    return res.data;
+  } catch (error) {
     throw new Error("Failed to fetch data");
   }
-  return res.json();
 }
 
 const ArticleContentSC: FC<ArticleContentSCProps> = async ({ articleId }) => {
   //
   const data = await getData(articleId);
   //
-  return (
-    <Suspense fallback={<></>}>
-      <ArticleContent data={data} />
-    </Suspense>
-  );
+  return <ArticleContent data={data} />;
 };
 
 export default ArticleContentSC;

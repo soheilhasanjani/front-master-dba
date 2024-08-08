@@ -189,7 +189,7 @@ const RegisterContent = () => {
               <p className="pb-2">
                 به سادگی با کلیک بر روی دکمه ورود به حساب کاربری خود وارد شوید
               </p>
-              <Link href="/login">
+              <Link href="/login" prefetch={false}>
                 <span className="block rounded border border-white px-3 py-2">
                   ورود
                 </span>

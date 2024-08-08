@@ -37,6 +37,7 @@ const UserBox = () => {
     return (
       <div className="flex items-center gap-4">
         <Link
+          prefetch={false}
           href="/login"
           className={cn("flex items-center gap-1 hover:text-primary", {
             "text-primary": pathname.startsWith("/login"),
@@ -47,6 +48,7 @@ const UserBox = () => {
         </Link>
         |
         <Link
+          prefetch={false}
           href="/register"
           className={cn("hover:text-primary", {
             "text-primary": pathname.startsWith("/register"),
@@ -62,7 +64,7 @@ const UserBox = () => {
       <PopoverTrigger asChild>
         <div className="flex items-center gap-2">
           <User />
-          <Link href="/" className="font-14">
+          <Link href="/" prefetch={false} className="font-14">
             پروفایل من
           </Link>
         </div>
@@ -74,12 +76,16 @@ const UserBox = () => {
           {user?.IsAdmin && (
             <li className="flex items-center gap-2">
               <Grid />
-              <Link href="/dashboard">پنل ادمین</Link>
+              <Link href="/dashboard" prefetch={false}>
+                پنل ادمین
+              </Link>
             </li>
           )}
           <li className="flex items-center gap-2">
             <UserCheck />
-            <Link href="#">حساب شخصی من</Link>
+            <Link href="#" prefetch={false}>
+              حساب شخصی من
+            </Link>
           </li>
           <hr />
           <li className="flex items-center gap-2">

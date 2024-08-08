@@ -1,12 +1,24 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ArticlesNavigationSC from "@/app/(public)/article/[...slug]/articles-navigation-sc";
 import ArticleContentSC from "@/app/(public)/article/[...slug]/article-content-sc";
-import ArticleBreadcrumbs from "@/app/(public)/article/[...slug]/article-breadcrumbs";
 import Container from "@/components/core/Container";
 import Grid from "@/components/core/Grid";
-import ArticleComment from "@/app/(public)/article/[...slug]/article-comment";
 import { Metadata } from "next";
 import axiosInstance from "@/configs/axios";
+import LoadingComponent from "@/components/shared/loading-component";
+import dynamic from "next/dynamic";
+const ArticleComment = dynamic(
+  () => import("@/app/(public)/article/[...slug]/article-comment"),
+  {
+    ssr: false,
+  },
+);
+const ArticleBreadcrumbs = dynamic(
+  () => import("@/app/(public)/article/[...slug]/article-breadcrumbs"),
+  {
+    ssr: false,
+  },
+);
 
 type Props = {
   params: { slug: string[] };
@@ -52,13 +64,17 @@ const ArticlePage = ({ params: { slug } }: { params: { slug: string[] } }) => {
       <Grid className="mb-4 gap-6">
         <div className="col-span-12 lg:col-span-3">
           <div className="sticky top-4">
-            <ArticlesNavigationSC articleId={articleId} />
+            <Suspense fallback={<LoadingComponent />}>
+              <ArticlesNavigationSC articleId={articleId} />
+            </Suspense>
           </div>
         </div>
         <div className="col-span-12 lg:col-span-9">
           <Grid className="gap-8">
             <div className="col-span-12">
-              <ArticleContentSC articleId={articleId} />
+              <Suspense fallback={<LoadingComponent />}>
+                <ArticleContentSC articleId={articleId} />
+              </Suspense>
             </div>
             <div className="col-span-12">
               <ArticleComment articleId={articleId} />

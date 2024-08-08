@@ -83,6 +83,7 @@ const ArticleInformation = (props: ArticleInformationProps) => {
                   <PopoverTrigger>
                     <Link
                       className="font-bold text-primary"
+                      prefetch={false}
                       href={`/authors/${props.authorId}/${props.authorName
                         .replace(" ", "_")
                         .replace(/ /g, "_")}`}
@@ -128,7 +129,7 @@ const ArticleInformation = (props: ArticleInformationProps) => {
         })}
       </ul>
       {isChecked && isLogin && user?.IsAdmin && (
-        <Link href={articlePathnameForEdit} target="_blank">
+        <Link href={articlePathnameForEdit} prefetch={false} target="_blank">
           <Edit size="18px" />
         </Link>
       )}

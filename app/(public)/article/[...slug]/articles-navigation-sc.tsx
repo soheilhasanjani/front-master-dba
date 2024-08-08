@@ -1,27 +1,22 @@
-import React, { Suspense } from "react";
+import React from "react";
 import { HOST_ADDRESS } from "@/configs/baseUrl";
 import ArticlesNavigation from "@/app/(public)/article/[...slug]/articles-navigation";
+import axios from "axios";
 
 async function getData() {
-  const res = await fetch(HOST_ADDRESS + "/Article/GetAllArticleMenu", {
-    method: "POST",
-    cache: "no-store",
-  });
-  if (!res.ok) {
+  try {
+    const res = await axios.post(HOST_ADDRESS + "/Article/GetAllArticleMenu");
+    return res.data;
+  } catch (error) {
     throw new Error("Failed to fetch data");
   }
-  return res.json();
 }
 
 const ArticlesNavigationSC = async ({ articleId }: { articleId: number }) => {
   //
   const data = await getData();
   //
-  return (
-    <Suspense fallback={<></>}>
-      <ArticlesNavigation data={data} articleId={articleId} />
-    </Suspense>
-  );
+  return <ArticlesNavigation data={data} articleId={articleId} />;
 };
 
 export default ArticlesNavigationSC;

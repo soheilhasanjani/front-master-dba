@@ -1,15 +1,14 @@
 import { HOST_ADDRESS } from "@/configs/baseUrl";
 import HeroSwiper from "@/components/pages/landing/HeroSwiper";
+import axios from "axios";
 
 async function getData() {
-  const res = await fetch(HOST_ADDRESS + "/slider/GetAllSliders", {
-    method: "POST",
-    cache: "no-store",
-  });
-  if (!res.ok) {
+  try {
+    const res = await axios.post(HOST_ADDRESS + "/slider/GetAllSliders");
+    return res.data;
+  } catch (error) {
     throw new Error("Failed to fetch data");
   }
-  return res.json();
 }
 
 const HeroSwiperSC = async () => {

@@ -66,6 +66,7 @@ const ArticleContent: FC<ArticleContentProps> = ({ data }) => {
                 {JSON.parse(article.Refrences).map((item: any) => {
                   return (
                     <Link
+                      prefetch={false}
                       target="_blank"
                       href={item.Link}
                       key={item.Index}

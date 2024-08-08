@@ -1,28 +1,31 @@
 import React from "react";
 import { HOST_ADDRESS } from "@/configs/baseUrl";
 import ArticleCard from "@/components/pages/landing/ArticleCard";
+import axios from "axios";
 
 interface AuthorPostsSCProps {
   authorId: string;
 }
 
 async function getData({ authorId }: { authorId: string }) {
-  const res = await fetch(HOST_ADDRESS + "/Article/GetAllArticlesOnAuthrId", {
-    method: "POST",
-    body: JSON.stringify({
-      Id: null,
-      AuthorId: authorId,
-      paginetedata: { perpage: 1000000, currntpage: 1, skip: 0 },
-    }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-    cache: "no-store",
-  });
-  if (!res.ok) {
+  try {
+    const res = await axios.post(
+      HOST_ADDRESS + "/Article/GetAllArticlesOnAuthrId",
+      {
+        Id: null,
+        AuthorId: authorId,
+        paginetedata: { perpage: 1000000, currntpage: 1, skip: 0 },
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
+    return res.data;
+  } catch (error) {
     throw new Error("Failed to fetch data");
   }
-  return res.json();
 }
 
 const AuthorPostsSC: React.FC<AuthorPostsSCProps> = async ({ authorId }) => {

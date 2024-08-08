@@ -52,6 +52,7 @@ const Sidebar = () => {
         ].map((item, i) => (
           <li key={i}>
             <Link
+              prefetch={false}
               href={item.href}
               className={cn("block px-2 py-2", {
                 "text-primary":

@@ -35,6 +35,7 @@ const Footer: FC<FooterProps> = ({ data }) => {
                 ].map((item) => (
                   <li key={item.id}>
                     <Link
+                      prefetch={false}
                       href={item.href}
                       className="block py-0.5 ps-3.5 text-sm leading-6 transition-[padding] hover:ps-4"
                     >

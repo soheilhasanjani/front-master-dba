@@ -5,6 +5,7 @@ import ArticleCard from "@/components/pages/landing/ArticleCard";
 import { HOST_ADDRESS } from "@/configs/baseUrl";
 import { Metadata } from "next";
 import { postPanelCustomValueGetWebSiteTitle } from "@/apis/panelCustomValueApi";
+import axios from "axios";
 
 export async function generateMetadata(): Promise<Metadata> {
   // fetch data
@@ -17,21 +18,20 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 async function getData(dto: any) {
-  const res = await fetch(
-    HOST_ADDRESS + "/Article/GetAllArticlesForArchiveWithPaginate",
-    {
-      method: "POST",
-      body: JSON.stringify(dto),
-      headers: {
-        "Content-Type": "application/json",
+  try {
+    const res = await axios.post(
+      HOST_ADDRESS + "/Article/GetAllArticlesForArchiveWithPaginate",
+      dto,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
       },
-      cache: "no-store",
-    },
-  );
-  if (!res.ok) {
+    );
+    return res.data;
+  } catch (error) {
     throw new Error("Failed to fetch data");
   }
-  return res.json();
 }
 
 const ArchivePage = async ({ params }: { params: { slug?: string[] } }) => {

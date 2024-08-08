@@ -12,6 +12,7 @@ const ArticleCard = ({
     <Link
       href={`/article/${id}/${name.replace(" ", "_").replace(/ /g, "_")}`}
       className="w-100"
+      prefetch={false}
     >
       <div className="flex flex-col rounded-sm shadow-[0px_5px_10px_0px_rgba(0,0,0,0.22)]">
         <div className="flex h-11 items-center rounded-t-sm bg-primary px-2 text-white">

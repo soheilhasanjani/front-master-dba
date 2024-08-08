@@ -142,6 +142,7 @@ const LoginContent = () => {
               به سادگی با کلیک بر روی دکمه ورود به حساب کاربری خود وارد شوید
             </p>
             <Link
+              prefetch={false}
               href="/register"
               className="block rounded border border-white px-3 py-2"
             >

@@ -1,16 +1,15 @@
 import React from "react";
 import OurServices from "@/components/pages/landing/OurServices";
 import { HOST_ADDRESS } from "@/configs/baseUrl";
+import axios from "axios";
 
 async function getData() {
-  const res = await fetch(HOST_ADDRESS + "/Product/GetAllProducts", {
-    method: "POST",
-    cache: "no-store",
-  });
-  if (!res.ok) {
+  try {
+    const res = await axios.post(HOST_ADDRESS + "/Product/GetAllProducts");
+    return res.data;
+  } catch (error) {
     throw new Error("Failed to fetch data");
   }
-  return res.json();
 }
 
 const OurServicesSC = async () => {

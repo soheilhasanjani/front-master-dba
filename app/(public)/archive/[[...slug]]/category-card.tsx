@@ -21,6 +21,7 @@ const CategoryCard: FC<CategoryCardProps> = ({
       href={{
         pathname: hrefPathname,
       }}
+      prefetch={false}
     >
       <div className="flex h-full flex-col items-center justify-center gap-4 rounded bg-[#0f70b7] p-8 shadow-[0_5px_10px_0_rgba(0,0,0,0.22)]">
         <h2 className="text-center text-lg font-medium text-white">{name}</h2>

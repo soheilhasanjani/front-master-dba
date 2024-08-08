@@ -1,16 +1,17 @@
 import React from "react";
 import { HOST_ADDRESS } from "@/configs/baseUrl";
 import LatestArticles from "@/components/pages/landing/LatestArticles";
+import axios from "axios";
 
 async function getData() {
-  const res = await fetch(HOST_ADDRESS + "/Article/GetAllArticlesForMainPage", {
-    method: "POST",
-    cache: "no-store",
-  });
-  if (!res.ok) {
+  try {
+    const res = await axios.post(
+      HOST_ADDRESS + "/Article/GetAllArticlesForMainPage",
+    );
+    return res.data;
+  } catch (error) {
     throw new Error("Failed to fetch data");
   }
-  return res.json();
 }
 
 const LatestArticlesSC = async () => {

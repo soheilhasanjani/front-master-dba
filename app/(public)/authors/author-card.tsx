@@ -28,6 +28,7 @@ const AuthorCard: FC<AuthorCardProps> = ({ id, imageSrc, fullName }) => {
           {fullName}
         </h2>
         <Link
+          prefetch={false}
           href={`/authors/${id}/${fullName}`}
           className="block w-fit whitespace-nowrap border-2 border-[#0f70b7] px-3 py-1.5 text-white transition hover:bg-[#0f70b7]"
         >

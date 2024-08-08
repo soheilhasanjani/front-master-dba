@@ -3,6 +3,7 @@ import { HOST_ADDRESS } from "@/configs/baseUrl";
 import AuthorCard from "@/app/(public)/authors/author-card";
 import { Metadata } from "next";
 import { postPanelCustomValueGetWebSiteTitle } from "@/apis/panelCustomValueApi";
+import axios from "axios";
 
 export async function generateMetadata(): Promise<Metadata> {
   // fetch data
@@ -15,14 +16,12 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 async function getData() {
-  const res = await fetch(HOST_ADDRESS + "/user/GetAllAuthorList", {
-    method: "POST",
-    cache: "no-store",
-  });
-  if (!res.ok) {
+  try {
+    const res = await axios.post(HOST_ADDRESS + "/user/GetAllAuthorList");
+    return res.data;
+  } catch (error) {
     throw new Error("Failed to fetch data");
   }
-  return res.json();
 }
 
 const AuthorsPage = async () => {
