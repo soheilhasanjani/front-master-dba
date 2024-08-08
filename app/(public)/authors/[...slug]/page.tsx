@@ -1,3 +1,5 @@
+export const revalidate = 0;
+
 import React, { Suspense } from "react";
 import AuthorInfoSC from "@/app/(public)/authors/[...slug]/author-info-sc";
 import AuthorPostsSC from "@/app/(public)/authors/[...slug]/author-posts-sc";

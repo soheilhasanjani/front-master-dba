@@ -1,3 +1,5 @@
+export const revalidate = 0;
+
 import React, { Suspense } from "react";
 import ArticlesNavigationSC from "@/app/(public)/article/[...slug]/articles-navigation-sc";
 import ArticleContentSC from "@/app/(public)/article/[...slug]/article-content-sc";

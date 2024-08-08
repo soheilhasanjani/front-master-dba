@@ -1,3 +1,5 @@
+export const revalidate = 0;
+
 import React, { Suspense } from "react";
 import Link from "next/link";
 import LogoSC from "@/components/layouts/PublicLayout/LogoSC";

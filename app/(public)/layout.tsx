@@ -1,3 +1,5 @@
+export const revalidate = 0;
+
 import React, { Suspense } from "react";
 import TopNav from "@/components/layouts/PublicLayout/TopNav";
 import MainNav from "@/components/layouts/PublicLayout/MainNav";

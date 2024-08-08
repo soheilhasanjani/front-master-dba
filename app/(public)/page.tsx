@@ -1,3 +1,5 @@
+export const revalidate = 0;
+
 import HeroSwiperSC from "@/components/pages/landing/HeroSwiperSC";
 import MostVisitedSC from "@/components/pages/landing/MostVisitedSC";
 import LatestArticlesSC from "@/components/pages/landing/LatestArticlesSC";
