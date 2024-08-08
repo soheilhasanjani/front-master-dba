@@ -6,7 +6,7 @@ import axios from "axios";
 async function getData() {
   try {
     const res = await axios.post(
-      HOST_ADDRESS + "/PanelCustomValue/GetLogImagez",
+      HOST_ADDRESS + "/PanelCustomValue/GetLogImage",
     );
     return res.data;
   } catch (error) {
@@ -17,7 +17,6 @@ async function getData() {
 const LogoSC = async () => {
   //
   const data = await getData();
-  console.log(data);
   //
   return <Logo data={data} />;
 };
