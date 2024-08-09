@@ -60,10 +60,9 @@ const LoginContent = () => {
         push("/");
         toast.success("با موفقیت وارد شدید !");
       },
-      onError: (e) => {
+      onError: (e: any) => {
         toast.error(
-          (e as AxiosError)?.response?.data?.error_description ??
-            "خطایی رخ داده است !",
+          e?.response?.data?.error_description ?? "خطایی رخ داده است !",
         );
       },
     });
