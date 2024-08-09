@@ -43,7 +43,7 @@ export const usePostCommentSaveComment = () => {
     mutationFn: commentApi.postCommentSaveComment,
     onSuccess: () => {
       QC.invalidateQueries({
-        queryKey: ["postCommentGetArticleComment"],
+        queryKey: ["ArticleComment"],
       });
     },
   });
@@ -55,7 +55,7 @@ export const usePostCommentDeleteComment = () => {
     mutationFn: commentApi.postCommentDeleteComment,
     onSuccess: () => {
       QC.invalidateQueries({
-        queryKey: ["postCommentGetArticleComment"],
+        queryKey: ["ArticleComment"],
       });
     },
   });

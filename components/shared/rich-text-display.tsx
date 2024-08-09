@@ -130,7 +130,7 @@ const RichTextDisplay: React.FC<RichTextDisplayProps> = ({ content }) => {
       const codeBlock = button.parentElement?.querySelector("code");
       if (codeBlock) {
         navigator.clipboard.writeText(codeBlock.innerText).then(() => {
-          alert("با موفقیت کپی شد!"); // User feedback
+          // alert("با موفقیت کپی شد!"); // User feedback
         });
       }
     };
