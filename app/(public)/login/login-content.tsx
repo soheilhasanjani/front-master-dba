@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 import { Eye, EyeOff, Lock, User } from "react-feather";
 import ForgetPassword from "@/app/(public)/login/forget-password";
 import Link from "next/link";
+import { AxiosError } from "axios";
 
 // Define your form schema
 const schema = z.object({
@@ -59,8 +60,11 @@ const LoginContent = () => {
         push("/");
         toast.success("با موفقیت وارد شدید !");
       },
-      onError: () => {
-        toast.error("خطایی رخ داده است !");
+      onError: (e) => {
+        toast.error(
+          (e as AxiosError)?.response?.data?.error_description ??
+            "خطایی رخ داده است !",
+        );
       },
     });
   };
