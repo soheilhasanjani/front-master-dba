@@ -10,7 +10,7 @@ interface AuthorPostsSCProps {
 
 // Create an Axios instance with a timeout and retry logic
 const axiosInstance = axios.create({
-  timeout: 10000, // 10 seconds timeout
+  timeout: 50000, // 10 seconds timeout
 });
 
 // Apply retry logic to the Axios instance
@@ -33,6 +33,7 @@ async function getData({ authorId }: { authorId: string }) {
     );
     return res.data;
   } catch (error) {
+    console.log(error)
     throw new Error("Failed to fetch data");
   }
 }
