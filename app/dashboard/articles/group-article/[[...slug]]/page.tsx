@@ -83,7 +83,7 @@ const ArticleGroupPage = ({ params }: { params: { slug?: string[] } }) => {
     saveArticle.mutate(formData, {
       onSuccess: () => {
         toast.success("با موفقیت ثبت گردید.");
-        push("/dashboard/articles/");
+        // push("/dashboard/articles/");
       },
       onError: () => {
         toast.error("خطایی رخ داده است.");
