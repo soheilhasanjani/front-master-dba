@@ -1,17 +1,22 @@
 "use client";
 
-import React, { FC, useEffect, useRef, useState } from "react";
+import React, { FC, useEffect } from "react";
 import { usePostArticleGetArticleUsingSearch } from "@/hooks/apis/articleHookApi";
-import useDebouncedState from "@/hooks/useDebouncedState";
 import { cn } from "@/utils/cn";
 import Link from "next/link";
 import { FileText, Search, UserCheck } from "react-feather";
+import { useSearchBox } from "@/components/providers/SearchBoxProvider";
 
 const SearchBox = () => {
   //
-  const searchBoxRef = useRef<HTMLDivElement>(null);
-  const [isFocus, setIsFocus] = useState(false);
-  const [inputText, debouncedInputText, setInputText] = useDebouncedState("");
+  const {
+    inputText,
+    debouncedInputText,
+    setInputText,
+    isFocus,
+    setIsFocus,
+    searchBoxRef,
+  } = useSearchBox();
   //
   const { data, isLoading } = usePostArticleGetArticleUsingSearch(
     inputText
