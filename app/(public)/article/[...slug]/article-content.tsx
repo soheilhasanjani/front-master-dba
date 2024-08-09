@@ -55,7 +55,7 @@ const ArticleContent: FC<ArticleContentProps> = ({ data }) => {
       <section className="mt-4">
         {article.Body ? <RichTextDisplay content={article.Body} /> : null}
       </section>
-      <footer>
+      <footer className="clear-both">
         {article.Refrences && (
           <Popover placement="bottom-start" typeInteract="click">
             <PopoverTrigger>

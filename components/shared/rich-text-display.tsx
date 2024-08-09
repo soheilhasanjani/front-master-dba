@@ -49,6 +49,25 @@ const processImageSrc = (htmlString: string): string => {
   return doc.body.innerHTML;
 };
 
+// Function to process <a> tags and prepend BASE_URL to href attributes
+const processAnchorTags = (htmlString: string): string => {
+  const doc = parseHTMLString(htmlString);
+  const anchorTags = doc.body.querySelectorAll("a");
+
+  anchorTags.forEach((anchor) => {
+    let href = anchor.getAttribute("href");
+    if (href) {
+      const isAbsoluteUrl = /^(?:[a-z]+:)?\/\//i.test(href);
+      if (href && !isAbsoluteUrl) {
+        href = href.replace(/^\s*(\.\.\/)*/g, "").replace(/^\//, "");
+        anchor.setAttribute("href", BASE_URL + "/" + href);
+      }
+    }
+  });
+
+  return doc.body.innerHTML;
+};
+
 // Function to highlight code blocks using highlight.js and set dir to ltr
 const highlightCodeBlocks = (htmlString: string): string => {
   const doc = parseHTMLString(htmlString);
@@ -90,6 +109,7 @@ const highlightCodeBlocks = (htmlString: string): string => {
 const transformations = [
   filterClassNames,
   processImageSrc,
+  processAnchorTags,
   highlightCodeBlocks,
 ];
 
