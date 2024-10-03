@@ -8,6 +8,7 @@ import { usePostPanelMenuGetPanelMenuOnUserRole } from "@/hooks/apis/panelMenuHo
 import Image from "next/image";
 import { cn } from "@/utils/cn";
 import { usePathname } from "next/navigation";
+import { IMAGE_BASE_URL } from "@/configs/baseUrl";
 
 const Sidebar = () => {
   //
@@ -24,7 +25,7 @@ const Sidebar = () => {
           height={50}
           src={
             !isEmpty(user?.ImageUrl)
-              ? "http://masterdba.ir:8080" + user.ImageUrl
+              ? IMAGE_BASE_URL + user.ImageUrl
               : "/images/dashboard-user-profile-placeholder.jpg"
           }
           alt="user-profile"

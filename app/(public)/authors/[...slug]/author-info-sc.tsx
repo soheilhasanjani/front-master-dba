@@ -1,5 +1,5 @@
 import React from "react";
-import { HOST_ADDRESS } from "@/configs/baseUrl";
+import { HOST_ADDRESS, IMAGE_BASE_URL } from "@/configs/baseUrl";
 import Image from "next/image";
 import axios from "axios";
 import axiosRetry from "axios-retry";
@@ -25,7 +25,7 @@ async function getData({ authorId }: { authorId: string }) {
     );
     return res.data;
   } catch (error) {
-    console.log(error)
+    console.log(error);
     throw new Error("Failed to fetch data");
   }
 }
@@ -39,7 +39,7 @@ const AuthorInfoSC: React.FC<AuthorInfoSCProps> = async ({ authorId }) => {
       <div className="relative aspect-square size-[150px] overflow-hidden rounded-full border-4 border-[gray]">
         {data?.ImageUrl ? (
           <Image
-            src={"http://masterdba.ir:8080" + data.ImageUrl}
+            src={IMAGE_BASE_URL + data.ImageUrl}
             fill
             alt="profile-image"
           />

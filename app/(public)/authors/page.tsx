@@ -1,5 +1,5 @@
 import React from "react";
-import { HOST_ADDRESS } from "@/configs/baseUrl";
+import { HOST_ADDRESS, IMAGE_BASE_URL } from "@/configs/baseUrl";
 import AuthorCard from "@/app/(public)/authors/author-card";
 import { Metadata } from "next";
 import { postPanelCustomValueGetWebSiteTitle } from "@/apis/panelCustomValueApi";
@@ -26,10 +26,12 @@ axiosRetry(axiosInstance, { retries: 3 });
 
 async function getData() {
   try {
-    const res = await axiosInstance.post(HOST_ADDRESS + "/user/GetAllAuthorList");
+    const res = await axiosInstance.post(
+      HOST_ADDRESS + "/user/GetAllAuthorList",
+    );
     return res.data;
   } catch (error) {
-    console.log(error)
+    console.log(error);
     throw new Error("Failed to fetch data");
   }
 }
@@ -50,9 +52,7 @@ const AuthorsPage = async () => {
               id={author.ID}
               fullName={author.FullName}
               imageSrc={
-                author.ImageUrl
-                  ? "http://masterdba.ir:8080" + author.ImageUrl
-                  : undefined
+                author.ImageUrl ? IMAGE_BASE_URL + author.ImageUrl : undefined
               }
             />
           </div>

@@ -3,8 +3,8 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "http",
-        hostname: "masterdba.ir",
+        protocol: "https",
+        hostname: "v1.masterdba.ir",
       },
     ],
   },

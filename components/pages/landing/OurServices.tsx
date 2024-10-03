@@ -6,6 +6,7 @@ import Swiper from "@/components/core/Swiper";
 import { SwiperSlide } from "swiper/react";
 import Link from "next/link";
 import Image from "next/image";
+import { IMAGE_BASE_URL } from "@/configs/baseUrl";
 
 interface OurServicesProps {
   data: any;
@@ -41,7 +42,7 @@ const OurServices: FC<OurServicesProps> = ({ data }) => {
             <SwiperSlide key={slide.Id}>
               <div className="flex flex-col items-center gap-4 rounded border border-[rgb(0,0,0,.27)] px-4 py-4 hover:border-primary">
                 <Image
-                  src={"http://masterdba.ir:8080" + slide.ImageUrl}
+                  src={IMAGE_BASE_URL + slide.ImageUrl}
                   className="size-[130px] flex-shrink-0 rounded-full object-cover"
                   width={130}
                   height={130}

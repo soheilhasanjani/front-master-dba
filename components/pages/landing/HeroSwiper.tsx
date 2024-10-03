@@ -4,6 +4,7 @@ import React, { FC } from "react";
 import Swiper from "@/components/core/Swiper";
 import { SwiperSlide } from "swiper/react";
 import Image from "next/image";
+import { IMAGE_BASE_URL } from "@/configs/baseUrl";
 
 interface HeroSwiperProps {
   data: Array<any>;
@@ -17,7 +18,7 @@ const HeroSwiper: FC<HeroSwiperProps> = ({ data }) => {
           <SwiperSlide key={slide.Id} className="aspect-[1325/364] w-full">
             <a href={slide.LinkUrl} target="_blank">
               <Image
-                src={"http://masterdba.ir:8080" + slide.ImageUrl}
+                src={IMAGE_BASE_URL + slide.ImageUrl}
                 fill
                 className="h-full w-full rounded object-cover"
                 alt={slide.Name}
